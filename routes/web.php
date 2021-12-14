@@ -19,4 +19,20 @@ Route::get('/', function () {
 
 Route::get('/HomePage', function () {
     return view('HomePage');
-});
+})->name('HomePage');
+
+Route::get('/AddClass', function () {
+    return view('AddClass');
+})->name('Addclass');
+
+Route::get('/Class', function () {
+    return view('Class');
+})->name('Class');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
