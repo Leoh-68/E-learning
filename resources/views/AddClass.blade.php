@@ -18,17 +18,17 @@
  <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
  @endsection
  @section('body')
- <form action="">
+ <form method="POST" action="{{route('addClass')}}">
   @csrf
   <div class="formsubmit" style="padding: 30px">
   <div class="form-group">
     <label for="">Tên lớp</label>
-    <input type="email" class="form-control"  aria-describedby="emailHelp" placeholder="Enter class name">
+    <input type="text" class="form-control"  placeholder="Enter class name" name="classname">
   </div>
-  <div class="form-group">
+  {{-- <div class="form-group">
     <label for="">Môn học</label>
     <input type="subject" class="form-control"  placeholder="Enter suject name">
-  </div>
+  </div> --}}
   <button type="submit" class="btn btn-primary" style="margin: 20px 0px 0px">Submit</button>
 </form>
 </div>

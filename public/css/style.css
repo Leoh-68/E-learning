@@ -103,12 +103,16 @@ header ul li a
       height: 70px;
       width: 70px;
       border-radius: 50%;
+      top: 100px;
   }
   .classname
   {
-     position: relative;
-     justify-content: start;
-     text-align: left;
+      position: relative;
+      justify-content: start;
+      text-align: left;
+      text-overflow: ellipsis; 
+      white-space: nowrap;
+      overflow: hidden;
   }
 .OpenMenuButton {
   cursor: pointer;

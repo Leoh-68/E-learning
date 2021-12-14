@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\ClassroomController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/HomePage', function () {
     return view('HomePage');
 })->name('HomePage');
@@ -29,14 +25,6 @@ Route::get('/Class', function () {
     return view('Class');
 })->name('Class');
 
-Auth::routes();
+Route::post('/AddClass',[ClassroomController::class,'addClass'])->name('addClass');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/',[ClassroomController::class,'showClass'])->name('showClass');
