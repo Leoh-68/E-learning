@@ -27,4 +27,8 @@ class ClassroomController extends Controller
     $class->save();
     return redirect()->route('showClass');
   }
+  public function showSingleClass(Request $req){
+    $class=Classroom::where('name','=',$req->id)->get();
+    return View('Class',compact('class'));
+  }
 }

@@ -28,3 +28,5 @@ Route::get('/Class', function () {
 Route::post('/AddClass',[ClassroomController::class,'addClass'])->name('addClass');
 
 Route::get('/',[ClassroomController::class,'showClass'])->name('showClass');
+
+Route::get('/Class/{id}', [ClassroomCOntroller::class,'showSingleClass'])->name('showSingleClass');
