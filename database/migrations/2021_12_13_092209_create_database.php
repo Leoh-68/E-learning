@@ -17,13 +17,13 @@ class CreateDatabase extends Migration
             $table->id();
             $table->string('username');
             $table->string('password');
-            $table->string('hoTen');
+            $table->string('hoten');
             $table->date('ngaysinh');
             $table->string('diachi');
             $table->string('sdt');
             $table->string('email');
             $table->integer('accounttype');
-            $table->foreign('accounttype')->references('Id')->on('accounttype');
+            $table->foreign('accounttype')->references('id')->on('accounttype');
             $table->timestamps();
             $table->SoftDeletes();
         });
@@ -33,8 +33,9 @@ class CreateDatabase extends Migration
         });
         Schema::create('classroom', function (Blueprint $table) {
             $table->id();
-            $table->integer('username');
+            $table->integer('idaccount');
             $table->string('name');
+            $table->string('malop');
             $table->timestamps();
             $table->SoftDeletes();
         });
