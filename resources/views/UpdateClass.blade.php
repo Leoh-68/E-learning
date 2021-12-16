@@ -28,7 +28,7 @@
       <input type="text" value="{{$item->name}}" class="form-control"  placeholder="Enter class name" name="classname">
     </div>
     <div class="form-group">
-      <label for="">Môn học</label>
+      <label for="">Giảng viên</label>
       <input type="subject" value="{{$item->username}}"  class="form-control"  placeholder="Enter suject name" name="username">
     </div>
       @endforeach
