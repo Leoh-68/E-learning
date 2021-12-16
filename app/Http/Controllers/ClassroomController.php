@@ -9,6 +9,10 @@ class ClassroomController extends Controller
   public function Classroom(){
       return view('Class');
   }     
+  public function getUpdateClass(Request $req){
+    $class=Classroom::where('name','=',$req->id)->get();
+    return View('UpdateClass',compact('class'));
+  }
 
   public function showClass(){
     $classlst=Classroom::all();
@@ -20,7 +24,6 @@ class ClassroomController extends Controller
   }
   public function addClass(Request $req)
   {
-    
     $class=new Classroom;
     $class->username=1;
     $class->name=$req->classname;
@@ -30,5 +33,19 @@ class ClassroomController extends Controller
   public function showSingleClass(Request $req){
     $class=Classroom::where('name','=',$req->id)->get();
     return View('Class',compact('class'));
+  }
+  public function updateClass(Request $req){
+  //   $class=new Classroom;
+  //   $class=Classroom::where('name','=',$req->id)->get();
+  //   foreach($class as $item)
+  //   {
+  //     $item->name=$req->classname;
+  //   }
+  // //   $class->name=$req->classname;
+  //   $class->save();
+  //  return redirect()->route('showClass');
+  echo $req->id;
+  echo $req->classname;
+    
   }
 }

@@ -179,7 +179,14 @@ text-align: left;
   color: white; 
 
 }
-
+.listfunct{
+  position: relative;
+  top: 100px;
+  left: 100px;
+}
+.listfunct a{
+  color: bla; 
+}
   /* Drawer menu */
 .sidenav {
     height: 100%; 

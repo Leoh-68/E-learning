@@ -4,7 +4,7 @@ use App\Http\Controllers\ClassroomController;
 @extends('IndexHomePage')
 @section('body')
 @foreach ($classlst as $var)
-<div class="row">
+
   <div class="column">
     <div class="card" style="background-image: url('../images/bg.jpg')"> 
       @php
@@ -18,8 +18,11 @@ use App\Http\Controllers\ClassroomController;
         Mr.Khánh
       </h2>
       <img src="{{ asset('images/3.jpg') }}" class="avatar" align="right"> 
+      <div class="listfunct">
+        <a href="/UpdateClassView/{{$var->name}}">Sửa</a>
+        <a href="/{{$var->name}}">Xóa</a>
+      </div>
      </div>
-  </div>
 </div>
 @endforeach
 @endsection
