@@ -26,7 +26,6 @@
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             <a href="{{route('showClass')}}">Lớp học</a>
-            <a href="#">Việc cần làm</a>
          </div>
           <span onclick="openNav()"><i class="fas fa-stream fa-2x"></i></span>
         <a href="#" class="logo">E-Learning Project</a>

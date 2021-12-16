@@ -33,6 +33,10 @@ Route::get('/Class/{id}', [ClassroomController::class,'showSingleClass'])->name(
 
 Route::get('/UpdateClassView/{id}', [ClassroomController::class,'getUpdateClass'])->name('updateSingleClass');
 
-// Route::get('/updateClass/{name}', [ClassroomController::class,'updateClass'])->name('updateClassGet');
+Route::get('/updateClass/{name}', [ClassroomController::class,'updateClass'])->name('updateClassGet');
 
 Route::post('/updateClass/{id}', [ClassroomController::class,'updateClass'])->name('updateClassPost');    
+
+Route::get('/deleteClass/{id}', [ClassroomController::class,'deleteClass'])->name('deleteClass');   
+
+  

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Classroom;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class ClassroomController extends Controller
 {
@@ -15,6 +16,7 @@ class ClassroomController extends Controller
   }
 
   public function showClass(){
+
     $classlst=Classroom::all();
     if($classlst==null)
     {
@@ -24,9 +26,18 @@ class ClassroomController extends Controller
   }
   public function addClass(Request $req)
   {
+    $listClass=Classroom::all();
+    foreach($listClass as $var)
+    {
+      if($var->name==$req->classname)
+      {
+        return "Lớp đã tồn tại";
+      }
+    }
     $class=new Classroom;
     $class->username=1;
     $class->name=$req->classname;
+    $class->idclass="Abc$32";
     $class->save();
     return redirect()->route('showClass');
   }
@@ -35,17 +46,18 @@ class ClassroomController extends Controller
     return View('Class',compact('class'));
   }
   public function updateClass(Request $req){
-  //   $class=new Classroom;
-  //   $class=Classroom::where('name','=',$req->id)->get();
-  //   foreach($class as $item)
-  //   {
-  //     $item->name=$req->classname;
-  //   }
-  // //   $class->name=$req->classname;
-  //   $class->save();
-  //  return redirect()->route('showClass');
-  echo $req->id;
-  echo $req->classname;
-    
+
+    $class=Classroom::where('name','=',$req->id)->first();
+    $class->name=$req->classname;
+    $class->save();
+   return redirect()->route('showClass');
+  }
+  public function deleteClass(Request $req)
+  {
+   
+    $class=Classroom::where('name','=',$req->id)->first();
+    $class->deleted_at= Carbon::now(); 
+    $class->save();
+   return redirect()->route('showClass');
   }
 }

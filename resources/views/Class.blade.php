@@ -22,6 +22,7 @@
  @endsection
  @section('body')
  @foreach ($class as $item)
+ 
  <div class="classbody">
     <div class="imgclass" style="background-image: url('../images/bg.jpg')">
         <h1 class="nameinclass">{{$item->name}}</h1>
@@ -41,7 +42,7 @@
               <a href="#">Link 3</a>
             </div>
           </div>
-          <h5 style="padding: 10px">AadaKNdaw<h5>
+          <h5 style="padding: 10px">{{$item->idclass}}<h5>
     </div>
  @endforeach
 
