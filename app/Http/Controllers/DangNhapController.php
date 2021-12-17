@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Classroom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -33,7 +33,7 @@ class DangNhapController extends Controller
             //echo"Đăng nhập thành công";
             // //dd($user);
             // echo "{$user->hoTen}";
-            return redirect()->route('HomePage'); 
+            return redirect()->route('showClass');
          }else{
              echo"Tên đăng nhập hoặc mật khẩu không đúng";
          }
