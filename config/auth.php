@@ -38,7 +38,7 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'Account',//thay users thành Account
         ],
     ],
 
@@ -58,11 +58,11 @@ return [
     | Supported: "database", "eloquent"
     |
     */
-
+    //đổi cái class và thay users thành Account
     'providers' => [
-        'users' => [
+        'Account' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\Account::class,
         ],
 
         // 'users' => [
