@@ -25,19 +25,45 @@ class DangNhapController extends Controller
         //  }else{
         //      echo $user->hoTen;
         //  }
-        
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required'
+            ]);
         $credentials = $request->only('username', 'password'); 
         //['username' =>$request->username, 'password' =>  $request->password]
          if (Auth::attempt($credentials)) { 
-            // $user = Auth::user();
-            //echo"Đăng nhập thành công";
-            // //dd($user);
-            // echo "{$user->hoTen}";
             return redirect()->route('HomePage'); 
          }else{
              echo"Tên đăng nhập hoặc mật khẩu không đúng";
+             return view('Login');
          }
             
+    }
+
+    public function forgotPassword()
+    {
+        return view('ForgotPassword');
+    }
+
+    public function xuLyMatKhau(Request $request)
+    {
+        $number = rand(100000,999999);
+        $request->validate([
+            'email' =>'required|email',
+            ]);
+        $user = Account::where('email',$request->email)->first();
+         if(empty($user)||$user->email != $request->email){
+            echo"Email không đúng";
+            return view('ForgotPassword');
+         }else{
+            
+            $id = $user->id;
+            $data = Account::find($id);
+            $data->password = Hash::make($number);
+            $data->save();
+            echo "Mật khẩu mới của bạn là : {$number}";
+            return view('Login');
+         }           
     }
 
     //MÃ hóa mật khẩu
