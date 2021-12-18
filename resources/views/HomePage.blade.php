@@ -22,7 +22,7 @@ use App\Http\Controllers\ClassroomController;
       <a href="/UpdateClassView/{{$var->name}}">Sửa</a>
       <a href="/deleteClass/{{$var->name}}">Xóa</a>
     </div>
-   </div>
+   </div> 
 </div>
 @endif
 @endforeach

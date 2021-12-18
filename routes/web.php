@@ -25,8 +25,6 @@ Route::get('/Class/{id}', [ClassroomController::class,'showSingleClass'])->name(
 
 Route::get('/UpdateClassView/{id}', [ClassroomController::class,'getUpdateClass'])->name('updateSingleClass');
 
-  
-
 Route::get('/deleteClass/{id}', [ClassroomController::class,'deleteClass'])->name('deleteClass');   
 
 //Bạch

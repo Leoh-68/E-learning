@@ -22,14 +22,13 @@
  @endsection
  @section('body')
  @foreach ($class as $item)
- 
  <div class="classbody">
     <div class="imgclass" style="background-image: url('../images/bg.jpg')">
         <h1 class="nameinclass">{{$item->name}}</h1>
     </div>
     <div class="post">
         <div class="form-group">     
-            <input type="text" class="posttext">
+            <textarea type="text" class="posttext"></textarea>
         </div>
     </div>
     <div class="idclass">
@@ -45,18 +44,7 @@
           <h5 style="padding: 10px">{{$item->idclass}}<h5>
     </div>
  @endforeach
-
             <input type="text" class="status">
-            <input type="text" class="status">
-            <input type="text" class="status">
-            <input type="text" class="status">
-            <input type="text" class="status">
-            <input type="text" class="status">
-            <input type="text" class="status">
-            <input type="text" class="status">
-            <input type="text" class="status">
-            <input type="text" class="status">
-       
     </div>
     </div>
 </div>
