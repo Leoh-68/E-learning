@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login</title>
+	<title>ForgotPassword</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -32,38 +32,26 @@
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
 			<div class="wrap-login100">	
-				<form action="{{ route('xl-dang-nhap') }}" method="POST"  class="login100-form validate-form" button type = 'submit'  >	
+				<form action="{{ route('xl-mat-khau') }}" method="POST"  class="login100-form validate-form">	
 				@csrf
 				<!-- <meta name="csrf-token" content="{{ csrf_token() }}"> -->			 
 					<span class="login100-form-title p-b-34 p-t-27">
-						Đăng nhập
+						Check Email
 					</span>
 
-					<div class="wrap-input100 validate-input" data-validate = "Enter username" >
-						<input class="input100" type="text" name="username" placeholder="Username">
-						<span class="focus-input100" data-placeholder="&#xf207;"></span>
-						@error('username')
-						<span>{{ $message }}</span>
-						@enderror	
-					</div>
-
-					<div class="wrap-input100 validate-input" data-validate="Enter password">
-						<input class="input100" type="password" name="password" placeholder="Password">
-						<span class="focus-input100" data-placeholder="&#xf191;"></span>
-						@error('password')
+					<div class="wrap-input100 validate-input" data-validate = "Enter email">
+                        <input class="input100" type="email" name="email" placeholder="Email" value="{{ old('email') }}" >
+                        <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                        @error('email')
 						<span>{{ $message }}</span>
 						@enderror
+						
 					</div>
 
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">
-							Đăng nhập
+							Xác Nhận
 						</button>
-					</div>
-					<div class="text-center p-t-90">
-						 <a class="txt1" href ="{{ route('xl-mat-khau') }}">
-							Forgot Password?
-						</a> 
 					</div>
 				</form>
 			</div>
