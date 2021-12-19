@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Account;
+use App\Models\AccountType;
 // Bạch: Ngộ thêm cả thư mục fonts(~E-learning\public\fonts) 
 // và vendor(~E-learning\public\vendor) nhưng ghi chú hết thì trầm cảm lắm
 class DangNhapController extends Controller
@@ -17,7 +18,8 @@ class DangNhapController extends Controller
 
     public function xuLyDangNhap(Request $request)
     {
-        // $user = Account::where('username',$request->username)->first();
+        //$user = Account::where('username',$request->username)->first();
+       
         //  if(empty($user)){
         //     echo"Tên đăng nhập hoặc mật khẩu không đúng";
         //  }else if($user->password != $request->password){
@@ -29,10 +31,15 @@ class DangNhapController extends Controller
             'username' => 'required',
             'password' => 'required'
             ]);
-        $credentials = $request->only('username', 'password'); 
+        //$credentials = $request->only('username', 'password'); 
         //['username' =>$request->username, 'password' =>  $request->password]
-         if (Auth::attempt($credentials)) { 
-            return redirect()->route('HomePage'); 
+        
+         if (Auth::attempt(['username' =>$request->username, 'password' =>  $request->password])) { 
+            $user = Account::where('username',$request->username)->first();
+            //$user = $user->danhSachAccount;
+            $Type = AccountType::where('id',$user->accounttype)->first();
+            $AccType = $Type->type;
+            return view('HomePage',compact('AccType'));
          }else{
              echo"Tên đăng nhập hoặc mật khẩu không đúng";
              return view('Login');
