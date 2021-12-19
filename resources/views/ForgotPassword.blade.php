@@ -40,18 +40,23 @@
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Enter email">
-                        <input class="input100" type="email" name="email" placeholder="Email" value="{{ old('email') }}" >
+                        <input class="input100" type="email" name="email" placeholder="Email" >
                         <span class="focus-input100" data-placeholder="&#xf207;"></span>
                         @error('email')
 						<span>{{ $message }}</span>
 						@enderror
 						
 					</div>
-
+					
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">
 							Xác Nhận
 						</button>
+					</div>
+					<div class="text-center p-t-90">
+						 <a class="txt1" href ="{{ route('xl-dang-nhap') }}">
+							Comback Login?
+						</a> 
 					</div>
 				</form>
 			</div>

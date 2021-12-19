@@ -20,9 +20,11 @@
     <header>
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <h>Xin chào <?=$AccType?> {{ auth()->user()->hoTen}}</h>
             <a href="#">Lớp học</a>
             <a href="#">Việc cần làm</a>
          </div>
+         
           <span onclick="openNav()"><i class="fas fa-stream fa-2x"></i></span>
         <a href="#" class="logo">E-Learning Project</a>
         <ul>
