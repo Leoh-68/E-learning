@@ -42,3 +42,9 @@ Route::get('/Logout', [DangNhapController::class,'dangXuat'])->name('Logout');
 //Route::get('/mk', [DangNhapController::class,'update'])->name('Login'); mã hóa mật khẩu
 Route::get('/ForgotPassword', [DangNhapController::class,'forgotPassword'])->name('/ForgotPassword');
 Route::post('/ForgotPassword', [DangNhapController::class,'xuLyMatKhau'])->name('xl-mat-khau');
+
+Route::get('/Students',[StudentController::class,'layDanhSachSV'])->name('StudentsList');
+Route::get('/Students/Add',[StudentController::class,'themSV'])->name('loadThemSV');
+Route::post('/Students/Add',[StudentController::class,'xlThemSV'])->name('xlThemSV');
+Route::get('/Students/Update/{id}',[StudentController::class,'suaSV'])->name('loadSuaSV');
+Route::post('/Students/Update/{id}',[StudentController::class,'xlSuaSV'])->name('xlSuaSV');
