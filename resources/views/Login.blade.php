@@ -4,6 +4,7 @@
 	<title>Login</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	 <meta name="csrf-token" content="{{ csrf_token() }}
 <!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="{{ asset('images/icons/favicon.ico') }} "/>
 <!--===============================================================================================-->
@@ -34,7 +35,7 @@
 			<div class="wrap-login100">	
 				<form action="{{ route('xl-dang-nhap') }}" method="POST"  class="login100-form validate-form" button type = 'submit'  >	
 				@csrf
-				<!-- <meta name="csrf-token" content="{{ csrf_token() }}"> -->			 
+						 
 					<span class="login100-form-title p-b-34 p-t-27">
 						Đăng nhập
 					</span>

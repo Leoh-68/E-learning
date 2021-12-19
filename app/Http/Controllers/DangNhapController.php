@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Classroom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -33,13 +33,12 @@ class DangNhapController extends Controller
             ]);
         //$credentials = $request->only('username', 'password'); 
         //['username' =>$request->username, 'password' =>  $request->password]
-        
-         if (Auth::attempt(['username' =>$request->username, 'password' =>  $request->password])) { 
-            $user = Account::where('username',$request->username)->first();
-            //$user = $user->danhSachAccount;
-            $Type = AccountType::where('id',$user->accounttype)->first();
-            $AccType = $Type->type;
-            return view('HomePage',compact('AccType'));
+         if (Auth::attempt($credentials)) { 
+            // $user = Auth::user();
+            //echo"Đăng nhập thành công";
+            // //dd($user);
+            // echo "{$user->hoTen}";
+            return redirect()->route('showClass');
          }else{
              echo"Tên đăng nhập hoặc mật khẩu không đúng";
              return view('Login');
