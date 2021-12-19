@@ -29,7 +29,7 @@
     </div>
     <div class="form-group">
       <label for="">Giảng viên</label>
-      <input type="subject" value="{{$item->username}}"  class="form-control"  placeholder="Enter suject name" name="username">
+      <input type="subject" value="{{$item->idaccount}}"  class="form-control"  placeholder="Enter suject name" name="username">
     </div>
       @endforeach
   <button type="submit" class="btn btn-primary" style="margin: 20px 0px 0px">Submit</button>

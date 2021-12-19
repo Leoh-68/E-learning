@@ -35,9 +35,9 @@ class ClassroomController extends Controller
       }
     }
     $class=new Classroom;
-    $class->username=1;
+    $class->idaccount=1;
     $class->name=$req->classname;
-    $class->idclass="Abc$32";
+    $class->malop="Abc$32";
     $class->save();
     return redirect()->route('showClass');
   }

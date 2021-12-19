@@ -41,7 +41,7 @@
               <a href="#">Link 3</a>
             </div>
           </div>
-          <h5 style="padding: 10px">{{$item->idclass}}<h5>
+          <h5 style="padding: 10px">{{$item->malop}}<h5>
     </div>
  @endforeach
             <input type="text" class="status">
