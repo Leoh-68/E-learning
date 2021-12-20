@@ -43,8 +43,10 @@ Route::get('/Logout', [DangNhapController::class,'dangXuat'])->name('Logout');
 Route::get('/ForgotPassword', [DangNhapController::class,'forgotPassword'])->name('/ForgotPassword');
 Route::post('/ForgotPassword', [DangNhapController::class,'xuLyMatKhau'])->name('xl-mat-khau');
 
+Route::post('/updateClass/{id}', [ClassroomController::class,'updateClass'])->name('updateClassPost');
 Route::get('/Students',[StudentController::class,'layDanhSachSV'])->name('StudentsList');
 Route::get('/Students/Add',[StudentController::class,'themSV'])->name('loadThemSV');
 Route::post('/Students/Add',[StudentController::class,'xlThemSV'])->name('xlThemSV');
 Route::get('/Students/Update/{id}',[StudentController::class,'suaSV'])->name('loadSuaSV');
 Route::post('/Students/Update/{id}',[StudentController::class,'xlSuaSV'])->name('xlSuaSV');
+Route::get('/Students/Deleted/{id}',[StudentController::class,'xoaSV'])->name('xoaSV');
