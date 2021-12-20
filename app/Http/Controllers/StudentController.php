@@ -9,7 +9,7 @@ class StudentController extends Controller
 {
     public function layDanhSachSV()
     {
-        $dsSV = Student::where('accounttype','2')->get();
+        $dsSV = Student::where([['accounttype','=','2'],['deleted_at','=',null]])->get();
 
         return view('StudentsList',compact('dsSV'));   
     }
@@ -58,6 +58,17 @@ class StudentController extends Controller
         $sv->accounttype = 2;
         $sv->updated_at = date("Y-m-d");
         $sv->save();
+        return redirect()->route('StudentsList');
+    }
+    public function xoaSV($id)
+    {
+        $dsSV = Student::find($id);
+        if($dsSV == null)
+        {
+            return "không tìm thấy giảng viên có ID = {$id} ";
+        }
+        $dsSV->deleted_at = date("Y-m-d");
+        $dsSV->save();
         return redirect()->route('StudentsList');
     }
 }
