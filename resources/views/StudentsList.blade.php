@@ -22,7 +22,7 @@
  <div class="classbody">
     <div class="container">
         <a href="">Quay lại</a>
-        <a href="">Thêm</a>
+        <a href="{{route('loadThemSV')}}">Thêm</a>
     <table class="table">
         <thead>
             <tr>
@@ -47,7 +47,7 @@
                 <td>{{ $SinhVien->sdt }}</td>
                 <td>{{ $SinhVien->email }}</td>
                 <td><a href="{{route('loadSuaSV',['id' => $SinhVien->id])}}">Sửa</a>
-                <a href="">Xóa</a></td>
+                <a href="{{route('xoaSV',['id' => $SinhVien->id])}}">Xóa</a></td>
             </tr>
             @endforeach
         </tbody>
