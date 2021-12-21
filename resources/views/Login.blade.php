@@ -4,7 +4,7 @@
 	<title>Login</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	 <meta name="csrf-token" content="{{ csrf_token() }}
+	 <meta name="csrf-token" content="{{ csrf_token() }}">
 <!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="{{ asset('images/icons/favicon.ico') }} "/>
 <!--===============================================================================================-->
@@ -39,20 +39,34 @@
 					<span class="login100-form-title p-b-34 p-t-27">
 						Đăng nhập
 					</span>
-
-					<div class="wrap-input100 validate-input" data-validate = "Enter username" >
-						<input class="input100" type="text" name="username" placeholder="Username">
+					
+						@if(!empty($number))
+						
+							
+							<div>
+							<h style="color: red; text-align: center"> Mật khẩu mới của bạn là : <?=$number?></h>
+							</div>
+						
+						@endif
+					<div class="wrap-input100 validate-input @error('username') is-invalid @enderror" data-validate = "Enter username" >
+						<input class="input100 " type="text" name="username" placeholder="Username <?php 
+						if(!empty($userText))
+						echo "$userText";
+						?>" >
 						<span class="focus-input100" data-placeholder="&#xf207;"></span>
 						@error('username')
-						<span>{{ $message }}</span>
+						<span class="alert alert-danger">>{{ $message }}</span>
 						@enderror	
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Enter password">
-						<input class="input100" type="password" name="password" placeholder="Password">
+						<input class="input100 @error('password') is-invalid @enderror" type="password" name="password" placeholder="Password <?php 
+						if(!empty($pwText))
+						echo "$pwText";
+						?>" >
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
 						@error('password')
-						<span>{{ $message }}</span>
+						<span class="alert alert-danger">>{{ $message }}</span>
 						@enderror
 					</div>
 
