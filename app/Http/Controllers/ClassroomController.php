@@ -18,6 +18,7 @@ class ClassroomController extends Controller
   }
 /*Lớp của giáo viên*/
   public function showClass(){
+    $account=Account::where('username',Cookie::get('username'))->first();
     $classlst=Classroom::all();
     if($classlst==null)
     {

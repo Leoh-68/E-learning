@@ -27,7 +27,7 @@
   <div class="formsubmit" style="padding: 30px">
   <div class="form-group">
     <label for="">Tên lớp</label>
-    <input type="text" class="form-control"  placeholder="Enter class name" name="classname">
+    <input type="text" class="form-control"  placeholder="Enter class name" name="classname" required>
   </div>
   <div class="form-group">
       <label for="">Mã lớp</label> 
