@@ -2,7 +2,9 @@
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\DangNhapController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\StudentListController;
 use Illuminate\Support\Facades\Route;
+
 // Khánh
 Route::get('/HomePage', function () {
     return view('HomePage');
@@ -41,6 +43,14 @@ Route::post('/deleteClass/{id}', [ClassroomController::class,'deleteClass'])->na
 Route::post('/randomCode', [ClassroomController::class,'randomCode'])->name('randomCode');   
 
 Route::get('/randomCode', [ClassroomController::class,'randomCode'])->name('randomCode');   
+
+Route::get('/lstStudent/{id}',[ClassroomController::class,'dsSinhVien'] )->name('lstStudent');
+
+Route::get('/ListStudent', [ClassroomController::class,'dsSinhVien']);
+
+Route::post('/ListStudent/{id}', [StudentListController::class,'AddStudent'])->name('dsSinhVienPost');
+
+Route::get('/ListStudent/Delete/{id}/{code}', [StudentListController::class,'DeleteStudent'])->name('xoaSinhvien');
 //Bạch
 Route::get('/', function () {
     return view('/Login');
@@ -62,3 +72,5 @@ Route::get('/Students/Update/{id}',[StudentController::class,'suaSV'])->name('lo
 Route::post('/Students/Update/{id}',[StudentController::class,'xlSuaSV'])->name('xlSuaSV');
 //Account
 Route::get('/loadAccount',[AccountController::class,'loadAccount'])->name('loadAccount');
+// TestPlace
+
