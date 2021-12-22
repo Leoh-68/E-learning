@@ -1,4 +1,4 @@
-@extends('IndexHomePage')
+@extends('layouts.AdminPage')
  @section('library')
  <meta charset="utf-8">
  <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,46 +18,52 @@
  @section('html')
  <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
  @endsection
- @section('body')
+ @section('func')
  <form action="{{route('xlSuaGV',['id' => $dsGV->id])}}" method="POST">
  @csrf
-    <div class="classbody">
-        <div class="container">
-            <a href="{{route('TeachersList')}}">Quay lại</a>
-            <table>
-                <tr>
-                    <th>Username</th>
-                    <td><input type="text" name="username" value="{{$dsGV->username}}" required/></td>
-                </tr>
-                <tr>
-                    <th>Password</th>
-                    <td><input type="text" name="password" value="{{$dsGV->password}}" required/></td>
-                </tr>
-                <tr>
-                    <th>Họ tên</th>
-                    <td><input type="text" name="hoten" value="{{$dsGV->hoten}}" required/></td>
-                </tr>
-                <tr>
-                    <th>Ngày sinh</th>
-                    <td><input type="date" name="ngaysinh" value="{{$dsGV->ngaysinh}}" required/></td>
-                </tr>
-                <tr>
-                    <th>Địa chỉ</th>
-                    <td><input type="text" name="diachi" value="{{$dsGV->diachi}}" required/></td>
-                </tr>
-                <tr>
-                    <th>Số điện thoại</th>
-                    <td><input type="text" name="sdt" value="{{$dsGV->sdt}}" required/></td>
-                </tr>
-                <tr>
-                    <th>Email</th>
-                    <td><input type="email" name="email" value="{{$dsGV->email}}" required/></td>
-                </tr>
-                <tr>
-                    <th></th>
-                    <td><button class="btn btn-primary" type = "submit">Sửa</button></td>
-                </tr>
-            </table>
+    <div class="">
+    <div class="container">
+            <a class="btn btn-primary" href="{{route('TeachersList')}}"><i class="fa fa-arrow-alt-circle-left"></i> Quay lại</a>
+            <br><br>
+            <div class="input">
+                <label class="font">Username</label>
+                <br>
+                <input type="text" name="username" value="{{$dsGV->username}}" required/>
+            </div>
+            <div>
+                <label>Password</label>
+                <br>
+                <input type="text" name="password" value="{{$dsGV->password}}" required/>
+            </div>
+            <br>
+            <div class="input">
+                <label>Họ tên</label>
+                <br>
+                <input type="text" name="hoten" value="{{$dsGV->hoten}}" required/>
+            </div>
+            <div>
+                <label>Ngày sinh</label>
+                <br>
+                <input type="date" name="ngaysinh" value="{{$dsGV->ngaysinh}}" required/>
+            </div>
+            <br>
+            <div class="input">
+                <label>Địa chỉ</label>
+                <br>
+                <input type="text" name="diachi" value="{{$dsGV->diachi}}" required/>
+            </div>
+            <div class="input">
+                <label>Số điện thoại</label>
+                <br>
+                <input type="text" name="sdt" value="{{$dsGV->sdt}}" required/>
+            </div>
+            <div>
+                <label>Email</label>
+                <br>
+                <input type="email" name="email" value="{{$dsGV->email}}" required/>
+            </div>
+            <br>
+            <button class="btn btn-primary" type = "submit">Sửa <i class="fa fa-check"></i></button>
         </div>
     </div>
 </form>

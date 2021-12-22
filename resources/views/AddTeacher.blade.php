@@ -1,4 +1,4 @@
-@extends('IndexHomePage')
+@extends('layouts.AdminPage')
  @section('library')
  <meta charset="utf-8">
  <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,45 +18,55 @@
  @section('html')
  <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
  @endsection
- @section('body')
+ @section('func')
  <form action="{{route('xlThemGV')}}" method="POST">
  @csrf
-    <div class="classbody">
+ <div class="">
         <div class="container">
-            <a href="{{route('TeachersList')}}">Quay lại</a>
-            <table>
-                <tr>
-                    <th>Username</th>
-                    <td><input type="text" name="username"required/></td>
-                </tr>
-                <tr>
-                    <th>Password</th>
-                    <td><input type="text" name="password"required/></td>
-                </tr>
-                <tr>
-                    <th>Họ tên</th>
-                    <td><input type="text" name="hoten"required/></td>
-                </tr>
-                <tr>
-                    <th>Ngày sinh</th>
-                    <td><input type="date" name="ngaysinh"required/></td>
-                </tr>
-                <tr>
-                    <th>Địa chỉ</th>
-                    <td><input type="text" name="diachi"required/></td>
-                </tr>
-                <tr>
-                    <th>Số điện thoại</th>
-                    <td><input type="text" name="sdt"required/></td>
-                </tr>
-                <tr>
-                    <th>Email</th>
-                    <td><input type="email" name="email"required/></td>
-                </tr>
-                <tr>
-                    <th></th>
-                    <td><button type = "submit">Thêm</button></td>
-                </tr>
+        <a class="btn btn-primary" href="{{route('TeachersList')}}"><i class="fa fa-arrow-alt-circle-left"></i> Quay lại</a>
+            <div>
+                <br>
+                <div class="input">
+                    <label>Username</label>
+                    <br>
+                    <input type="text" name="username"required/>
+                </div>
+                <div>
+                    <label>Password</label>
+                    <br>
+                    <input type="text" name="password"required/>
+                </div>
+                <br>
+                <div class="input">
+                    <label>Họ tên</label>
+                    <br>
+                    <input type="text" name="hoten"required/>
+                </div>
+                <div>
+                    <label>Ngày sinh</label>
+                    <br>
+                    <input type="date" name="ngaysinh"required/>
+                </div>
+                <br>
+                <div class="input">
+                    <label>Địa chỉ</label>
+                    <br>
+                    <input type="text" name="diachi"required/>
+                </div>
+                <div class="input">
+                    <label>Số điện thoại</label>
+                    <br>
+                    <input type="text" name="sdt"required/>
+                </div>
+                <div>
+                    <label>Email</label>
+                    <br>
+                    <input type="email" name="email"required/>
+                </div>
+                <br>
+                <div>
+                    <button class="btn btn-primary" type = "submit">Thêm <i class="fa fa-check"></i></button>
+                </div>
             </table>
         </div>
     </div>

@@ -1,4 +1,4 @@
-@extends('IndexHomePage')
+@extends('layouts.AdminPage')
  @section('library')
  <meta charset="utf-8">
  <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,11 +18,10 @@
  @section('html')
  <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
  @endsection
- @section('body')
- <div class="classbody">
+ @section('func')
+ <div class="">
     <div class="container">
-        <a href="">Quay lại</a>
-        <a href="{{route('loadThemGV')}}">Thêm</a>
+        <a class="btn btn-primary" href="{{route('loadThemGV')}}"><i class="fa fa-plus"></i> Thêm</a>
     <table class="table">
         <thead>
             <tr>
@@ -46,8 +45,8 @@
                 <td>{{ $GiangVien->diachi }}</td>
                 <td>{{ $GiangVien->sdt }}</td>
                 <td>{{ $GiangVien->email }}</td>
-                <td><a href="{{route('loadSuaGV',['id' => $GiangVien->id])}}">Sửa</a>
-                <a href="{{route('xoaGV',['id' => $GiangVien->id])}}">Xóa</a></td>
+                <td><a class="btn btn-primary" href="{{route('loadSuaGV',['id' => $GiangVien->id])}}"><i class="fa fa-pencil-alt"></i> Sửa</a>
+                <a class="btn btn-danger" onclick="return confirm('Bạn có chắc không?')" href="{{route('xoaGV',['id' => $GiangVien->id])}}"><i class="fa fa-trash"></i> Xóa</a></td>
             </tr>
             @endforeach
         </tbody>

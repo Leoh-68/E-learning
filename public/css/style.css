@@ -270,3 +270,16 @@ text-align: left;
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {display:block;}
+div.input{
+  float:left;
+  padding-right: 20px;
+}
+div,label{
+  font-weight: bold;
+}
+tr{
+  font-weight: normal;
+}
+#btn{
+  margin-right: 20px;
+}

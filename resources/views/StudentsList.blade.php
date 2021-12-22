@@ -1,4 +1,4 @@
-@extends('IndexHomePage')
+@extends('layouts.AdminPage')
  @section('library')
  <meta charset="utf-8">
  <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,6 +10,7 @@
  <!-- Fonts -->
  <link rel="dns-prefetch" href="//fonts.gstatic.com">
  <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
  <!-- Styles -->
  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
  {{-- link --}}
@@ -18,11 +19,10 @@
  @section('html')
  <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
  @endsection
- @section('body')
- <div class="classbody">
+ @section('func')
+ <div class="">
     <div class="container">
-        <a href="">Quay lại</a>
-        <a href="{{route('loadThemSV')}}">Thêm</a>
+        <a class="btn btn-primary" href="{{route('loadThemSV')}}"><i class="fa fa-plus"></i> Thêm</a>
     <table class="table">
         <thead>
             <tr>
@@ -46,8 +46,8 @@
                 <td>{{ $SinhVien->diachi }}</td>
                 <td>{{ $SinhVien->sdt }}</td>
                 <td>{{ $SinhVien->email }}</td>
-                <td><a href="{{route('loadSuaSV',['id' => $SinhVien->id])}}">Sửa</a>
-                <a href="{{route('xoaSV',['id' => $SinhVien->id])}}">Xóa</a></td>
+                <td><a class="btn btn-primary" href="{{route('loadSuaSV',['id' => $SinhVien->id])}}"><i class="fa fa-pencil-alt"></i> Sửa</a>
+                <a class="btn btn-danger" onclick="return confirm('Bạn có chắc không?')" href="{{route('xoaSV',['id' => $SinhVien->id])}}"><i class="fa fa-trash"></i> Xóa</a></td>
             </tr>
             @endforeach
         </tbody>

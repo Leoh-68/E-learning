@@ -46,16 +46,20 @@ Route::get('/ForgotPassword', [DangNhapController::class,'forgotPassword'])->nam
 Route::post('/ForgotPassword', [DangNhapController::class,'xuLyMatKhau'])->name('xl-mat-khau');
 
 
-Route::get('/Students',[StudentController::class,'layDanhSachSV'])->name('StudentsList');
-Route::get('/Students/Add',[StudentController::class,'themSV'])->name('loadThemSV');
-Route::post('/Students/Add',[StudentController::class,'xlThemSV'])->name('xlThemSV');
-Route::get('/Students/Update/{id}',[StudentController::class,'suaSV'])->name('loadSuaSV');
-Route::post('/Students/Update/{id}',[StudentController::class,'xlSuaSV'])->name('xlSuaSV');
-Route::get('/Students/Deleted/{id}',[StudentController::class,'xoaSV'])->name('xoaSV');
+Route::get('/Admin/Students',[StudentController::class,'layDanhSachSV'])->name('StudentsList');
+Route::get('/Admin/Students/Add',[StudentController::class,'themSV'])->name('loadThemSV');
+Route::post('/Admin/Students/Add',[StudentController::class,'xlThemSV'])->name('xlThemSV');
+Route::get('/Admin/Students/Update/{id}',[StudentController::class,'suaSV'])->name('loadSuaSV');
+Route::post('/Admin/Students/Update/{id}',[StudentController::class,'xlSuaSV'])->name('xlSuaSV');
+Route::get('/Admin/Students/Deleted/{id}',[StudentController::class,'xoaSV'])->name('xoaSV');
 
-Route::get('/Teachers',[TeacherController::class,'layDanhSachGV'])->name('TeachersList');
-Route::get('/Teachers/Add',[TeacherController::class,'themGV'])->name('loadThemGV');
-Route::post('/Teachers/Add',[TeacherController::class,'xlThemGV'])->name('xlThemGV');
-Route::get('/Teachers/Update/{id}',[TeacherController::class,'suaGV'])->name('loadSuaGV');
-Route::post('/Teachers/Update/{id}',[TeacherController::class,'xlSuaGV'])->name('xlSuaGV');
-Route::get('/Teachers/Deleted/{id}',[TeacherController::class,'xoaGV'])->name('xoaGV');
+Route::get('/Admin/Teachers',[TeacherController::class,'layDanhSachGV'])->name('TeachersList');
+Route::get('/Admin/Teachers/Add',[TeacherController::class,'themGV'])->name('loadThemGV');
+Route::post('/Admin/Teachers/Add',[TeacherController::class,'xlThemGV'])->name('xlThemGV');
+Route::get('/Admin/Teachers/Update/{id}',[TeacherController::class,'suaGV'])->name('loadSuaGV');
+Route::post('/Admin/Teachers/Update/{id}',[TeacherController::class,'xlSuaGV'])->name('xlSuaGV');
+Route::get('/Admin/Teachers/Deleted/{id}',[TeacherController::class,'xoaGV'])->name('xoaGV');
+
+Route::get('/Admin', function () {
+    return view('Admin');
+})->name('Admin');
