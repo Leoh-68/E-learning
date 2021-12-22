@@ -27,7 +27,6 @@ class StudentListController extends Controller
     public function DeleteStudent(Request $req)
     {
         $a= StudentList::where('idaccount',$req->id)->delete();
-    
         return redirect()->route('lstStudent',['id'=>$req->code]);
     }
     
