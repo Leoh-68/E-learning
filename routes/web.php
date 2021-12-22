@@ -1,6 +1,8 @@
 <?php
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\DangNhapController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
 // Khánh
 Route::get('/HomePage', function () {
@@ -43,10 +45,17 @@ Route::get('/Logout', [DangNhapController::class,'dangXuat'])->name('Logout');
 Route::get('/ForgotPassword', [DangNhapController::class,'forgotPassword'])->name('/ForgotPassword');
 Route::post('/ForgotPassword', [DangNhapController::class,'xuLyMatKhau'])->name('xl-mat-khau');
 
-Route::post('/updateClass/{id}', [ClassroomController::class,'updateClass'])->name('updateClassPost');
+
 Route::get('/Students',[StudentController::class,'layDanhSachSV'])->name('StudentsList');
 Route::get('/Students/Add',[StudentController::class,'themSV'])->name('loadThemSV');
 Route::post('/Students/Add',[StudentController::class,'xlThemSV'])->name('xlThemSV');
 Route::get('/Students/Update/{id}',[StudentController::class,'suaSV'])->name('loadSuaSV');
 Route::post('/Students/Update/{id}',[StudentController::class,'xlSuaSV'])->name('xlSuaSV');
 Route::get('/Students/Deleted/{id}',[StudentController::class,'xoaSV'])->name('xoaSV');
+
+Route::get('/Teachers',[TeacherController::class,'layDanhSachGV'])->name('TeachersList');
+Route::get('/Teachers/Add',[TeacherController::class,'themGV'])->name('loadThemGV');
+Route::post('/Teachers/Add',[TeacherController::class,'xlThemGV'])->name('xlThemGV');
+Route::get('/Teachers/Update/{id}',[TeacherController::class,'suaGV'])->name('loadSuaGV');
+Route::post('/Teachers/Update/{id}',[TeacherController::class,'xlSuaGV'])->name('xlSuaGV');
+Route::get('/Teachers/Deleted/{id}',[TeacherController::class,'xoaGV'])->name('xoaGV');

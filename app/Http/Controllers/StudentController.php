@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Student;
+use App\Models\Account;
 
 class StudentController extends Controller
 {
     public function layDanhSachSV()
     {
-        $dsSV = Student::where([['accounttype','=','2'],['deleted_at','=',null]])->get();
+        $dsSV = Account::where([['accounttype','=','3'],['deleted_at','=',null]])->get();
 
         return view('StudentsList',compact('dsSV'));   
     }
@@ -19,7 +19,7 @@ class StudentController extends Controller
     }
     public function xlThemSV(Request $rq)
     {
-        $sv = new Student;
+        $sv = new Account;
         $sv->username = $rq->username;
         $sv->password = $rq->password;
         $sv->hoten = $rq->hoten;
@@ -34,7 +34,7 @@ class StudentController extends Controller
     }
     public function suaSV($id)
     {
-        $dsSV = Student::find($id);
+        $dsSV = Account::find($id);
         if($dsSV == null)
         {
             return "Không tìm thấy sinh viên có ID = {$id}";
@@ -43,8 +43,8 @@ class StudentController extends Controller
     }
     public function xlSuaSV(Request $rq,$id)
     {
-        $sv = Student::find($id);
-        if($dsSV == null)
+        $sv = Account::find($id);
+        if($sv == null)
         {
             return "Không tìm thấy sinh viên có ID = {$id}";
         }
@@ -62,10 +62,10 @@ class StudentController extends Controller
     }
     public function xoaSV($id)
     {
-        $dsSV = Student::find($id);
+        $dsSV = Account::find($id);
         if($dsSV == null)
         {
-            return "không tìm thấy giảng viên có ID = {$id} ";
+            return "không tìm thấy sinh viên có ID = {$id} ";
         }
         $dsSV->deleted_at = date("Y-m-d");
         $dsSV->save();

@@ -23,7 +23,7 @@
  @csrf
     <div class="classbody">
         <div class="container">
-            <a href="">Quay lại</a>
+            <a href="{{route('StudentsList')}}">Quay lại</a>
             <table>
                 <tr>
                     <th>Username</th>

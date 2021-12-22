@@ -19,39 +19,39 @@
  <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
  @endsection
  @section('body')
- <form action="{{route('xlSuaSV',['id' => $dsSV->id])}}" method="POST">
+ <form action="{{route('xlSuaGV',['id' => $dsGV->id])}}" method="POST">
  @csrf
     <div class="classbody">
         <div class="container">
-            <a href="{{route('StudentsList')}}">Quay lại</a>
+            <a href="{{route('TeachersList')}}">Quay lại</a>
             <table>
                 <tr>
                     <th>Username</th>
-                    <td><input type="text" name="username" value="{{$dsSV->username}}" required/></td>
+                    <td><input type="text" name="username" value="{{$dsGV->username}}" required/></td>
                 </tr>
                 <tr>
                     <th>Password</th>
-                    <td><input type="text" name="password" value="{{$dsSV->password}}" required/></td>
+                    <td><input type="text" name="password" value="{{$dsGV->password}}" required/></td>
                 </tr>
                 <tr>
                     <th>Họ tên</th>
-                    <td><input type="text" name="hoten" value="{{$dsSV->hoten}}" required/></td>
+                    <td><input type="text" name="hoten" value="{{$dsGV->hoten}}" required/></td>
                 </tr>
                 <tr>
                     <th>Ngày sinh</th>
-                    <td><input type="date" name="ngaysinh" value="{{$dsSV->ngaysinh}}" required/></td>
+                    <td><input type="date" name="ngaysinh" value="{{$dsGV->ngaysinh}}" required/></td>
                 </tr>
                 <tr>
                     <th>Địa chỉ</th>
-                    <td><input type="text" name="diachi" value="{{$dsSV->diachi}}" required/></td>
+                    <td><input type="text" name="diachi" value="{{$dsGV->diachi}}" required/></td>
                 </tr>
                 <tr>
                     <th>Số điện thoại</th>
-                    <td><input type="text" name="sdt" value="{{$dsSV->sdt}}" required/></td>
+                    <td><input type="text" name="sdt" value="{{$dsGV->sdt}}" required/></td>
                 </tr>
                 <tr>
                     <th>Email</th>
-                    <td><input type="email" name="email" value="{{$dsSV->email}}" required/></td>
+                    <td><input type="email" name="email" value="{{$dsGV->email}}" required/></td>
                 </tr>
                 <tr>
                     <th></th>
