@@ -71,7 +71,7 @@ Route::get('/Admin/Teachers/Add',[TeacherController::class,'themGV'])->name('loa
 Route::post('/Admin/Teachers/Add',[TeacherController::class,'xlThemGV'])->name('xlThemGV');
 Route::get('/Admin/Teachers/Update/{id}',[TeacherController::class,'suaGV'])->name('loadSuaGV');
 Route::post('/Admin/Teachers/Update/{id}',[TeacherController::class,'xlSuaGV'])->name('xlSuaGV');
-Route::get('/Admin/Teachers/Deleted/{id}',[TeacherController::class,'xoaGV'])->name('xoaGV');
+Route::get('/Admin/Teachers/Delete/{id}',[TeacherController::class,'xoaGV'])->name('xoaGV');
 
 Route::get('/Admin', function () {
     return view('Admin');

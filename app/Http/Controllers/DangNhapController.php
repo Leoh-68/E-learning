@@ -62,7 +62,7 @@ class DangNhapController extends Controller
             //--------------------Xét quyền truy cập *Khánh làm
             if($user->accounttype==1)
             {
-                return  redirect()->route('showClassAdmin');
+                return  redirect()->route('Admin');
             }
             if($user->accounttype==2)
             {

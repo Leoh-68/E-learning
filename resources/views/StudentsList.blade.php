@@ -38,6 +38,10 @@
         </thead>
         <tbody>
             @foreach($dsSV as $SinhVien)
+            @if(Hash::needsRehash($SinhVien->password)) {
+            $SinhVien->password = Hash::make('$SinhVien->password');
+            }
+            @endif
             <tr>
                 <td>{{ $SinhVien->username }}</td>
                 <td>{{ $SinhVien->password }}</td>

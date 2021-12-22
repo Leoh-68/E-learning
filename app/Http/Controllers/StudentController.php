@@ -10,7 +10,7 @@ class StudentController extends Controller
     public function layDanhSachSV()
     {
         $dsSV = Account::where([['accounttype','=','3'],['deleted_at','=',null]])->get();
-
+        
         return view('StudentsList',compact('dsSV'));   
     }
     public function themSV()

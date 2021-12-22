@@ -15,12 +15,12 @@ class KhoiTaoDuLieu extends Seeder
      */
     public function run()
     {
-        // for($i=1;$i<6;$i++){
-        //     $type=Str::random(10);
-        //     DB::table('accounttype')->insert([
-        //         'type'=>$type,
-        //     ]);
-        // }
+        for($i=1;$i<4;$i++){
+            $type=Str::random(10);
+            DB::table('accounttype')->insert([
+                'type'=>$type,
+            ]);
+        }
         for($i=1;$i<6;$i++){
             $username=Str::random(10);
             $password=Str::random(5);
@@ -29,7 +29,7 @@ class KhoiTaoDuLieu extends Seeder
             $diachi=Str::random(10);
             $sdt="0123456789";
             $email="abc@gmail.com";
-            $type=rand(1,2);
+            $type=rand(1,3);
             $created_at=date("Y-m-d");
             DB::table('account')->insert([
                 'username'=>$username,
@@ -43,18 +43,18 @@ class KhoiTaoDuLieu extends Seeder
                 'created_at'=>$created_at,
             ]);
         }
-        // for($i=1;$i<6;$i++){
-        //     $idaccount=rand(1,5);
-        //     $name=Str::random(5);
-        //     $malop=Str::random(10);
-        //     $created_at=date("Y-m-d");
-        //     DB::table('classroom')->insert([
-        //         'idaccount'=>$idaccount,
-        //         'name'=>$name,
-        //         'malop'=>$malop,
-        //         'created_at'=>$created_at,
-        //     ]);
-        // }
+        for($i=1;$i<6;$i++){
+            $idaccount=rand(1,5);
+            $name=Str::random(5);
+            $malop=Str::random(10);
+            $created_at=date("Y-m-d");
+            DB::table('classroom')->insert([
+                'idaccount'=>$idaccount,
+                'name'=>$name,
+                'malop'=>$malop,
+                'created_at'=>$created_at,
+            ]);
+        }
         for($i=1;$i<6;$i++){
             $stt=$i;
             $idaccount=$i;
