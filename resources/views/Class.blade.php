@@ -15,7 +15,6 @@
  <!-- Styles -->
  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
  {{-- link --}}
- 
  @endsection
  @section('html')
  <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">

@@ -19,7 +19,7 @@
  @endsection
  @section('body')
  @foreach ($class as $item)
- <form method="POST" action="/updateClass/{{$item->name}}">
+ <form method="POST" action="{{route('updateSingleClassPost',['id' => $item->malop])}}">
   @csrf
   <div class="formsubmit" style="padding: 30px">
     
@@ -29,7 +29,7 @@
     </div>
     <div class="form-group">
       <label for="">Giảng viên</label>
-      <input type="subject" value="{{$item->idaccount}}"  class="form-control"  placeholder="Enter suject name" name="username">
+      <input type="subject" value="{{$item->idaccount}}"  class="form-control"  placeholder="Enter suject name" name="username" readonly>
     </div>
       @endforeach
   <button type="submit" class="btn btn-primary" style="margin: 20px 0px 0px">Submit</button>

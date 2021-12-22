@@ -3,6 +3,7 @@ use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\DangNhapController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\AccountController;
 use Illuminate\Support\Facades\Route;
 // Khánh
 Route::get('/HomePage', function () {
@@ -10,25 +11,38 @@ Route::get('/HomePage', function () {
 })->name('HomePage');
 
 Route::get('/AddClass', function () {
-    return view('AddClass');
+    return view('Teacher/AddClass');
 })->name('Addclass');
 
 Route::get('/Class', function () {
     return view('Class');
 })->name('Class');Route::get('/updateClass/{name}', [ClassroomController::class,'updateClass'])->name('updateClassGet');
 
+
+//-----------------------------//
+Route::get('/showClass',[ClassroomController::class,'showClass'])->name('showClass');
+
+Route::get('/showClassStudent',[ClassroomController::class,'showClassStudent'])->name('showClassStudent');
+
+Route::get('/showClassAdmin',[ClassroomController::class,'showClassAdmin'])->name('showClassAdmin');
+//-----------------------------//
 Route::post('/updateClass/{id}', [ClassroomController::class,'updateClass'])->name('updateClassPost');  
 
 Route::post('/AddClass',[ClassroomController::class,'addClass'])->name('addClass');
 
-Route::get('/showClass',[ClassroomController::class,'showClass'])->name('showClass');
-
 Route::get('/Class/{id}', [ClassroomController::class,'showSingleClass'])->name('showSingleClass');
 
-Route::get('/UpdateClassView/{id}', [ClassroomController::class,'getUpdateClass'])->name('updateSingleClass');
+Route::get('/UpdateClassView/{id}', [ClassroomController::class,'getUpdateClass'])->name('updateSingleClassGet');
+
+Route::post('/UpdateClassView/{id}', [ClassroomController::class,'getUpdateClass'])->name('updateSingleClassPost');
 
 Route::get('/deleteClass/{id}', [ClassroomController::class,'deleteClass'])->name('deleteClass');   
 
+Route::post('/deleteClass/{id}', [ClassroomController::class,'deleteClass'])->name('deleteClass'); 
+
+Route::post('/randomCode', [ClassroomController::class,'randomCode'])->name('randomCode');   
+
+Route::get('/randomCode', [ClassroomController::class,'randomCode'])->name('randomCode');   
 //Bạch
 Route::get('/', function () {
     return view('/Login');
@@ -62,3 +76,5 @@ Route::get('/Admin/Teachers/Deleted/{id}',[TeacherController::class,'xoaGV'])->n
 Route::get('/Admin', function () {
     return view('Admin');
 })->name('Admin');
+
+Route::get('/loadAccount',[AccountController::class,'loadAccount'])->name('loadAccount');

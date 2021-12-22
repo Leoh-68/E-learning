@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Account;
@@ -19,7 +20,6 @@ class DangNhapController extends Controller
     {
         return view('Login');
     }
-
     public function messages()
     {
         return [
@@ -33,6 +33,8 @@ class DangNhapController extends Controller
 
     public function xuLyDangNhap(DangNhapRequest $request)
     {
+        $rep= new Response();
+       
         $user = Account::where('username',$request->username)->first();
        
         //  if(empty($user)){
@@ -52,14 +54,34 @@ class DangNhapController extends Controller
          //$validated = $request->validated();
          if (Auth::attempt(['username' =>$request->username, 'password' =>  $request->password])) { 
             $user = Account::where('username',$request->username)->first();
+            //----------------------Cookie *Khánh làm
+            Cookie::queue('username',$request->username,3600);
+            Cookie::queue('password',$request->password,3600);
+            //---------------------------
+
+            //--------------------Xét quyền truy cập *Khánh làm
+            if($user->accounttype==1)
+            {
+                return  redirect()->route('showClassAdmin');
+            }
+            if($user->accounttype==2)
+            {
+                return  redirect()->route('showClass');
+            }
+            if($user->accounttype==3)
+            {
+                return  redirect()->route('showClassStudent');
+            }
+            //--------------------------
             //$Type = AccountType::where('id',$user->accounttype)->first();
             //$AccType = $Type->type;
-            return redirect()->route('showClass',compact('user'));
-         }else{
+           
+         }
+         else{
             if($user->username != $request->username){
                 $userText = " không đúng";
-                return view('Login',compact('userText'));
-             }else
+                return view('Login',compact('userText'));   
+             }else 
              $pwText = " không đúng";
              return view('Login',compact('pwText'));
          }
@@ -106,4 +128,5 @@ class DangNhapController extends Controller
         Auth::logout();
         return view('Login');
     }
+
 }

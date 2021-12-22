@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class AccountType extends Model
 {
     use HasFactory;
-    protected $table = 'Accounttype';
+    protected $table = 'accounttype';
 
     public function danhSachAccount()
     {
