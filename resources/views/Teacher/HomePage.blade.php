@@ -1,6 +1,7 @@
 @php
 use App\Http\Controllers\ClassroomController;   
 @endphp
+
 @extends('IndexHomePage')
 @section('body')
 @foreach ($classlst as $var)
@@ -8,19 +9,25 @@ use App\Http\Controllers\ClassroomController;
 <div class="column">
   <div class="card" style="background-image: url('../images/bg.jpg')"> 
     @php
-     $id=$var->name;   
+     $id=$var->malop;   
     @endphp
+  
       <a class="linkname" style="text-decoration: none" href="Class/{{$id}}">
         <h1 class="classname">{{$var->name}}</h1>
       <a>
     <h2 class="nameteacher">
-      {{-- {{$var->username}} --}}
-      Mr.Khánh
+      {{$var->idaccount}}
+   
     </h2>
-    <img src="{{ asset('images/3.jpg') }}" class="avatar" align="right"> 
+   
+    <span class="classcode">
+     Mã lớp: {{$var->malop}}
+    </span>
+    
+     <img src="{{ asset('images/3.jpg') }}" class="avatar" align="right">
     <div class="listfunct">
-      <a href="/UpdateClassView/{{$var->name}}">Sửa</a>
-      <a href="/deleteClass/{{$var->name}}">Xóa</a>
+      <a href="{{route('updateSingleClassPost',['id' => $var->malop])}}">Sửa</a>
+      <a  onclick="return confirm('Are you sure?')" href="/deleteClass/{{$var->malop}}">Xóa</a>
     </div>
    </div> 
 </div>
