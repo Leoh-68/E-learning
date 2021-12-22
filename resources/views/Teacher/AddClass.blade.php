@@ -33,10 +33,6 @@
       <label for="">Mã lớp</label> 
       <input type="text" class="form-control"  value="{{ClassroomController::randomCode() }}"  placeholder="Enter class code" name="classcode">
   </div>
-  <div class="form-group">
-    <label for="">Giáo viên</label>
-    <input type="text" class="form-control"  placeholder="Enter class name" name="teacher">
-  </div>
   <button type="submit" class="btn btn-primary" style="margin: 20px 0px 0px">Submit</button>
 </form>
 </div>

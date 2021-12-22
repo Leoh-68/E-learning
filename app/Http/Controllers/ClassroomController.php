@@ -1,7 +1,9 @@
 <?php
-
 namespace App\Http\Controllers;
 use App\Models\Classroom;
+use App\Models\Account;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Http\Repsponse;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -14,15 +16,34 @@ class ClassroomController extends Controller
     $class=Classroom::where('malop','=',$req->id)->get();
     return View('Teacher/UpdateClass',compact('class'));
   }
-
+/*Lớp của giáo viên*/
   public function showClass(){
+    $classlst=Classroom::all();
+    if($classlst==null)
+    {
+      return 0;
+    }
+    return View('Teacher/HomePage',compact('classlst'));
+  }
+/*Lớp của admin*/
+  public function showClassAdmin(){
 
     $classlst=Classroom::all();
     if($classlst==null)
     {
       return 0;
     }
-    return View('HomePage',compact('classlst'));
+    return View('admin/HomePageAdmin',compact('classlst'));
+  }
+/*Lớp của sinh viên*/
+  public function showClassStudent(){
+
+    $classlst=Classroom::all();
+    if($classlst==null)
+    {
+      return 0;
+    }
+    return View('student/HomePageStudent',compact('classlst'));
   }
 
   public function addClass(Request $req)
@@ -36,8 +57,9 @@ class ClassroomController extends Controller
         return "Lớp đã tồn tại";
       }
     }
+    $account=Account::where('username',Cookie::get('username'))->first();
     $class=new Classroom;
-    $class->idaccount=1;
+    $class->idaccount=$account->hoten;
     $class->name=$req->classname;
     $class->malop=$req->classcode;
     $class->save();
@@ -46,6 +68,7 @@ class ClassroomController extends Controller
 
   public function showSingleClass(Request $req){
     $class=Classroom::where('malop','=',$req->id)->get();
+
     return View('Class',compact('class'));
   }
 
@@ -55,7 +78,6 @@ class ClassroomController extends Controller
       'username'=>'required',
 
     ]);
-
     $class=Classroom::where('malop','=',$req->id)->first();
     $class->name=$req->classname;
     $class->save();

@@ -30,20 +30,23 @@
 <body>
 	
 	<div class="limiter">
-		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
+		<div class="container-login100" style="background-image: url('images/bg-02.jpg');">
 			<div class="wrap-login100">	
-				<form action="{{ route('xl-mat-khau') }}" method="POST"  class="login100-form validate-form">	
+				<form action="{{ route('xl-mat-khau') }}" method="POST"  class="login100-form validate-form" button type = 'submit'>	
 				@csrf
 				<!-- <meta name="csrf-token" content="{{ csrf_token() }}"> -->			 
 					<span class="login100-form-title p-b-34 p-t-27">
 						Check Email
 					</span>
-
+						
 					<div class="wrap-input100 validate-input" data-validate = "Enter email">
-                        <input class="input100" type="email" name="email" placeholder="Email" >
+                        <input class="input100 @error('email') is-invalid @enderror" type="email" name="email" placeholder="Email <?php 
+						if(!empty($title))
+						echo "$title";
+						?>">
                         <span class="focus-input100" data-placeholder="&#xf207;"></span>
                         @error('email')
-						<span>{{ $message }}</span>
+						<span class="alert alert-danger">>{{ $message }}</span>
 						@enderror
 						
 					</div>
@@ -52,11 +55,6 @@
 						<button class="login100-form-btn">
 							Xác Nhận
 						</button>
-					</div>
-					<div class="text-center p-t-90">
-						 <a class="txt1" href ="{{ route('xl-dang-nhap') }}">
-							Comback Login?
-						</a> 
 					</div>
 				</form>
 			</div>

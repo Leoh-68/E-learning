@@ -32,7 +32,7 @@
         <ul>
             <li><a href="{{route('Addclass')}}"> <i class="fa fa-plus fa-2x" ></i> </a></li>
             <li>
-                 <img src="{{ asset('images/3.jpg') }}" alt="Avatar" class="avatarnavbar">
+                <a href="{{route('loadAccount')}}"><img src="{{ asset('images/3.jpg') }}" alt="Avatar" class="avatarnavbar"></a>
             </li>
             <li>
                 {{-- <div class="dropdown">
