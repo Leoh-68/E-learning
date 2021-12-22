@@ -19,11 +19,11 @@
  <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
  @endsection
  @section('func')
- <form action="{{route('xlThemSV')}}" method="POST">
+ <form action="{{route('xlThemGV')}}" method="POST">
  @csrf
-    <div class="">
+ <div class="">
         <div class="container">
-        <a class="btn btn-primary" href="{{route('StudentsList')}}"><i class="fa fa-arrow-alt-circle-left"></i> Quay lại</a>
+        <a class="btn btn-primary" href="{{route('TeachersList')}}"><i class="fa fa-arrow-alt-circle-left"></i> Quay lại</a>
             <div>
                 <br>
                 <div class="input">

@@ -29,5 +29,24 @@ class StudentListController extends Controller
         $a= StudentList::where('idaccount',$req->id)->delete();
         return redirect()->route('lstStudent',['id'=>$req->code]);
     }
-    
+
+    public function AddStudentAdmin(Request $req)
+    {
+        $studentlis= new StudentList;
+        $allacc=Account::where('email',$req->textinput)->first();
+        if($allacc==null)
+        {
+            return 0;
+        } 
+        $studentlis->stt=1;
+        $studentlis->idaccount=$allacc->id;
+        $studentlis->idclassroom=$req->id;
+        $studentlis->save();
+        return redirect()->route('loadDSSV',['id'=>$req->id]);
+    }
+    public function DeleteStudentAdmin(Request $req)
+    {
+        $a= StudentList::where('idaccount',$req->id)->delete();
+        return redirect()->route('loadDSSV',['id'=>$req->code]);
+    }
 }

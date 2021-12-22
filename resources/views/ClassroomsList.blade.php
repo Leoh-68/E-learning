@@ -1,3 +1,6 @@
+@php 
+use \App\Http\Controllers\ClassroomController;
+@endphp
 @extends('layouts.AdminPage')
  @section('library')
  <meta charset="utf-8">
@@ -22,32 +25,22 @@
  @section('func')
  <div class="">
     <div class="container">
-        <a class="btn btn-primary" href="{{route('loadThemSV')}}"><i class="fa fa-plus"></i> Thêm</a>
     <table class="table">
         <thead>
             <tr>
-                <th>Username</th>
-                <th>Password</th>
-                <th>Họ tên</th>
-                <th>Ngày sinh</th>
-                <th>Địa chỉ</th>
-                <th>Số điện thoại</th>
-                <th>Email</th>
+                <th>Tên lớp</th>
+                <th>Giảng viên</th>
+                <th>Mã lớp</th>
                 <th>Chức năng</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($dsSV as $SinhVien)
+            @foreach($lst as $Lop)
             <tr>
-                <td>{{ $SinhVien->username }}</td>
-                <td>{{ $SinhVien->password }}</td>
-                <td>{{ $SinhVien->hoten }}</td>
-                <td>{{ $SinhVien->ngaysinh }}</td>
-                <td>{{ $SinhVien->diachi }}</td>
-                <td>{{ $SinhVien->sdt }}</td>
-                <td>{{ $SinhVien->email }}</td>
-                <td><a class="btn btn-primary" href="{{route('loadSuaSV',['id' => $SinhVien->id])}}"><i class="fa fa-pencil-alt"></i> Sửa</a>
-                <a class="btn btn-danger" onclick="return confirm('Bạn có chắc không?')" href="{{route('xoaSV',['id' => $SinhVien->id])}}"><i class="fa fa-trash"></i> Xóa</a></td>
+                <td>{{ $Lop->name }}</td>
+                <td>{{ ClassroomController::TheoAccount($Lop->id) }}</td>
+                <td>{{ $Lop->malop }}</td>
+                <td><a class="btn btn-primary" href="{{route('loadDSSV',['id'=>$Lop->id])}}"><i class="fa fa-pencil-alt"></i> Xem danh sách sinh viên</a></td>
             </tr>
             @endforeach
         </tbody>

@@ -1,6 +1,8 @@
 <?php
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\DangNhapController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\StudentListController;
 use Illuminate\Support\Facades\Route;
@@ -23,8 +25,6 @@ Route::get('/Class', function () {
 Route::get('/showClass',[ClassroomController::class,'showClass'])->name('showClass');
 
 Route::get('/showClassStudent',[ClassroomController::class,'showClassStudent'])->name('showClassStudent');
-
-Route::get('/showClassAdmin',[ClassroomController::class,'showClassAdmin'])->name('showClassAdmin');
 //-----------------------------//
 Route::post('/updateClass/{id}', [ClassroomController::class,'updateClass'])->name('updateClassPost');  
 
@@ -65,12 +65,29 @@ Route::post('/Login', [DangNhapController::class,'xuLyDangNhap'])->name('xl-dang
 //Route::get('/mk', [DangNhapController::class,'update'])->name('Login'); mã hóa mật khẩu
 Route::get('/ForgotPassword', [DangNhapController::class,'forgotPassword'])->name('/ForgotPassword');
 Route::post('/ForgotPassword', [DangNhapController::class,'xuLyMatKhau'])->name('xl-mat-khau');
-Route::get('/Students',[StudentController::class,'layDanhSachSV'])->name('StudentsList');
-Route::get('/Students/Add',[StudentController::class,'themSV'])->name('loadThemSV');
-Route::post('/Students/Add',[StudentController::class,'xlThemSV'])->name('xlThemSV');
-Route::get('/Students/Update/{id}',[StudentController::class,'suaSV'])->name('loadSuaSV');
-Route::post('/Students/Update/{id}',[StudentController::class,'xlSuaSV'])->name('xlSuaSV');
-//Account
-Route::get('/loadAccount',[AccountController::class,'loadAccount'])->name('loadAccount');
-// TestPlace
 
+Route::get('/Admin/Students',[StudentController::class,'layDanhSachSV'])->name('StudentsList');
+Route::get('/Admin/Students/Add',[StudentController::class,'themSV'])->name('loadThemSV');
+Route::post('/Admin/Students/Add',[StudentController::class,'xlThemSV'])->name('xlThemSV');
+Route::get('/Admin/Students/Update/{id}',[StudentController::class,'suaSV'])->name('loadSuaSV');
+Route::post('/Admin/Students/Update/{id}',[StudentController::class,'xlSuaSV'])->name('xlSuaSV');
+Route::get('/Admin/Students/Deleted/{id}',[StudentController::class,'xoaSV'])->name('xoaSV');
+
+Route::get('/Admin/Teachers',[TeacherController::class,'layDanhSachGV'])->name('TeachersList');
+Route::get('/Admin/Teachers/Add',[TeacherController::class,'themGV'])->name('loadThemGV');
+Route::post('/Admin/Teachers/Add',[TeacherController::class,'xlThemGV'])->name('xlThemGV');
+Route::get('/Admin/Teachers/Update/{id}',[TeacherController::class,'suaGV'])->name('loadSuaGV');
+Route::post('/Admin/Teachers/Update/{id}',[TeacherController::class,'xlSuaGV'])->name('xlSuaGV');
+Route::get('/Admin/Teachers/Delete/{id}',[TeacherController::class,'xoaGV'])->name('xoaGV');
+
+Route::get('/Admin/Classrooms',[ClassroomController::class,'layDSLopHoc'])->name('ClassroomsList');
+Route::get('/Admin/Classrooms/StudentsList/{id}',[ClassroomController::class,'layDSSVTL'])->name('loadDSSV');
+Route::post('/Admin/Classrooms/StudentsList/Add/{id}',[StudentListController::class,'AddStudentAdmin'])->name('xlThemSVTL');
+Route::get('/Admin/Classrooms/StudentsList/Delete/{id}/{code}', [StudentListController::class,'DeleteStudentAdmin'])->name('xlXoaSVTL');
+
+
+Route::get('/Admin', function () {
+    return view('Admin');
+})->name('Admin');
+
+Route::get('/loadAccount',[AccountController::class,'loadAccount'])->name('loadAccount');

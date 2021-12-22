@@ -27,14 +27,10 @@ class ClassroomController extends Controller
     return View('Teacher/HomePage',compact('classlst'));
   }
 /*Lớp của admin*/
-  public function showClassAdmin(){
+  public function layDSLopHoc(){
 
-    $classlst=Classroom::all();
-    if($classlst==null)
-    {
-      return 0;
-    }
-    return View('admin/HomePageAdmin',compact('classlst'));
+    $lst=Classroom::all();
+    return View('ClassroomsList',compact('lst'));
   }
 /*Lớp của sinh viên*/
   public function showClassStudent(){
@@ -107,7 +103,7 @@ class ClassroomController extends Controller
     }
     return $code;
   }
-  public function TheoAccount($id)
+  public static function TheoAccount($id)
   {
     $a=Classroom::find($id)->theoAccount;
     return $a->hoten;
@@ -118,6 +114,10 @@ class ClassroomController extends Controller
     $lstStudent= Classroom::find($req->id)->dsStudentJoined;
     return View('Teacher/ListStudent',compact('lstStudent'));
   }
-
+  public function layDSSVTL (Request $req)
+  {
+    $lstStudent= Classroom::find($req->id)->dsStudentJoined;
+    return View('SCL',compact('lstStudent'));
+  }
 
 }
