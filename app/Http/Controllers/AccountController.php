@@ -14,5 +14,8 @@ class AccountController extends Controller
         return View('Account',compact('account'));
     }
 
-   
+    public function dsLopJoined ()
+    {
+    
+    }
 }

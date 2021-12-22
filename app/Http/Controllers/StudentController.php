@@ -27,7 +27,7 @@ class StudentController extends Controller
         $sv->diachi = $rq->diachi;
         $sv->sdt = $rq->sdt;
         $sv->email = $rq->email;
-        $sv->accounttype = 2;
+        $sv->accounttype = 3;
         $sv->created_at = date("Y-m-d");
         $sv->save();
         return redirect()->route('StudentsList');

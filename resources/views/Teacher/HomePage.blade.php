@@ -1,6 +1,6 @@
-@php
-use App\Http\Controllers\ClassroomController;   
-@endphp
+<!-- @php
+use app\Http\Controllers\ClassroomController;   
+@endphp -->
 
 @extends('IndexHomePage')
 @section('body')
@@ -16,7 +16,7 @@ use App\Http\Controllers\ClassroomController;
         <h1 class="classname">{{$var->name}}</h1>
       <a>
     <h2 class="nameteacher">
-      {{$var->idaccount}}
+      {{\App\Http\Controllers\ClassroomController::TheoAccount($var->id)}}
    
     </h2>
    

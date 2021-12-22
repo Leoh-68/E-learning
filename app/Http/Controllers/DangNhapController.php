@@ -71,7 +71,7 @@ class DangNhapController extends Controller
             if($user->accounttype==3)
             {
                 return  redirect()->route('showClassStudent');
-            }
+            }   
             //--------------------------
             //$Type = AccountType::where('id',$user->accounttype)->first();
             //$AccType = $Type->type;

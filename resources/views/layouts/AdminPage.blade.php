@@ -42,7 +42,7 @@
         <div class="container">
             <a id="btn" class="btn btn-primary" href="{{route('TeachersList')}}">Quản lý Giảng viên</a>
             <a id="btn" class="btn btn-primary" href="{{route('StudentsList')}}">Quản lý Sinh viên</a>
-            <a href=""></a>
+            <a id="btn" class="btn btn-primary" href="{{route('ClassroomsList')}}">Quản lý lớp học</a>
         </div>
     </div>
      @yield('func')
