@@ -1,12 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Classroom;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Account;
 use App\Models\AccountType;
+use App\Http\Requests\DangNhapRequest;
+use App\Http\Requests\EmailRequest;
+use Illuminate\Support\Str;
+
 // Bạch: Ngộ thêm cả thư mục fonts(~E-learning\public\fonts) 
 // và vendor(~E-learning\public\vendor) nhưng ghi chú hết thì trầm cảm lắm
 class DangNhapController extends Controller
@@ -16,9 +20,20 @@ class DangNhapController extends Controller
         return view('Login');
     }
 
-    public function xuLyDangNhap(Request $request)
+    public function messages()
     {
-        //$user = Account::where('username',$request->username)->first();
+        return [
+            'username.required' => 'Chưa nhập tên đăng nhập',
+            'password.required' => 'Chưa nhập mật khẩu',
+            'password.min'=>'Password chứa ít nhất 5 ký tự',
+            'email.required' => 'Chưa nhập email',
+            'email.gmail' => 'Định dạng email không đúng',
+        ];
+    }
+
+    public function xuLyDangNhap(DangNhapRequest $request)
+    {
+        $user = Account::where('username',$request->username)->first();
        
         //  if(empty($user)){
         //     echo"Tên đăng nhập hoặc mật khẩu không đúng";
@@ -27,21 +42,26 @@ class DangNhapController extends Controller
         //  }else{
         //      echo $user->hoTen;
         //  }
+        // $request->validate([
+        //     'username' => 'required',
+        //     'password' => 'required|min:5'
+        //     ]);  
         $request->validate([
-            'username' => 'required',
-            'password' => 'required'
-            ]);
-        //$credentials = $request->only('username', 'password'); 
-        //['username' =>$request->username, 'password' =>  $request->password]
-         if (Auth::attempt($credentials)) { 
-            // $user = Auth::user();
-            //echo"Đăng nhập thành công";
-            // //dd($user);
-            // echo "{$user->hoTen}";
-            return redirect()->route('showClass');
+           
+        ]);     
+         //$validated = $request->validated();
+         if (Auth::attempt(['username' =>$request->username, 'password' =>  $request->password])) { 
+            $user = Account::where('username',$request->username)->first();
+            //$Type = AccountType::where('id',$user->accounttype)->first();
+            //$AccType = $Type->type;
+            return redirect()->route('showClass',compact('user'));
          }else{
-             echo"Tên đăng nhập hoặc mật khẩu không đúng";
-             return view('Login');
+            if($user->username != $request->username){
+                $userText = " không đúng";
+                return view('Login',compact('userText'));
+             }else
+             $pwText = " không đúng";
+             return view('Login',compact('pwText'));
          }
             
     }
@@ -51,24 +71,22 @@ class DangNhapController extends Controller
         return view('ForgotPassword');
     }
 
-    public function xuLyMatKhau(Request $request)
+    public function xuLyMatKhau(EmailRequest $request)
     {
-        $number = rand(100000,999999);
+        
         $request->validate([
-            'email' =>'required|email',
-            ]);
+        ]);    
         $user = Account::where('email',$request->email)->first();
          if(empty($user)||$user->email != $request->email){
-            echo"Email không đúng";
-            return view('ForgotPassword');
+            $title = " không đúng";
+            return view('ForgotPassword',compact('title'));
          }else{
-            
+            $number = Str::random(5);
             $id = $user->id;
             $data = Account::find($id);
             $data->password = Hash::make($number);
             $data->save();
-            echo "Mật khẩu mới của bạn là : {$number}";
-            return view('Login');
+            return view('Login',compact('number'));
          }           
     }
 

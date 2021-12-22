@@ -44,7 +44,7 @@ class StudentController extends Controller
     public function xlSuaSV(Request $rq,$id)
     {
         $sv = Student::find($id);
-        if($dsSV == null)
+        if($sv == null)
         {
             return "Không tìm thấy sinh viên có ID = {$id}";
         }
