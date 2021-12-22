@@ -1,5 +1,9 @@
 
+<@php
+    use App\Http\Controllers\ClassroomController;
+@endphp
  @extends('IndexHomePage')
+
  @section('library')
  <meta charset="utf-8">
  <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,10 +29,12 @@
     <label for="">Tên lớp</label>
     <input type="text" class="form-control"  placeholder="Enter class name" name="classname">
   </div>
-  {{-- <div class="form-group">
-    <label for="">Môn học</label>
-    <input type="subject" class="form-control"  placeholder="Enter suject name">
-  </div> --}}
+  <div class="form-group">
+    
+      <label for="">Mã lớp</label> 
+      <input type="text" class="form-control"  value="{{ClassroomController::randomCode();}}"  placeholder="Enter class code" name="classcode">
+ 
+  </div>
   <button type="submit" class="btn btn-primary" style="margin: 20px 0px 0px">Submit</button>
 </form>
 </div>

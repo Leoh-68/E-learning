@@ -1,6 +1,7 @@
 @php
 use App\Http\Controllers\ClassroomController;   
 @endphp
+
 @extends('IndexHomePage')
 @section('body')
 @foreach ($classlst as $var)
@@ -10,6 +11,7 @@ use App\Http\Controllers\ClassroomController;
     @php
      $id=$var->name;   
     @endphp
+  
       <a class="linkname" style="text-decoration: none" href="Class/{{$id}}">
         <h1 class="classname">{{$var->name}}</h1>
       <a>
@@ -17,10 +19,11 @@ use App\Http\Controllers\ClassroomController;
       {{-- {{$var->username}} --}}
       Mr.Khánh
     </h2>
+    
     <img src="{{ asset('images/3.jpg') }}" class="avatar" align="right"> 
     <div class="listfunct">
       <a href="/UpdateClassView/{{$var->name}}">Sửa</a>
-      <a href="/deleteClass/{{$var->name}}">Xóa</a>
+      <a class="btn btn-danger" onclick="return confirm('Are you sure?')" href="/deleteClass/{{$var->name}}"><i class="fa fa-trash"></i></a>
     </div>
    </div> 
 </div>

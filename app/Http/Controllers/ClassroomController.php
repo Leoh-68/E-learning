@@ -29,7 +29,8 @@ class ClassroomController extends Controller
     $listClass=Classroom::all();
     foreach($listClass as $var)
     {
-      if($var->name==$req->classname)
+  
+      if($var->malop==$req->classcode)
       {
         return "Lớp đã tồn tại";
       }
@@ -37,12 +38,12 @@ class ClassroomController extends Controller
     $class=new Classroom;
     $class->idaccount=1;
     $class->name=$req->classname;
-    $class->malop="Abc$32";
+    $class->malop=$req->classcode;
     $class->save();
     return redirect()->route('showClass');
   }
   public function showSingleClass(Request $req){
-    $class=Classroom::where('name','=',$req->id)->get();
+    $class=Classroom::where('malop','=',$req->id)->get();
     return View('Class',compact('class'));
   }
   public function updateClass(Request $req){
@@ -59,5 +60,23 @@ class ClassroomController extends Controller
     $class->deleted_at= Carbon::now(); 
     $class->save();
    return redirect()->route('showClass');
+  }
+
+
+
+  public static function randomCode()
+  {
+    $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $class= Classroom::all();
+    $code= substr(str_shuffle(str_repeat($pool, 5)), 0, 6);
+    foreach($class as $var)
+    {
+      while($var->malop==$class)
+      {
+        $code= rand(6);
+      }
+    }
+    echo $code;
+    return $code;
   }
 }

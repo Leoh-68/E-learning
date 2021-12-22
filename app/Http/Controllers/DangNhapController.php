@@ -31,7 +31,7 @@ class DangNhapController extends Controller
             'username' => 'required',
             'password' => 'required'
             ]);
-        //$credentials = $request->only('username', 'password'); 
+        $credentials = $request->only('username', 'password'); 
         //['username' =>$request->username, 'password' =>  $request->password]
          if (Auth::attempt($credentials)) { 
             // $user = Auth::user();

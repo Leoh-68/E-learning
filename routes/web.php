@@ -27,6 +27,11 @@ Route::get('/UpdateClassView/{id}', [ClassroomController::class,'getUpdateClass'
 
 Route::get('/deleteClass/{id}', [ClassroomController::class,'deleteClass'])->name('deleteClass');   
 
+Route::post('/randomCode', [ClassroomController::class,'randomCode'])->name('randomCode');   
+
+Route::get('/randomCode', [ClassroomController::class,'randomCode'])->name('randomCode');   
+
+
 //Bạch
 Route::get('/', function () {
     return view('/Login');
@@ -39,10 +44,8 @@ Route::get('/HomePage', function () {
 Route::get('/Login', [DangNhapController::class,'dangNhap'])->name('Login')->middleware('guest');
 Route::post('/Login', [DangNhapController::class,'xuLyDangNhap'])->name('xl-dang-nhap');
 Route::get('/Logout', [DangNhapController::class,'dangXuat'])->name('Logout');
-//Route::get('/mk', [DangNhapController::class,'update'])->name('Login'); mã hóa mật khẩu
 Route::get('/ForgotPassword', [DangNhapController::class,'forgotPassword'])->name('/ForgotPassword');
 Route::post('/ForgotPassword', [DangNhapController::class,'xuLyMatKhau'])->name('xl-mat-khau');
-
 Route::get('/Students',[StudentController::class,'layDanhSachSV'])->name('StudentsList');
 Route::get('/Students/Add',[StudentController::class,'themSV'])->name('loadThemSV');
 Route::post('/Students/Add',[StudentController::class,'xlThemSV'])->name('xlThemSV');
