@@ -19,11 +19,15 @@ use App\Http\Controllers\ClassroomController;
       {{-- {{$var->username}} --}}
       Mr.Khánh
     </h2>
+   
+    <span class="classcode">
+     Mã lớp: {{$var->malop}}
+    </span>
     
     <img src="{{ asset('images/3.jpg') }}" class="avatar" align="right"> 
     <div class="listfunct">
-      <a href="/UpdateClassView/{{$var->name}}">Sửa</a>
-      <a class="btn btn-danger" onclick="return confirm('Are you sure?')" href="/deleteClass/{{$var->name}}"><i class="fa fa-trash"></i></a>
+      <a href="{{route('updateSingleClassPost',['id' => $var->malop])}}">Sửa</a>
+      <a class="btn btn-danger" onclick="return confirm('Are you sure?')" href="/deleteClass/{{$var->malop}}"><i class="fa fa-trash"></i></a>
     </div>
    </div> 
 </div>

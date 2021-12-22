@@ -1,9 +1,5 @@
 
-<@php
-    use App\Http\Controllers\ClassroomController;
-@endphp
  @extends('IndexHomePage')
-
  @section('library')
  <meta charset="utf-8">
  <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,19 +18,20 @@
  <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
  @endsection
  @section('body')
- <form method="POST" action="{{route('addClass')}}">
+ @foreach ($class as $item)
+ <form method="POST" action="{{route('updateSingleClassPost',['id' => $item->malop])}}">
   @csrf
   <div class="formsubmit" style="padding: 30px">
-  <div class="form-group">
-    <label for="">Tên lớp</label>
-    <input type="text" class="form-control"  placeholder="Enter class name" name="classname">
-  </div>
-  <div class="form-group">
     
-      <label for="">Mã lớp</label> 
-      <input type="text" class="form-control"  value="{{ClassroomController::randomCode();}}"  placeholder="Enter class code" name="classcode">
- 
-  </div>
+      <div class="form-group">
+      <label for="">Tên lớp</label>
+      <input type="text" value="{{$item->name}}" class="form-control"  placeholder="Enter class name" name="classname">
+    </div>
+    <div class="form-group">
+      <label for="">Giảng viên</label>
+      <input type="subject" value="{{$item->idaccount}}"  class="form-control"  placeholder="Enter suject name" name="username">
+    </div>
+      @endforeach
   <button type="submit" class="btn btn-primary" style="margin: 20px 0px 0px">Submit</button>
 </form>
 </div>

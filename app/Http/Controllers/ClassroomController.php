@@ -11,8 +11,8 @@ class ClassroomController extends Controller
       return view('Class');
   }     
   public function getUpdateClass(Request $req){
-    $class=Classroom::where('name','=',$req->id)->get();
-    return View('UpdateClass',compact('class'));
+    $class=Classroom::where('malop','=',$req->id)->get();
+    return View('Teacher/UpdateClass',compact('class'));
   }
 
   public function showClass(){
@@ -24,6 +24,7 @@ class ClassroomController extends Controller
     }
     return View('HomePage',compact('classlst'));
   }
+
   public function addClass(Request $req)
   {
     $listClass=Classroom::all();
@@ -42,27 +43,32 @@ class ClassroomController extends Controller
     $class->save();
     return redirect()->route('showClass');
   }
+
   public function showSingleClass(Request $req){
     $class=Classroom::where('malop','=',$req->id)->get();
     return View('Class',compact('class'));
   }
-  public function updateClass(Request $req){
 
-    $class=Classroom::where('name','=',$req->id)->first();
+  public function updateClass(Request $req){
+    $req->validate([
+      'classname'=>'required',
+      'username'=>'required',
+
+    ]);
+
+    $class=Classroom::where('malop','=',$req->id)->first();
     $class->name=$req->classname;
     $class->save();
    return redirect()->route('showClass');
   }
+  
   public function deleteClass(Request $req)
   {
-   
-    $class=Classroom::where('name','=',$req->id)->first();
+    $class=Classroom::where('malop','=',$req->id)->first();
     $class->deleted_at= Carbon::now(); 
     $class->save();
    return redirect()->route('showClass');
   }
-
-
 
   public static function randomCode()
   {
@@ -76,7 +82,6 @@ class ClassroomController extends Controller
         $code= rand(6);
       }
     }
-    echo $code;
     return $code;
   }
 }

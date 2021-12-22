@@ -35,7 +35,7 @@
                  <img src="{{ asset('images/3.jpg') }}" alt="Avatar" class="avatarnavbar">
             </li>
             <li>
-                <div class="dropdown">
+                {{-- <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             
                     </button>
@@ -44,7 +44,7 @@
                       <a class="dropdown-item" href="#">Another action</a>
                       <a class="dropdown-item" href="#">Something else here</a>
                     </div>
-                  </div>
+                  </div> --}}
                
             </li>
         </ul>

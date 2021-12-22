@@ -8,7 +8,7 @@ Route::get('/HomePage', function () {
 })->name('HomePage');
 
 Route::get('/AddClass', function () {
-    return view('AddClass');
+    return view('Teacher/AddClass');
 })->name('Addclass');
 
 Route::get('/Class', function () {
@@ -23,9 +23,13 @@ Route::get('/showClass',[ClassroomController::class,'showClass'])->name('showCla
 
 Route::get('/Class/{id}', [ClassroomController::class,'showSingleClass'])->name('showSingleClass');
 
-Route::get('/UpdateClassView/{id}', [ClassroomController::class,'getUpdateClass'])->name('updateSingleClass');
+Route::get('/UpdateClassView/{id}', [ClassroomController::class,'getUpdateClass'])->name('updateSingleClassGet');
+
+Route::post('/UpdateClassView/{id}', [ClassroomController::class,'getUpdateClass'])->name('updateSingleClassPost');
 
 Route::get('/deleteClass/{id}', [ClassroomController::class,'deleteClass'])->name('deleteClass');   
+
+Route::post('/deleteClass/{id}', [ClassroomController::class,'deleteClass'])->name('deleteClass'); 
 
 Route::post('/randomCode', [ClassroomController::class,'randomCode'])->name('randomCode');   
 
