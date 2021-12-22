@@ -40,7 +40,6 @@ Route::get('/HomePage', function () {
 
 Route::get('/Login', [DangNhapController::class,'dangNhap'])->name('Login')->middleware('guest');
 Route::post('/Login', [DangNhapController::class,'xuLyDangNhap'])->name('xl-dang-nhap');
-Route::get('/Logout', [DangNhapController::class,'dangXuat'])->name('Logout');
 //Route::get('/mk', [DangNhapController::class,'update'])->name('Login'); mã hóa mật khẩu
 Route::get('/ForgotPassword', [DangNhapController::class,'forgotPassword'])->name('/ForgotPassword');
 Route::post('/ForgotPassword', [DangNhapController::class,'xuLyMatKhau'])->name('xl-mat-khau');
