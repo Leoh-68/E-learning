@@ -23,7 +23,6 @@ use App\Http\Controllers\ClassroomController;
     <span class="classcode">
      Mã lớp: {{$var->malop}}
     </span>
-    
      <img src="{{ asset('images/3.jpg') }}" class="avatar" align="right">
     <div class="listfunct">
       <a href="{{route('updateSingleClassPost',['id' => $var->malop])}}">admin</a>

@@ -9,4 +9,14 @@ class Classroom extends Model
 {
     use HasFactory;
     protected $table='classroom';
+
+    public function theoAccount()
+    {
+       return $this->belongsTo('App\Models\Account','idaccount','id');
+    }
+
+    public function dsStudentJoined (Type $var = null)
+    {
+       return $this->belongsToMany('App\Models\Account','studentlist','idclassroom','idaccount','id','id');
+    }
 }

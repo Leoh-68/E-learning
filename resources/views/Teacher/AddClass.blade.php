@@ -1,5 +1,4 @@
-
-<@php
+@php
     use App\Http\Controllers\ClassroomController;
 @endphp
  @extends('IndexHomePage')
@@ -31,7 +30,7 @@
   </div>
   <div class="form-group">
       <label for="">Mã lớp</label> 
-      <input type="text" class="form-control"  value="{{ClassroomController::randomCode() }}"  placeholder="Enter class code" name="classcode">
+      <input type="text" class="form-control"  value="{{ClassroomController::randomCode()}}"  placeholder="Enter class code" name="classcode">
   </div>
   <button type="submit" class="btn btn-primary" style="margin: 20px 0px 0px">Submit</button>
 </form>

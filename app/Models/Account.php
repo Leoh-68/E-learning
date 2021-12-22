@@ -11,4 +11,13 @@ class Account extends Authenticatable
     use HasFactory;
     protected $table ='account';
    
+    public function dsLop()
+    {
+     return $this->belongsTo('App\Models\Classroom','id','idaccount');
+    }
+
+    public function dsClassJoined (Type $var = null)
+    {
+       return $this->belongsToMany('App\Models\Classroom','studentlist','idaccount','idclassroom','id','id');
+    }
 }
