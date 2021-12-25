@@ -31,26 +31,33 @@
 	
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-02.jpg');">
-			<div class="wrap-login100">	
+			<div class="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">	
 				<form action="{{ route('xl-mat-khau') }}" method="POST"  class="login100-form validate-form" button type = 'submit'>	
 				@csrf
 				<!-- <meta name="csrf-token" content="{{ csrf_token() }}"> -->			 
 					<span class="login100-form-title p-b-34 p-t-27">
 						Check Email
 					</span>
-						
-					<div class="wrap-input100 validate-input" data-validate = "Enter email">
-                        <input class="input100 @error('email') is-invalid @enderror" type="email" name="email" placeholder="Email <?php 
-						if(!empty($title))
-						echo "$title";
-						?>">
-                        <span class="focus-input100" data-placeholder="&#xf207;"></span>
-                        @error('email')
-						<span class="alert alert-danger">>{{ $message }}</span>
-						@enderror
-						
+					<div class="p-t-31 p-b-9">
+						<span class="txt1">
+							Email
+						</span>
 					</div>
 					
+					<div class="wrap-input100 validate-input" data-validate = "Enter email">
+                        <input class="input100 @error('email') is-invalid @enderror" type="email" name="email" placeholder="Email" value="{{ old('email') }}" required>
+                        <span class="focus-input100" data-placeholder="&#xf207;"></span>	
+					</div>
+					@error('email')
+						<span class="alert alert-danger">>{{ $message }}</span>
+					@enderror
+					@if (!empty($title))
+						<div class="alert alert-danger">
+						<ul>
+						<li>{{$title }}</li>
+						</ul>
+						</div>
+					@endif
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">
 							Xác Nhận

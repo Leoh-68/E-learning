@@ -34,6 +34,10 @@
             <li>
                  <img src="{{ asset('images/3.jpg') }}" alt="Avatar" class="avatarnavbar">
             </li>
+            <a href="{{route('dangXuat')}}" class="btn-face m-t-17">
+				<i class="fa "></i>
+				Logout
+			</a>
         </ul>
     </header>
      <section class="banner">

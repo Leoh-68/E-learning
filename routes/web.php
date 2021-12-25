@@ -13,19 +13,19 @@ Route::get('/AddClass', function () {
 
 Route::get('/Class', function () {
     return view('Class');
-})->name('Class');Route::get('/updateClass/{name}', [ClassroomController::class,'updateClass'])->name('updateClassGet');
+})->name('Class');Route::get('/updateClass/{name}', [ClassroomController::class,'updateClass'])->name('updateClassGet')->middleware('Teacher');
 
-Route::post('/updateClass/{id}', [ClassroomController::class,'updateClass'])->name('updateClassPost');  
+Route::post('/updateClass/{id}', [ClassroomController::class,'updateClass'])->name('updateClassPost')->middleware('Teacher');  
 
-Route::post('/AddClass',[ClassroomController::class,'addClass'])->name('addClass');
+Route::post('/AddClass',[ClassroomController::class,'addClass'])->name('addClass')->middleware('Teacher');
 
-Route::get('/showClass',[ClassroomController::class,'showClass'])->name('showClass');
+Route::get('/showClass',[ClassroomController::class,'showClass'])->name('showClass')->middleware('Teacher','auth');
 
-Route::get('/Class/{id}', [ClassroomController::class,'showSingleClass'])->name('showSingleClass');
+Route::get('/Class/{id}', [ClassroomController::class,'showSingleClass'])->name('showSingleClass')->middleware('Teacher','auth');
 
-Route::get('/UpdateClassView/{id}', [ClassroomController::class,'getUpdateClass'])->name('updateSingleClass');
+Route::get('/UpdateClassView/{id}', [ClassroomController::class,'getUpdateClass'])->name('updateSingleClass')->middleware('Teacher');
 
-Route::get('/deleteClass/{id}', [ClassroomController::class,'deleteClass'])->name('deleteClass');   
+Route::get('/deleteClass/{id}', [ClassroomController::class,'deleteClass'])->name('deleteClass')->middleware('Teacher');   
 
 //Bạch
 Route::get('/', function () {
@@ -38,10 +38,15 @@ Route::get('/HomePage', function () {
 
 Route::get('/Login', [DangNhapController::class,'dangNhap'])->name('Login')->middleware('guest');
 Route::post('/Login', [DangNhapController::class,'xuLyDangNhap'])->name('xl-dang-nhap');
-//Route::get('/mk', [DangNhapController::class,'update'])->name('Login'); mã hóa mật khẩu
-Route::get('/ForgotPassword', [DangNhapController::class,'forgotPassword'])->name('/ForgotPassword');
+Route::get('/dangXuat', [DangNhapController::class,'dangXuat'])->name('dangXuat');
+Route::get('/ForgotPassword', [DangNhapController::class,'forgotPassword'])->name('/ForgotPassword')->middleware('guest');
 Route::post('/ForgotPassword', [DangNhapController::class,'xuLyMatKhau'])->name('xl-mat-khau');
-
+Route::get('/Password', [DangNhapController::class,'Password'])->name('/Password')->middleware('guest');
+Route::post('/Password/{id}', [DangNhapController::class,'taoMoiMatKhau'])->name('mat-khau-moi');
+Route::post('/joinClass',[ClassroomController::class,'joinClass'])->name('joinClass');
+Route::get('/showStudent',[ClassroomController::class,'showStudent'])->name('showStudent');
+Route::get('/Student/{id}', [ClassroomController::class,'showSingleClass'])->name('showSingleClass');
+ 
 Route::get('/Students',[StudentController::class,'layDanhSachSV'])->name('StudentsList');
 Route::get('/Students/Add',[StudentController::class,'themSV'])->name('loadThemSV');
 Route::post('/Students/Add',[StudentController::class,'xlThemSV'])->name('xlThemSV');

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Account;
 use Illuminate\Http\Request;
 use App\Models\Student;
+use App\Models\Classroom;
 
 class StudentController extends Controller
 {
@@ -60,4 +62,36 @@ class StudentController extends Controller
         $sv->save();
         return redirect()->route('StudentsList');
     }
+
+    public function showStudent(){
+        $classlst=Classroom::all();
+        if($classlst==null)
+        {
+         return 0;
+        }
+        $SinhVien=Account::all();
+        if($SinhVien==null)
+        {
+          return 0;
+        }
+        return View('HomePage',compact('classlst'));
+      }
+      
+      public function joinClass(Request $req)
+      {
+        $listClass=Classroom::all();
+        foreach($listClass as $var)
+        {
+          if($req->malop!=$var->malop)
+          {
+            return "Lớp không tồn tại";
+          }
+        }
+        
+        return redirect()->route('joinClass');
+      }
+      public function showSingleClass(Request $req){
+        $class=Classroom::where('name','=',$req->id)->get();
+        return View('Student',compact('class'));
+      }
 }

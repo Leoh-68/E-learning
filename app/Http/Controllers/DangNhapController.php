@@ -33,37 +33,22 @@ class DangNhapController extends Controller
 
     public function xuLyDangNhap(DangNhapRequest $request)
     {
-        $user = Account::where('username',$request->username)->first();
-       
-        //  if(empty($user)){
-        //     echo"Tên đăng nhập hoặc mật khẩu không đúng";
-        //  }else if($user->password != $request->password){
-        //     echo"Tên đăng nhập hoặc mật khẩu không đúng";
-        //  }else{
-        //      echo $user->hoTen;
-        //  }
+        $user = Account::where('username',$request->username)->first();  
         // $request->validate([
-        //     'username' => 'required',
-        //     'password' => 'required|min:5'
-        //     ]);  
-        $request->validate([
-           
-        ]);     
-         //$validated = $request->validated();
+        // ]);     
+         $validated = $request->validated();
          if (Auth::attempt(['username' =>$request->username, 'password' =>  $request->password])) { 
             $user = Account::where('username',$request->username)->first();
-            //$Type = AccountType::where('id',$user->accounttype)->first();
-            //$AccType = $Type->type;
+            if($user->accounttype==2){
             return redirect()->route('showClass',compact('user'));
+            }elseif($user->accounttype==1){
+               echo ' Admin đăng nhập';
+            }
+            return redirect()->route('showStudent',compact('user'));
          }else{
-            if($user->username != $request->username){
-                $userText = " không đúng";
-                return view('Login',compact('userText'));
-             }else
-             $pwText = " không đúng";
-             return view('Login',compact('pwText'));
-         }
-            
+             $Text = "Username hoặc password không tồn tại";
+             return view('Login',compact('Text'));
+         }      
     }
 
     public function forgotPassword()
@@ -74,36 +59,45 @@ class DangNhapController extends Controller
     public function xuLyMatKhau(EmailRequest $request)
     {
         
-        $request->validate([
-        ]);    
+        $validated = $request->validated();   
         $user = Account::where('email',$request->email)->first();
          if(empty($user)||$user->email != $request->email){
-            $title = " không đúng";
+            $title = " Email không tồn tại";
             return view('ForgotPassword',compact('title'));
-         }else{
-            $number = Str::random(5);
-            $id = $user->id;
-            $data = Account::find($id);
-            $data->password = Hash::make($number);
-            $data->save();
-            return view('Login',compact('number'));
-         }           
+        }
+        return view('Password',compact('user'));            
     }
 
-    //MÃ hóa mật khẩu
-    public function update()
-        {
-        $id=1;
-        $data = Account::find($id);
-        $data->password = Hash::make('123456');
-        $data->save();
-        echo 'Cập nhật thành viên thành công!';
+    public function Password()
+    {
+        return view('Password');
     }
+
+    public function taoMoiMatKhau(Request $request,$id)
+    {
+        
+        $request->validate([
+            'password' => 'required|min:5',
+            'password2' => 'required|min:5'
+        ]
+        );  
+        $user = Account::find($id);
+        if($request->password!=$request->password2){
+            $title = " Password không khớp";
+            return view('Password',compact('title','user'));
+         }else{
+            $user->password = Hash::make($request->password);
+            $user->save();
+            $Text = "Cập nhật thành công";
+            return view('Password',compact('Text','user'));
+         }           
+    }
+    
 
     //Cái này là đăng xuất
     public function dangXuat()
     {
         Auth::logout();
-        return view('Login');
+        return redirect()->route('Login');
     }
 }

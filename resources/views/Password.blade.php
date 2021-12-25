@@ -32,61 +32,69 @@
 	
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-02.jpg');">
-			<div class="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33" >	
-				<form action="{{ route('xl-dang-nhap') }}" method="POST"  class="login100-form validate-form flex-sb flex-w"" button type = 'submit'  >	
+			<div class="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">	
+				<form action="{{ route('mat-khau-moi',['id'=>$user->id]) }}" method="POST"  class="login100-form validate-form flex-sb flex-w" button type = 'submit'  >	
 				@csrf
 						 
 					<span class="login100-form-title p-b-53">	
-						Đăng nhập
+						New Password
 					</span>
-					<a href="#" class="btn-face m-b-20">
-						<i class="fa fa-facebook-official"></i>
-						Facebook
-					</a>
-
-					<a href="#" class="btn-google m-b-20">
-						<img src="images/icons/icon-google.png" alt="GOOGLE">
-						Google
-					</a>
-					<div class="p-t-31 p-b-9">
-						<span class="txt1">
-							Username
-						</span>
-					</div>
-					<div class="wrap-input100 validate-input" data-validate = "Username is required">
-						<input class="input100 @error('username') is-invalid @enderror" type="text" name="username" value="{{ old('username') }}" required>
-						<span class="focus-input100"></span>	
-					</div>
-					@error('username')
-						<span class="alert alert-danger">>{{ $message }}</span>
-					@enderror
+					
 					<div class="p-t-13 p-b-9">
 						<span class="txt1">
 							Password
 						</span>
-						<a class="txt2 bo1 m-l-5" href ="{{ route('xl-mat-khau') }}">
-							Forgot?
-						</a> 
 					</div>
-					<div class="wrap-input100 validate-input" data-validate = "Password is required">
-						<input class="input100 @error('password') is-invalid @enderror " type="password" name="password" value="{{ old('password') }}" required>
-						<span class="focus-input100"></span>
-					</div>
-					@error('password')				
-						<span class="alert alert-danger">>{{ $message }}</span>
-					@enderror
-					@if (!empty($Text))
+					@if (!empty($title))
 						<div class="alert alert-danger">
+						<ul>
+						<li>{{$title }}</li>
+						</ul>
+						</div>
+					@endif
+					@if (!empty($Text))
+						<div class="alert alert-success">
 						<ul>
 						<li>{{$Text }}</li>
 						</ul>
 						</div>
 					@endif
+					<div class="wrap-input100 validate-input" data-validate = "Password is required">
+						<input class="input100 @error('password') is-invalid @enderror " type="password" name="password" value="{{ old('password') }}" required>
+						<span class="focus-input100"></span>
+					
+					</div>
+					@error('password')
+						<div>
+						<span class="alert alert-danger">>{{ $message }}</span>
+						</div>
+					@enderror
+					
+					<div class="p-t-13 p-b-9">
+						<span class="txt1">
+							Confirmed Password
+						</span>
+					</div>
+					<div class="wrap-input100 validate-input" data-validate = "Password is required">
+						<input class="input100 @error('password') is-invalid @enderror " type="password" name="password2" value="{{ old('password2') }}" required>
+						<span class="focus-input100"></span>
+					
+					</div>
+					@error('password2')
+						<div>
+						<span class="alert alert-danger">>{{ $message }}</span>
+						</div>
+					@enderror
 					<div class="container-login100-form-btn m-t-17">
 						<button class="login100-form-btn">
-							Đăng nhập
+							Xác nhận
 						</button>
+						<a href="{{ route('xl-dang-nhap') }}" class="btn-face m-t-17">
+						<i class="fa"></i>
+							Back to Login
+						</a>
 					</div>
+					
 				</form>
 			</div>
 		</div>

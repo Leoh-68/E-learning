@@ -31,7 +31,7 @@ class EmailRequest extends FormRequest
     {
         return [
             'email.required' => 'Chưa nhập email',
-            'email.gmail' => 'Định dạng email không đúng',
+            'email.email' => 'Định dạng email không đúng',
         ];
     }
 }
