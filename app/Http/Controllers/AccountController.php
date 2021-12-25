@@ -46,4 +46,9 @@ class AccountController extends Controller
     return redirect()->route('loadAccount');    
 
     }
+
+    public static function AccountLogin(){
+        $account=Account::where('username',Cookie::get('username'))->first();
+        return $account;
+    }
 }

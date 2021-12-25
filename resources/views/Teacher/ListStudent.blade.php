@@ -7,6 +7,7 @@
             @csrf
                 <br><input name="textinput">
                 <button type="submit"> Thêm</button>
+                <span style="color: red">{{Cookie::get('error')}}</span>
             </form>
             <table class="table">
             <thead>

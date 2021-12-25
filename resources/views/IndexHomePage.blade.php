@@ -25,16 +25,20 @@
     <header>
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <a href="{{route('showClass')}}">Lớp học</a>
+            @yield('MenuHomePage')
          </div>
           <span onclick="openNav()"><i class="fas fa-stream fa-2x"></i></span>
         <a href="#" class="logo">E-Learning Project</a>
         <ul>
-            <li><a href="{{route('Addclass')}}"> <i class="fa fa-plus fa-2x" ></i> </a></li>
+            @yield('AddButton')
+            @php
+                  $account= App\Http\Controllers\AccountController::AccountLogin();  
+                     echo $account->hoten;
+               @endphp  
             <li>
                 <a href="{{route('loadAccount')}}"><img src="{{ asset('images/3.jpg') }}" alt="Avatar" class="avatarnavbar"></a>
             </li>
-            <li> 
+            <li>         
             </li>
         </ul>
     </header>

@@ -15,7 +15,7 @@ class Classroom extends Model
        return $this->belongsTo('App\Models\Account','idaccount','id');
     }
 
-    public function dsStudentJoined (Type $var = null)
+    public function dsStudentJoined ()
     {
        return $this->belongsToMany('App\Models\Account','studentlist','idclassroom','idaccount','id','id');
     }

@@ -33,16 +33,6 @@ class ClassroomController extends Controller
     return View('ClassroomsList',compact('lst'));
   }
 /*Lớp của sinh viên*/
-  public function showClassStudent(){
-
-    $classlst=Classroom::all();
-    if($classlst==null)
-    {
-      return 0;
-    }
-    return View('student/HomePageStudent',compact('classlst'));
-  }
-
   public function addClass(Request $req)
   {
     $req->validate([
@@ -68,6 +58,12 @@ class ClassroomController extends Controller
     $class=Classroom::where('malop','=',$req->id)->get();
 
     return View('Teacher/Class',compact('class'));
+  }
+
+  public function showSingleClassStudent(Request $req){
+    $class=Classroom::where('malop','=',$req->id)->get();
+
+    return View('Student/ClassStudent',compact('class'));
   }
 
   public function updateClass(Request $req){

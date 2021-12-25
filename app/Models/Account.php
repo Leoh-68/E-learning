@@ -16,7 +16,7 @@ class Account extends Authenticatable
      return $this->belongsTo('App\Models\Classroom','id','idaccount');
     }
 
-    public function dsClassJoined (Type $var = null)
+    public function lstClassJoined ()
     {
        return $this->belongsToMany('App\Models\Classroom','studentlist','idaccount','idclassroom','id','id');
     }

@@ -130,6 +130,13 @@ header ul li a
     left: 20px;
 
   }
+  .nameinclassStudent{
+    position: relative;
+    top: 190px;
+    left: 20px;
+
+
+  }
   .post{
     padding: 20px 0px 20px 0px;
     float: right;

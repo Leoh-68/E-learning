@@ -2,6 +2,13 @@
 use app\Http\Controllers\ClassroomController;   
 @endphp -->
 @extends('IndexHomePage')
+@section('AddButton')
+<li><a href="{{route('Addclass')}}"> <i class="fa fa-plus fa-2x" ></i> </a></li>
+@endsection
+@section('MenuHomePage')
+<a href="{{route('showClass')}}">Lớp học</a>
+@endsection
+
 @section('logo')
 <a href="#" class="logo">E-Learning Project</a>   
 @endsection

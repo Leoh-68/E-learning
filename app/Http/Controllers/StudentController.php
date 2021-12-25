@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Account;
-
+use App\Models\Classroom;
+use App\Models\StudentList;
+use Illuminate\Support\Facades\Cookie;
 class StudentController extends Controller
 {
     public function layDanhSachSV()
@@ -71,4 +73,31 @@ class StudentController extends Controller
         $dsSV->save();
         return redirect()->route('StudentsList');
     }
+
+    public function showClassStudent(){
+        $account=Account::where('username',Cookie::get('username'))->first();
+        $id=$account->id;
+        $classlst=Account::find($id)->lstClassJoined;
+        return View('student/HomePageStudent',compact('classlst'));
+      }
+
+      public function addClassStudent(Request $req)
+      {
+        $req->validate([
+          'classcode'=>'required|max:6|min:6'
+        ],[
+          'classcode.required'=>'Vui lòng nhập đầu đủ mã lớp',
+          'classcode.min'=>'Mã lớp phải có :min ký tự',
+          'classcode.max'=>'Mã lớp phải có :max ký tự'
+        ]);
+        $account=Account::where('username',Cookie::get('username'))->first();
+
+        $listClass=Classroom::where('malop',$req->classcode)->first();
+        $class= new StudentList;
+        $class->idaccount=$account->id;
+        $class->idclassroom=$listClass->id;
+        $class->stt=1;
+        $class->save();
+        return redirect()->route('showClassStudent');
+      }
 }
