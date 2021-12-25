@@ -1,7 +1,9 @@
 @php
 use App\Http\Controllers\ClassroomController;   
 @endphp
-
+@section('logo')
+<a href="#" class="logo">E-Learning Project</a>   
+@endsection
 @extends('IndexHomePage')
 @section('body')
 @foreach ($classlst as $var)

@@ -20,7 +20,7 @@ Route::get('/Class', function () {
     return view('Class');
 })->name('Class');Route::get('/updateClass/{name}', [ClassroomController::class,'updateClass'])->name('updateClassGet');
 
-
+//<-                Classroom                 ->
 //-----------------------------//
 Route::get('/showClass',[ClassroomController::class,'showClass'])->name('showClass');
 
@@ -90,4 +90,6 @@ Route::get('/Admin', function () {
     return view('Admin');
 })->name('Admin');
 
+//<-                Account                 ->
 Route::get('/loadAccount',[AccountController::class,'loadAccount'])->name('loadAccount');
+Route::post('/updateAccount',[AccountController::class,'updateAccount'])->name('updateAccount');
