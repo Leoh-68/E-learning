@@ -5,11 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Account;
-use App\Models\AccountType;
 use App\Http\Requests\DangNhapRequest;
 use App\Http\Requests\EmailRequest;
-use Illuminate\Support\Str;
 
 // Bạch: Ngộ thêm cả thư mục fonts(~E-learning\public\fonts) 
 // và vendor(~E-learning\public\vendor) nhưng ghi chú hết thì trầm cảm lắm
@@ -44,7 +43,7 @@ class DangNhapController extends Controller
             }elseif($user->accounttype==1){
                echo ' Admin đăng nhập';
             }
-            return redirect()->route('showStudent',compact('user'));
+                echo ' Học sinh đăng nhập';
          }else{
              $Text = "Username hoặc password không tồn tại";
              return view('Login',compact('Text'));
@@ -61,16 +60,29 @@ class DangNhapController extends Controller
         
         $validated = $request->validated();   
         $user = Account::where('email',$request->email)->first();
-         if(empty($user)||$user->email != $request->email){
+        if(empty($user)||$user->email != $request->email){
             $title = " Email không tồn tại";
             return view('ForgotPassword',compact('title'));
         }
-        return view('Password',compact('user'));            
+        Mail::send('SendMail',compact('user'),function($email) use($user){
+            $email->subject('E-learning - Quên mật khẩu');
+            $email->to($user->email,$user->hoten);
+        });           
     }
 
-    public function Password()
+    public function guiMail($id)
     {
-        return view('Password');
+        $user = Account::find($id);
+        Mail::send('SendMail',compact('user'),function($email) use($user){
+            $email->subject('Forgot Password');
+            $email->to($user->email,$user->hoTen);
+        });
+    }
+
+    public function Password($id)
+    {
+        $user = Account::find($id);
+        return view('Password',compact('user'));
     }
 
     public function taoMoiMatKhau(Request $request,$id)

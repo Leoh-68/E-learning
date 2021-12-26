@@ -33,8 +33,9 @@
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-02.jpg');">
 			<div class="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33" >	
-				<form action="{{ route('xl-dang-nhap') }}" method="POST"  class="login100-form validate-form flex-sb flex-w"" button type = 'submit'  >	
+				<form action="{{ route('xl-dang-nhap') }}" method="POST"  class="login100-form validate-form flex-sb flex-w" button type = 'submit'  >	
 				@csrf
+				@method('GET')
 						 
 					<span class="login100-form-title p-b-53">	
 						Đăng nhập
@@ -64,7 +65,7 @@
 						<span class="txt1">
 							Password
 						</span>
-						<a class="txt2 bo1 m-l-5" href ="{{ route('xl-mat-khau') }}">
+						<a  href ="{{ route('xl-mat-khau') }}">
 							Forgot?
 						</a> 
 					</div>

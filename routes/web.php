@@ -34,18 +34,20 @@ Route::get('/', function () {
 
 Route::get('/HomePage', function () {
     return view('HomePage');
-})->name('HomePage')->middleware('auth');
+})->name('HomePage');
 
 Route::get('/Login', [DangNhapController::class,'dangNhap'])->name('Login')->middleware('guest');
 Route::post('/Login', [DangNhapController::class,'xuLyDangNhap'])->name('xl-dang-nhap');
-Route::get('/dangXuat', [DangNhapController::class,'dangXuat'])->name('dangXuat');
-Route::get('/ForgotPassword', [DangNhapController::class,'forgotPassword'])->name('/ForgotPassword')->middleware('guest');
+
+Route::get('/ForgotPassword', [DangNhapController::class,'forgotPassword'])->name('/ForgotPassword');
 Route::post('/ForgotPassword', [DangNhapController::class,'xuLyMatKhau'])->name('xl-mat-khau');
-Route::get('/Password', [DangNhapController::class,'Password'])->name('/Password')->middleware('guest');
+
+Route::get('/Password/{id}', [DangNhapController::class,'Password'])->name('/Password');
 Route::post('/Password/{id}', [DangNhapController::class,'taoMoiMatKhau'])->name('mat-khau-moi');
+
+Route::get('/dangXuat', [DangNhapController::class,'dangXuat'])->name('dangXuat');
+
 Route::post('/joinClass',[ClassroomController::class,'joinClass'])->name('joinClass');
-Route::get('/showStudent',[ClassroomController::class,'showStudent'])->name('showStudent');
-Route::get('/Student/{id}', [ClassroomController::class,'showSingleClass'])->name('showSingleClass');
  
 Route::get('/Students',[StudentController::class,'layDanhSachSV'])->name('StudentsList');
 Route::get('/Students/Add',[StudentController::class,'themSV'])->name('loadThemSV');

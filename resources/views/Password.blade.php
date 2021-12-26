@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login</title>
+	<title>New Password</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	 <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -29,12 +29,13 @@
 <!--===============================================================================================-->
 </head>
 <body>
-	
+
 	<div class="limiter">
-		<div class="container-login100" style="background-image: url('images/bg-02.jpg');">
+		<div class="container-login100" style="background-image: url('images/bg-02.jpg');"> 
 			<div class="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">	
 				<form action="{{ route('mat-khau-moi',['id'=>$user->id]) }}" method="POST"  class="login100-form validate-form flex-sb flex-w" button type = 'submit'  >	
 				@csrf
+				<!-- @method('POST') -->
 						 
 					<span class="login100-form-title p-b-53">	
 						New Password
