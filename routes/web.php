@@ -102,3 +102,5 @@ Route::get('/loadAccount',[AccountController::class,'loadAccount'])->name('loadA
 Route::post('/updateAccount',[AccountController::class,'updateAccount'])->name('updateAccount');
 
 Route::post('Student/AddClass',[StudentController::class,'addClassStudent'])->name('addClassStudent');
+
+Route::get('/logout',[DangNhapController::class,'dangXuat'])->name('Logout');
