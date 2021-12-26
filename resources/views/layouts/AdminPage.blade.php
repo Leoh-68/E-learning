@@ -23,14 +23,9 @@
 </head>
 <body>
     <header>
-        <div id="mySidenav" class="sidenav">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <a href="{{route('showClass')}}">Lớp học</a>
-         </div>
-          <span onclick="openNav()"><i class="fas fa-stream fa-2x"></i></span>
+          <span></span>
         <a href="#" class="logo">E-Learning Project</a>
         <ul>
-            <li><a href="{{route('Addclass')}}"> <i class="fa fa-plus fa-2x" ></i> </a></li>
             <li>
                  <img src="{{ asset('images/3.jpg') }}" alt="Avatar" class="avatarnavbar">
             </li>
@@ -43,6 +38,7 @@
             <a id="btn" class="btn btn-primary" href="{{route('TeachersList')}}">Quản lý Giảng viên</a>
             <a id="btn" class="btn btn-primary" href="{{route('StudentsList')}}">Quản lý Sinh viên</a>
             <a id="btn" class="btn btn-primary" href="{{route('ClassroomsList')}}">Quản lý lớp học</a>
+            <a id="btn" class="btn btn-danger" style="float:right" href="{{route('AdminsList')}}">Quản lý tài khoản quản trị viên</a>
         </div>
     </div>
      @yield('func')

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Account;
+use App\Http\Requests\SubmitRequest;
 
 class StudentController extends Controller
 {
@@ -17,11 +19,11 @@ class StudentController extends Controller
     {
         return view('AddStudent');
     }
-    public function xlThemSV(Request $rq)
+    public function xlThemSV(SubmitRequest $rq)
     {
         $sv = new Account;
         $sv->username = $rq->username;
-        $sv->password = $rq->password;
+        $sv->password = Hash::make($rq->password);
         $sv->hoten = $rq->hoten;
         $sv->ngaysinh = $rq->ngaysinh;
         $sv->diachi = $rq->diachi;
@@ -35,27 +37,23 @@ class StudentController extends Controller
     public function suaSV($id)
     {
         $dsSV = Account::find($id);
-        if($dsSV == null)
+        if($dsSV == null||$dsSV->deleted_at != NULL)
         {
-            return "Không tìm thấy sinh viên có ID = {$id}";
+            return view('UnknowAccount');
         }
         return view('UpdateStudent',compact('dsSV'));
     }
-    public function xlSuaSV(Request $rq,$id)
+    public function xlSuaSV(SubmitRequest $rq,$id)
     {
         $sv = Account::find($id);
-        if($sv == null)
-        {
-            return "Không tìm thấy sinh viên có ID = {$id}";
-        }
         $sv->username = $rq->username;
-        $sv->password = $rq->password;
+        $sv->password = Hash::make($rq->password);
         $sv->hoten = $rq->hoten;
         $sv->ngaysinh = $rq->ngaysinh;
         $sv->diachi = $rq->diachi;
         $sv->sdt = $rq->sdt;
         $sv->email = $rq->email;
-        $sv->accounttype = 2;
+        $sv->accounttype = 3;
         $sv->updated_at = date("Y-m-d");
         $sv->save();
         return redirect()->route('StudentsList');
@@ -63,9 +61,9 @@ class StudentController extends Controller
     public function xoaSV($id)
     {
         $dsSV = Account::find($id);
-        if($dsSV == null)
+        if($dsSV == null||$dsSV->deleted_at != NULL)
         {
-            return "không tìm thấy sinh viên có ID = {$id} ";
+            return view('UnknowAccount');
         }
         $dsSV->deleted_at = date("Y-m-d");
         $dsSV->save();
