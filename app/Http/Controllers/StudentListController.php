@@ -15,7 +15,8 @@ class StudentListController extends Controller
            $allacc=Account::where('email',$req->textinput)->first();
            if($allacc==null)
            {
-               return 0;
+            Cookie::queue('error',"Thêm ngu",0.09);
+               return  redirect()->route('lstStudent',['id'=>$req->id]);
            } 
            $studentlis->stt=1;
            $studentlis->idaccount=$allacc->id;

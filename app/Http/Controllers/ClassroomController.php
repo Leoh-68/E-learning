@@ -33,27 +33,19 @@ class ClassroomController extends Controller
     return View('ClassroomsList',compact('lst'));
   }
 /*Lớp của sinh viên*/
-  public function showClassStudent(){
-
-    $classlst=Classroom::all();
-    if($classlst==null)
-    {
-      return 0;
-    }
-    return View('student/HomePageStudent',compact('classlst'));
-  }
-
   public function addClass(Request $req)
   {
+    $req->validate([
+      'classname'=>'required',
+      'classcode'=>'required|max:6|min:6'
+    ],[
+      'classname.required'=>'Vui lòng nhập đầy đủ tên lớp',
+      'classcode.required'=>'Vui lòng nhập đầu đủ mã lớp',
+      'classcode.min'=>'Mã lớp phải có :min ký tự',
+      'classcode.max'=>'Mã lớp phải có :max ký tự'
+    ]);
     $account=Account::where('username',Cookie::get('username'))->first();
     $listClass=Classroom::all();
-    foreach($listClass as $var)
-    {
-      if($var->malop==$req->classcode)
-      {
-        return "Lớp đã tồn tại";
-      }
-    }
     $account=Account::where('username',Cookie::get('username'))->first();
     $class=new Classroom;
     $class->idaccount=$account->id;
@@ -62,25 +54,29 @@ class ClassroomController extends Controller
     $class->save();
     return redirect()->route('showClass');
   }
-
   public function showSingleClass(Request $req){
     $class=Classroom::where('malop','=',$req->id)->get();
 
     return View('Teacher/Class',compact('class'));
   }
 
+  public function showSingleClassStudent(Request $req){
+    $class=Classroom::where('malop','=',$req->id)->get();
+
+    return View('Student/ClassStudent',compact('class'));
+  }
+
   public function updateClass(Request $req){
     $req->validate([
       'classname'=>'required',
       'username'=>'required',
-
+      'classname.required'=>'Vui lòng nhập đầy đủ tên lớp',
     ]);
     $class=Classroom::where('malop','=',$req->id)->first();
     $class->name=$req->classname;
     $class->save();
    return redirect()->route('showClass');
   }
-  
   public function deleteClass(Request $req)
   {
     $class=Classroom::where('malop','=',$req->id)->first();
@@ -107,6 +103,12 @@ class ClassroomController extends Controller
   {
     $a=Classroom::find($id)->theoAccount;
     return $a->hoten;
+  }
+
+  public static function LayTenTheoMa($id)
+  {
+    $account= Account::where('id',$id)->first();
+    return $account->hoten;
   }
 
   public function dsSinhVien(Request $req)
