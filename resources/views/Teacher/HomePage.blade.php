@@ -30,7 +30,7 @@ use app\Http\Controllers\ClassroomController;
     <span class="classcode">
      Mã lớp: {{$var->malop}}
     </span>
-     <img src="{{ asset('images/3.jpg') }}" class="avatar" align="right">
+     <img src="{{ asset('images/3.png') }}" class="avatar" align="right">
     <div class="listfunct">
       <a href="{{route('updateSingleClassPost',['id' => $var->malop])}}">Sửa</a>
       <a  onclick="return confirm('Bạn có chắc muốn xóa ?')" href="/deleteClass/{{$var->malop}}">Xóa</a>

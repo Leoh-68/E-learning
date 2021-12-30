@@ -310,7 +310,10 @@ font-size: 10;
 .show {display:block;}
 div.input{
   float:left;
-  padding-right: 20px;
+  padding-right: 100px;
+}
+div.fixedbox{
+  display: inline-block;
 }
 div,label{
   font-weight: bold;
@@ -320,4 +323,7 @@ tr{
 }
 #btn{
   margin-right: 20px;
+}
+#font{
+  color: rgb(255, 0, 0);
 }

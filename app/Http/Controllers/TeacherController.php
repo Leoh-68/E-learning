@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Account;
+use App\Http\Requests\SubmitRequest;
 
 class TeacherController extends Controller
 {
@@ -17,7 +19,7 @@ class TeacherController extends Controller
     {
         return view('AddTeacher');
     }
-    public function xlThemGV(Request $rq)
+    public function xlThemGV(SubmitRequest $rq)
     {
         $gv = new Account;
         $gv->username = $rq->username;
@@ -35,19 +37,15 @@ class TeacherController extends Controller
     public function suaGV($id)
     {
         $dsGV = Account::find($id);
-        if($dsGV == null)
+        if($dsGV == null||$dsGV->deleted_at != NULL)
         {
-            return "Không tìm thấy giảng viên có ID = {$id}";
+            return view('UnknowAccount');
         }
         return view('UpdateTeacher',compact('dsGV'));
     }
-    public function xlSuaGV(Request $rq,$id)
+    public function xlSuaGV(SubmitRequest $rq,$id)
     {
         $gv = Account::find($id);
-        if($gv == null)
-        {
-            return "Không tìm thấy giảng viên có ID = {$id}";
-        }
         $gv->username = $rq->username;
         $gv->password = $rq->password;
         $gv->hoten = $rq->hoten;
@@ -63,9 +61,9 @@ class TeacherController extends Controller
     public function xoaGV($id)
     {
         $dsGV = Account::find($id);
-        if($dsGV == null)
+        if($dsGV == null||$dsGV->deleted_at != NULL)
         {
-            return "không tìm thấy giảng viên có ID = {$id} ";
+            return view('UnknowAccount');
         }
         $dsGV->deleted_at = date("Y-m-d");
         $dsGV->save();

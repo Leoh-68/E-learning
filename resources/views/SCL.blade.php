@@ -28,7 +28,7 @@ use \App\Http\Controllers\ClassroomController;
             <a class="btn btn-primary" href="{{route('ClassroomsList')}}"><i class="fa fa-arrow-alt-circle-left"></i> Quay lại</a>
             <br>
             <form method="POST" action="{{route('xlThemSVTL',['id' => request()->id])}}">
-            @csrf<input name="textinput">
+            @csrf<input style="width:250px" name="textinput">
                 <button class="btn btn-primary" type="submit"><i class="fa fa-plus"></i> Thêm</button>
                 <br>
             </form>

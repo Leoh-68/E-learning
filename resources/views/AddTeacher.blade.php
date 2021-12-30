@@ -26,48 +26,82 @@
         <a class="btn btn-primary" href="{{route('TeachersList')}}"><i class="fa fa-arrow-alt-circle-left"></i> Quay lại</a>
             <div>
                 <br>
-                <div class="input">
-                    <label>Username</label>
-                    <br>
-                    <input type="text" name="username"required/>
-                </div>
                 <div>
-                    <label>Password</label>
-                    <br>
-                    <input type="text" name="password"required/>
+                    <div class="input">
+                        <label>Username</label><span id="font"> *</span>
+                        <br>
+                        <input type="text" name="username"/>
+                        @error('username')
+                        <br>
+                        <span id="font">{{$message}}</span>
+                        @enderror
+                    </div>
+                    <div class="fixedbox">
+                        <label>Password</label><span id="font"> *</span>
+                        <br>
+                        <input type="password" name="password"/>
+                        @error('password')
+                        <br>
+                        <span id="font">{{$message}}</span>
+                        @enderror
+                    </div>
                 </div>
                 <br>
-                <div class="input">
-                    <label>Họ tên</label>
-                    <br>
-                    <input type="text" name="hoten"required/>
-                </div>
                 <div>
-                    <label>Ngày sinh</label>
-                    <br>
-                    <input type="date" name="ngaysinh"required/>
+                    <div class="input">
+                        <label>Họ tên</label><span id="font"> *</span>
+                        <br>
+                        <input type="text" name="hoten"/>
+                        @error('hoten')
+                        <br>
+                        <span id="font">{{$message}}</span>
+                        @enderror
+                    </div>
+                    <div class="fixedbox">
+                        <label>Ngày sinh</label><span id="font"> *</span>
+                        <br>
+                        <input type="date" name="ngaysinh"/>
+                        @error('ngaysinh')
+                        <br>
+                        <span id="font">{{$message}}</span>
+                        @enderror
+                    </div>
                 </div>
                 <br>
-                <div class="input">
-                    <label>Địa chỉ</label>
-                    <br>
-                    <input type="text" name="diachi"required/>
-                </div>
-                <div class="input">
-                    <label>Số điện thoại</label>
-                    <br>
-                    <input type="text" name="sdt"required/>
-                </div>
                 <div>
-                    <label>Email</label>
-                    <br>
-                    <input type="email" name="email"required/>
+                    <div class="input">
+                        <label>Địa chỉ</label>
+                        <br>
+                        <input type="text" name="diachi"/>
+                        @error('diachi')
+                        <br>
+                        <span id="font">{{$message}}</span>
+                        @enderror
+                    </div>
+                    <div class="input">
+                        <label>Số điện thoại</label><span id="font"> *</span>
+                        <br>
+                        <input type="text" name="sdt"/>
+                        @error('sdt')
+                        <br>
+                        <span id="font">{{$message}}</span>
+                        @enderror
+                    </div>
+                    <div class="fixedbox">
+                        <label>Email</label><span id="font"> *</span>
+                        <br>
+                        <input type="email" name="email"/>
+                        @error('email')
+                        <br>
+                        <span id="font">{{$message}}</span>
+                        @enderror
+                    </div>
                 </div>
                 <br>
                 <div>
                     <button class="btn btn-primary" type = "submit">Thêm <i class="fa fa-check"></i></button>
                 </div>
-            </table>
+            </div>
         </div>
     </div>
 </form>

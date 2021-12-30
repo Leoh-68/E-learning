@@ -19,7 +19,7 @@ class CreateDatabase extends Migration
             $table->string('password');
             $table->string('hoten');
             $table->date('ngaysinh');
-            $table->string('diachi');
+            $table->string('diachi')->nullable();
             $table->string('sdt');
             $table->string('email');
             $table->integer('accounttype');
