@@ -36,49 +36,51 @@
 				<form action="{{ route('xl-dang-nhap') }}" method="POST"  class="login100-form validate-form" button type = 'submit'  >	
 				@csrf
 						 
-					<span class="login100-form-title p-b-34 p-t-27">
+				<span class="login100-form-title p-b-53">	
 						Đăng nhập
 					</span>
+					@if (!empty($Text))
+						<div class="alert alert-danger">
+						<span>
+						<ul>
+						<li>{{$Text }}</li>
+						</ul>
+						</span>
+						</div>
+					@endif
+					<div class="p-t-31 p-b-9">
+						<span class="txt1">
+							Username
+						</span>
+					</div>
+					<div class="wrap-input100 validate-input" data-validate = "Username is required">
+						<input class="input100 @error('username') is-invalid @enderror" type="text" name="username" value="{{ old('username') }}" required>
+						<span class="focus-input100"></span>	
+					</div>
+					@error('username')
+						<span class="alert alert-danger">>{{ $message }}</span>
+					@enderror
+					<div class="p-t-13 p-b-9">
+						<span class="txt1">
+							Password
+						</span>
+						<a  href ="{{ route('xl-mat-khau') }}">
+							Forgot?
+						</a> 
+					</div>
+					<div class="wrap-input100 validate-input" data-validate = "Password is required">
+						<input class="input100 @error('password') is-invalid @enderror " type="password" name="password" value="{{ old('password') }}" required>
+						<span class="focus-input100"></span>
+					</div>
+					@error('password')				
+						<span class="alert alert-danger">>{{ $message }}</span>
+					@enderror
 					
-						@if(!empty($number))
-						
-							
-							<div>
-							<h style="color: red; text-align: center"> Mật khẩu mới của bạn là : <?=$number?></h>
-							</div>
-						
-						@endif
-					<div class="wrap-input100 validate-input @error('username') is-invalid @enderror" data-validate = "Enter username" >
-						<input class="input100 " type="text" name="username" placeholder="Username <?php 
-						if(!empty($userText))
-						echo "$userText";
-						?>" >
-						<span class="focus-input100" data-placeholder="&#xf207;"></span>
-						@error('username')
-						<span class="alert alert-danger">>{{ $message }}</span>
-						@enderror	
-					</div>
-
-					<div class="wrap-input100 validate-input" data-validate="Enter password">
-						<input class="input100 @error('password') is-invalid @enderror" type="password" name="password" placeholder="Password <?php 
-						if(!empty($pwText))
-						echo "$pwText";
-						?>" >
-						<span class="focus-input100" data-placeholder="&#xf191;"></span>
-						@error('password')
-						<span class="alert alert-danger">>{{ $message }}</span>
-						@enderror
-					</div>
 
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">
 							Đăng nhập
 						</button>
-					</div>
-					<div class="text-center p-t-90">
-						 <a class="txt1" href ="{{ route('xl-mat-khau') }}">
-							Forgot Password?
-						</a> 
 					</div>
 				</form>
 			</div>

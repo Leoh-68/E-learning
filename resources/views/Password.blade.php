@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>ForgotPassword</title>
+	<title>New Password</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	 <meta name="csrf-token" content="{{ csrf_token() }}">
 <!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="{{ asset('images/icons/favicon.ico') }} "/>
 <!--===============================================================================================-->
@@ -28,19 +29,17 @@
 <!--===============================================================================================-->
 </head>
 <body>
-	
-	<div class="limiter">
-		<div class="container-login100" style="background-image: url('images/bg-02.jpg');">
+
+<div class="limiter">
+		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
 			<div class="wrap-login100">	
-				<form action="{{ route('xl-mat-khau') }}" method="POST"  class="login100-form validate-form" button type = 'submit'>	
-				@csrf
-				<!-- <meta name="csrf-token" content="{{ csrf_token() }}"> -->			 
-				<span class="login100-form-title p-b-34 p-t-27">
-						Check Email
+				<form action="{{ route('mat-khau-moi',['id'=>$user->id]) }}" method="POST"  class="login100-form validate-form" button type = 'submit'  >	
+				@csrf	 
+					<span class="login100-form-title p-b-53">	
+						New Password
 					</span>
-					@error('email')
-						<span class="alert alert-danger">>{{ $message }}</span>
-					@enderror
+					
+					
 					@if (!empty($title))
 						<div class="alert alert-danger">
 						<ul>
@@ -48,20 +47,53 @@
 						</ul>
 						</div>
 					@endif
-					<div class="p-t-31 p-b-9">
+					@if (!empty($Text))
+						<div class="alert alert-success">
+						<ul>
+						<li>{{$Text }}</li>
+						</ul>
+						</div>
+					@endif
+                    <div class="p-t-13 p-b-9">
 						<span class="txt1">
-							Email
+							Password
 						</span>
 					</div>
+					<div class="wrap-input100 validate-input" data-validate = "Password is required">
+						<input class="input100 @error('password') is-invalid @enderror " type="password" name="password" value="{{ old('password') }}" required>
+						<span class="focus-input100"></span>
 					
-					<div class="wrap-input100 validate-input" data-validate = "Enter email">
-                        <input class="input100 @error('email') is-invalid @enderror" type="email" name="email" placeholder="Email" value="{{ old('email') }}" required>
-                        <span class="focus-input100" data-placeholder="&#xf207;"></span>	
 					</div>
-					<div class="container-login100-form-btn">
+					@error('password')
+						<div>
+						<span class="alert alert-danger">>{{ $message }}</span>
+						</div>
+					@enderror
+					
+					<div class="p-t-13 p-b-9">
+						<span class="txt1">
+							Confirmed Password
+						</span>
+					</div>
+					<div class="wrap-input100 validate-input" data-validate = "Password is required">
+						<input class="input100 @error('password') is-invalid @enderror " type="password" name="password2" value="{{ old('password2') }}" required>
+						<span class="focus-input100"></span>
+					
+					</div>
+					@error('password2')
+						<div>
+						<span class="alert alert-danger">>{{ $message }}</span>
+						</div>
+					@enderror
+					<div class="container-login100-form-btn m-t-17">
 						<button class="login100-form-btn">
-							Xác Nhận
+							Xác nhận
 						</button>
+					</div>
+					<div class="container-login100-form-btn m-t-17">
+						<a href="{{ route('xl-dang-nhap') }}" >
+							Back to Login
+						</a>
 					</div>
 				</form>
 			</div>
@@ -89,6 +121,3 @@
 	<script src="{{ asset('js/main.js') }}"></script>
     
 </html>
-
-<!--  Bạch thêm cả thư mục fonts(~E-learning\public\fonts) 
- và vendor(~E-learning\public\vendor) nhưng ghi chú hết thì trầm cảm lắm -->

@@ -63,15 +63,16 @@ Route::get('/', function () {
     return view('/Login');
 })->name('Login');
 
-Route::get('/HomePage', function () {
-    return view('HomePage');
-})->name('HomePage')->middleware('auth');
-
-Route::get('/Login', [DangNhapController::class,'dangNhap'])->name('Login')->middleware('guest');
+Route::get('/Login', [DangNhapController::class,'dangNhap'])->name('Login');
 Route::post('/Login', [DangNhapController::class,'xuLyDangNhap'])->name('xl-dang-nhap');
-//Route::get('/mk', [DangNhapController::class,'update'])->name('Login'); mã hóa mật khẩu
+
 Route::get('/ForgotPassword', [DangNhapController::class,'forgotPassword'])->name('/ForgotPassword');
 Route::post('/ForgotPassword', [DangNhapController::class,'xuLyMatKhau'])->name('xl-mat-khau');
+
+Route::get('/Password/{id}', [DangNhapController::class,'Password'])->name('/Password');
+Route::post('/Password/{id}', [DangNhapController::class,'taoMoiMatKhau'])->name('mat-khau-moi');
+
+Route::get('/dangXuat', [DangNhapController::class,'dangXuat'])->name('dangXuat');
 
 Route::get('/Admin/Students',[StudentController::class,'layDanhSachSV'])->name('StudentsList');
 Route::get('/Admin/Students/Add',[StudentController::class,'themSV'])->name('loadThemSV');
