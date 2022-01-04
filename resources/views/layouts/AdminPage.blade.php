@@ -27,7 +27,7 @@
         <a href="#" class="logo">E-Learning Project</a>
         <ul>
             <li>
-                 <img src="{{ asset('images/3.jpg') }}" alt="Avatar" class="avatarnavbar">
+                <a href="{{route('loadAccount')}}"><img src="{{ asset('images/3.jpg') }}" alt="Avatar" class="avatarnavbar"></a>
             </li>
         </ul>
     </header>

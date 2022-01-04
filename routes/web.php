@@ -17,21 +17,27 @@ Route::get('/AddClass', function () {
     return view('Teacher/AddClass');
 })->name('Addclass');
 
+Route::get('/AddClassStudent', function () {
+    return view('Student/JoinClass');
+})->name('AddClassStudent');
+
 Route::get('/Class', function () {
     return view('Class');
 })->name('Class');Route::get('/updateClass/{name}', [ClassroomController::class,'updateClass'])->name('updateClassGet');
 
-
+//<-                Classroom                 ->
 //-----------------------------//
 Route::get('/showClass',[ClassroomController::class,'showClass'])->name('showClass');
 
-Route::get('/showClassStudent',[ClassroomController::class,'showClassStudent'])->name('showClassStudent');
+Route::get('/showClassStudent',[StudentController::class,'showClassStudent'])->name('showClassStudent');
 //-----------------------------//
 Route::post('/updateClass/{id}', [ClassroomController::class,'updateClass'])->name('updateClassPost');  
 
 Route::post('/AddClass',[ClassroomController::class,'addClass'])->name('addClass');
 
 Route::get('/Class/{id}', [ClassroomController::class,'showSingleClass'])->name('showSingleClass');
+
+Route::get('ClassStudent/{id}', [ClassroomController::class,'showSingleClassStudent'])->name('showSingleClassStudent');
 
 Route::get('/UpdateClassView/{id}', [ClassroomController::class,'getUpdateClass'])->name('updateSingleClassGet');
 
@@ -102,4 +108,11 @@ Route::get('/Admin', function () {
     return view('Admin');
 })->name('Admin');
 
+//<-                Account                 ->
 Route::get('/loadAccount',[AccountController::class,'loadAccount'])->name('loadAccount');
+
+Route::post('/updateAccount',[AccountController::class,'updateAccount'])->name('updateAccount');
+
+Route::post('Student/AddClass',[StudentController::class,'addClassStudent'])->name('addClassStudent');
+
+Route::get('/logout',[DangNhapController::class,'dangXuat'])->name('Logout');

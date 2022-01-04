@@ -1,8 +1,21 @@
-@php
-use App\Http\Controllers\ClassroomController;   
-@endphp
-
+<!-- @php
+use app\Http\Controllers\ClassroomController;   
+@endphp -->
+{{--  --}}
 @extends('IndexHomePage')
+{{--  --}}
+@section('AddButton')
+<li><a href="{{route('AddClassStudent')}}"> <i class="fa fa-plus fa-2x" ></i> </a></li>
+@endsection
+{{--  --}}
+@section('logo')
+<a href="#" class="logo">E-Learning Project</a>   
+@endsection
+{{--  --}}
+@section('MenuHomePage')
+<a href="{{route('showClassStudent')}}">Lớp học</a>
+@endsection
+
 @section('body')
 @foreach ($classlst as $var)
 @if ($var->deleted_at==null)
@@ -11,24 +24,21 @@ use App\Http\Controllers\ClassroomController;
     @php
      $id=$var->malop;   
     @endphp
-  
-      <a class="linkname" style="text-decoration: none" href="Class/{{$id}}">
+    
+      <a class="linkname" style="text-decoration: none" href="{{route('showSingleClassStudent',['id' => $id])}}">
         <h1 class="classname">{{$var->name}}</h1>
       <a>
     <h2 class="nameteacher">
-      {{$var->idaccount}}
-   
+      {{\App\Http\Controllers\ClassroomController::TheoAccount($var->id)}}
     </h2>
-   
     <span class="classcode">
      Mã lớp: {{$var->malop}}
     </span>
-    
      <img src="{{ asset('images/3.jpg') }}" class="avatar" align="right">
-    <div class="listfunct">
-      <a href="{{route('updateSingleClassPost',['id' => $var->malop])}}">Học sinh</a>
-      <a  onclick="return confirm('Are you sure?')" href="/deleteClass/{{$var->malop}}">Xóa</a>
-    </div>
+    {{-- <div class="listfunct">
+      <a href="{{route('updateSingleClassPost',['id' => $var->malop])}}">Sửa</a>
+      <a  onclick="return confirm('Bạn có chắc muốn xóa ?')" href="/deleteClass/{{$var->malop}}">Xóa</a>
+    </div> --}}
    </div> 
 </div>
 @endif

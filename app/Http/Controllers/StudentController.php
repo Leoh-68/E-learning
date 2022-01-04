@@ -1,10 +1,12 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Account;
+use App\Models\Classroom;
+use App\Models\StudentList;
+use Illuminate\Support\Facades\Cookie;
 use App\Http\Requests\SubmitRequest;
 
 class StudentController extends Controller
@@ -69,4 +71,40 @@ class StudentController extends Controller
         $dsSV->save();
         return redirect()->route('StudentsList');
     }
+
+    public function showClassStudent(){
+        $account=Account::where('username',Cookie::get('username'))->first();
+        $id=$account->id;
+        $classlst=Account::find($id)->lstClassJoined;
+        return View('student/HomePageStudent',compact('classlst'));
+      }
+
+      public function addClassStudent(Request $req)
+      {
+        $req->validate([
+          'classcode'=>'required|max:6|min:6'
+        ],[
+          'classcode.required'=>'Vui lòng nhập đầu đủ mã lớp',
+          'classcode.min'=>'Mã lớp phải có :min ký tự',
+          'classcode.max'=>'Mã lớp phải có :max ký tự'
+        ]);
+        $account=Account::where('username',Cookie::get('username'))->first();
+
+        $Class=Classroom::all();
+        $listClass=Classroom::where('malop',$req->classcode)->first();
+        $IdExs= StudentList::all();
+        foreach($IdExs as $var)
+        {
+            if($var->idaccount == $account->id && $var->idclassroom==$listClass->id)
+            {
+                return 0;
+            }      
+        }
+        $class= new StudentList;
+        $class->idaccount=$account->id;
+        $class->idclassroom=$listClass->id;
+        $class->stt=1;
+        $class->save();
+        return redirect()->route('showClassStudent');
+      }
 }
