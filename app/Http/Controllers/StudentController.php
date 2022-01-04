@@ -13,11 +13,11 @@ class StudentController extends Controller
     {
         $dsSV = Account::where([['accounttype','=','3'],['deleted_at','=',null]])->get();
         
-        return view('StudentsList',compact('dsSV'));   
+        return view('admin/StudentsList',compact('dsSV'));   
     }
     public function themSV()
     {
-        return view('AddStudent');
+        return view('admin/AddStudent');
     }
     public function xlThemSV(SubmitRequest $rq)
     {
@@ -39,9 +39,9 @@ class StudentController extends Controller
         $dsSV = Account::find($id);
         if($dsSV == null||$dsSV->deleted_at != NULL)
         {
-            return view('UnknowAccount');
+            return view('admin/UnknowAccount');
         }
-        return view('UpdateStudent',compact('dsSV'));
+        return view('admin/UpdateStudent',compact('dsSV'));
     }
     public function xlSuaSV(SubmitRequest $rq,$id)
     {
@@ -63,7 +63,7 @@ class StudentController extends Controller
         $dsSV = Account::find($id);
         if($dsSV == null||$dsSV->deleted_at != NULL)
         {
-            return view('UnknowAccount');
+            return view('admin/UnknowAccount');
         }
         $dsSV->deleted_at = date("Y-m-d");
         $dsSV->save();

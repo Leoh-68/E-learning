@@ -13,11 +13,11 @@ class AdminController extends Controller
     {
         $dsAD = Account::where([['accounttype','=','1'],['deleted_at','=',null]])->get();
         
-        return view('AdminsList',compact('dsAD'));   
+        return view('admin/AdminsList',compact('dsAD'));   
     }
     public function themAd()
     {
-        return view('AddAdmin');
+        return view('admin/AddAdmin');
     }
     public function xlThemAd(SubmitRequest $rq)
     {
@@ -39,9 +39,9 @@ class AdminController extends Controller
         $dsAD = Account::find($id);
         if($dsAD == null||$dsAD->deleted_at != NULL)
         {
-            return view('UnknowAccount');
+            return view('admin/UnknowAccount');
         }
-        return view('UpdateAdmin',compact('dsAD'));
+        return view('admin/UpdateAdmin',compact('dsAD'));
     }
     public function xlSuaAd(SubmitRequest $rq,$id)
     {
@@ -63,7 +63,7 @@ class AdminController extends Controller
         $dsAD = Account::find($id);
         if($dsAD == null||$dsAD->deleted_at != NULL)
         {
-            return view('UnknowAccount');
+            return view('admin/UnknowAccount');
         }
         $dsAD->deleted_at = date("Y-m-d");
         $dsAD->save();
