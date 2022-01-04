@@ -54,7 +54,7 @@ Route::post('/ListStudent/{id}', [StudentListController::class,'AddStudent'])->n
 Route::get('/ListStudent/Delete/{id}/{code}', [StudentListController::class,'DeleteStudent'])->name('xoaSinhvien');
 //Bạch
 Route::get('/', function () {
-    return view('/Login');
+    return view('Login');
 })->name('Login');
 
 Route::get('/HomePage', function () {
