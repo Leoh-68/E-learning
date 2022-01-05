@@ -54,6 +54,7 @@
 				if($title){
 						echo '<div class="alert alert-success">'.$title.'</div>';
 						Session::put('title',null);
+				}
 				@endphp
 				@if (!empty($Text))
 						<div class="alert alert-danger">

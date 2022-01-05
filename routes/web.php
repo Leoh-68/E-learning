@@ -13,13 +13,11 @@ Route::get('/HomePage', function () {
     return view('HomePage');
 })->name('HomePage');
 
-Route::get('/AddClass', function () {
-    return view('Teacher/AddClass');
-})->name('Addclass');
+
 
 Route::get('/AddClassStudent', function () {
     return view('Student/JoinClass');
-})->name('AddClassStudent');
+})->name('AddClassStudent')->middleware('auth');
 
 Route::get('/Class', function () {
     return view('Class');
@@ -32,6 +30,9 @@ Route::group(['prefix'=>'/', 'middleware' => ['auth','giangvien','login']],funct
 
 Route::get('/showClass',[ClassroomController::class,'showClass'])->name('showClass');
 
+Route::get('/AddClass', function () {
+    return view('Teacher/AddClass');
+})->name('Addclass');
 
 Route::post('/updateClass/{id}', [ClassroomController::class,'updateClass'])->name('updateClassPost');  
 
