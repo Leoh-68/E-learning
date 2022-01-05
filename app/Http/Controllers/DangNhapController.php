@@ -44,7 +44,7 @@ class DangNhapController extends Controller
             return  redirect()->route('showClassStudent');
          }else{
              $Text = "Username hoặc password không tồn tại";
-             return redirect()->route('Login');
+             return redirect()->route('Login')->with('Text');
          }      
             
     }
@@ -61,13 +61,14 @@ class DangNhapController extends Controller
         $user = Account::where('email',$request->email)->first();
         if(empty($user)||$user->email != $request->email){
             $title = " Email không tồn tại";
-            return view('ForgotPassword',compact('title'));
+            return redirect()->route('ForgotPassword')->with('title');
         }
         Mail::send('SendMail',compact('user'),function($email) use($user){
             $email->subject('E-learning - Quên mật khẩu');
             $email->to($user->email,$user->hoten);
         });  
-        //return redirect()->route('Login');         
+        //return redirect()->route('Login');  
+        return redirect()->route('Login')->with('title', 'Vui lòng kiểm tra hòm thư của bạn!!!');
     }
 
     public function guiMail($id)
@@ -96,12 +97,12 @@ class DangNhapController extends Controller
         $user = Account::find($id);
         if($request->password!=$request->password2){
             $title = " Password không khớp";
-            return view('Password',compact('title','user'));
+            return redirect()->route('Password')->with('title','user');
          }else{
             $user->password = Hash::make($request->password);
             $user->save();
-            $Text = "Cập nhật thành công";
-            return view('Password',compact('Text','user'));
+           
+            return redirect()->route('Login')->with('title', 'Cập nhật mật khẩu thành công');
          }           
     }
 
@@ -109,7 +110,7 @@ class DangNhapController extends Controller
     public function dangXuat()
     {
         Auth::logout();
-        return view('Login');
+        return redirect()->route('Login');
     }
 
 }

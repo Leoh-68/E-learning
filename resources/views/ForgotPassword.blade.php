@@ -63,6 +63,11 @@
 							Xác Nhận
 						</button>
 					</div>
+					<div class="container-login100-form-btn m-t-17">
+						<a href="{{ route('xl-dang-nhap') }}" >
+							Back to Login
+						</a>
+					</div>
 				</form>
 			</div>
 		</div>

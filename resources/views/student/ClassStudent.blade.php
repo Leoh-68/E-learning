@@ -24,6 +24,7 @@
  <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
  @endsection
  @section('body')
+
  @foreach ($class as $item)
  <div class="classbody">
     <div class="imgclass" style="background-image: url('../images/bg.jpg')">
@@ -52,6 +53,7 @@
 </div>
 
  @endsection
+ 
  
 
 

@@ -47,13 +47,7 @@
 						</ul>
 						</div>
 					@endif
-					@if (!empty($Text))
-						<div class="alert alert-success">
-						<ul>
-						<li>{{$Text }}</li>
-						</ul>
-						</div>
-					@endif
+					
                     <div class="p-t-13 p-b-9">
 						<span class="txt1">
 							Password

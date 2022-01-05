@@ -35,11 +35,27 @@
 			<div class="wrap-login100">	
 				<form action="{{ route('xl-dang-nhap') }}" method="POST"  class="login100-form validate-form" button type = 'submit'  >	
 				@csrf
-						 
 				<span class="login100-form-title p-b-53">	
 						Đăng nhập
-					</span>
-					@if (!empty($Text))
+				</span>
+
+
+
+				
+				@php
+	    		$message = Session::get('message');
+	    		if($message){
+		   			echo '<span class="alert alert-danger">'.$message.'</span>';
+		    		Session::put('message',null);
+	    		}
+	    		@endphp
+				@php 
+				$title = Session::get('title');
+				if($title){
+						echo '<div class="alert alert-success">'.$title.'</div>';
+						Session::put('title',null);
+				@endphp
+				@if (!empty($Text))
 						<div class="alert alert-danger">
 						<span>
 						<ul>
@@ -47,7 +63,8 @@
 						</ul>
 						</span>
 						</div>
-					@endif
+				@endif
+				
 					<div class="p-t-31 p-b-9">
 						<span class="txt1">
 							Username
