@@ -72,8 +72,8 @@ class StudentController extends Controller
         return redirect()->route('StudentsList');
     }
 
-    public function showClassStudent(){
-        $account=Account::where('username',Cookie::get('username'))->first();
+    public function showClassStudent(Request $request){
+        $account=Account::where('username',$request->session()->get('username'))->first();
         $id=$account->id;
         $classlst=Account::find($id)->lstClassJoined;
         return View('student/HomePageStudent',compact('classlst'));
@@ -88,16 +88,24 @@ class StudentController extends Controller
           'classcode.min'=>'Mã lớp phải có :min ký tự',
           'classcode.max'=>'Mã lớp phải có :max ký tự'
         ]);
-        $account=Account::where('username',Cookie::get('username'))->first();
+        $account=Account::where('username',session('username'))->first();
 
         $Class=Classroom::all();
         $listClass=Classroom::where('malop',$req->classcode)->first();
+        if($listClass==null||$listClass->deleted_at!=null)
+        {
+                Cookie::queue('error',"Lớp không tồn tại",0.09);
+            return redirect()->route('AddClassStudent');
+        }
         $IdExs= StudentList::all();
         foreach($IdExs as $var)
         {
             if($var->idaccount == $account->id && $var->idclassroom==$listClass->id)
             {
-                return 0;
+
+                Cookie::queue('error',"Lớp đã tồn tại",0.09);
+                return redirect()->route('AddClassStudent');
+               
             }      
         }
         $class= new StudentList;

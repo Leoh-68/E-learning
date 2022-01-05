@@ -46,7 +46,7 @@
          <br> <h5 style="padding: 10px">{{$item->malop}}<h5>
     </div>
  @endforeach
-            <input type="text" class="status">
+ <a href="{{route('loadAccount')}}"><img src="{{ asset('images/3.jpg') }}" alt="Avatar" class="avatarnavbar"></a>
     </div>
     </div>
 </div>

@@ -9,15 +9,28 @@ use Illuminate\Support\Facades\Cookie;
 class StudentListController extends Controller
 {
     public function AddStudent(Request $req)
-    {
-     
+    {       
+           $listaccount=StudentList::all();
            $studentlis= new StudentList;
            $allacc=Account::where('email',$req->textinput)->first();
+           foreach($listaccount as $var)
+           {
+               if($var->idaccount==$allacc->id && $var->idclassroom==$req->id)
+               {
+                Cookie::queue('error',"Tài khoản đã tồn tại",0.09);
+                return  redirect()->route('lstStudent',['id'=>$req->id]);
+               }
+           }
            if($allacc==null)
            {
             Cookie::queue('error',"Email không tồn tại",0.09);
                return  redirect()->route('lstStudent',['id'=>$req->id]);
            } 
+        //    if($account->id==$allacc->)
+        //    {
+        //     Cookie::queue('error',"Email không tồn tại",0.09);
+        //        return  redirect()->route('lstStudent',['id'=>$req->id]);
+        //    } 
 
         //    $IdExs= StudentList::all();
         

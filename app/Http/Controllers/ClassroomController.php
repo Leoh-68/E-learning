@@ -17,8 +17,8 @@ class ClassroomController extends Controller
     return View('Teacher/UpdateClass',compact('class'));
   }
 /*Lớp của giáo viên*/
-  public function showClass(){
-    $account=Account::where('username',Cookie::get('username'))->first();
+  public function showClass(Request $request){
+    $account=Account::where('username',$request->session()->get('username'))->first();
     $classlst=Classroom::where('idaccount',$account->id)->get();
     if($classlst==null)
     {
@@ -44,9 +44,9 @@ class ClassroomController extends Controller
       'classcode.min'=>'Mã lớp phải có :min ký tự',
       'classcode.max'=>'Mã lớp phải có :max ký tự'
     ]);
-    $account=Account::where('username',Cookie::get('username'))->first();
+    $account=Account::where('username', session('username'))->first();
     $listClass=Classroom::all();
-    $account=Account::where('username',Cookie::get('username'))->first();
+    $account=Account::where('username', session('username'))->first();
     $class=new Classroom;
     $class->idaccount=$account->id;
     $class->name=$req->classname;
