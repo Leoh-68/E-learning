@@ -27,7 +27,6 @@
         <thead>
             <tr>
                 <th>Username</th>
-                <th>Password</th>
                 <th>Họ tên</th>
                 <th>Ngày sinh</th>
                 <th>Địa chỉ</th>
@@ -40,7 +39,6 @@
             @foreach($dsSV as $SinhVien)
             <tr>
                 <td>{{ $SinhVien->username }}</td>
-                <td>{{ $SinhVien->password }}</td>
                 <td>{{ $SinhVien->hoten }}</td>
                 <td>{{ $SinhVien->ngaysinh }}</td>
                 <td>{{ $SinhVien->diachi }}</td>

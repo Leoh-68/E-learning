@@ -34,10 +34,10 @@ class StudentListController extends Controller
     public function AddStudentAdmin(Request $req)
     {
         $studentlis= new StudentList;
-        $allacc=Account::where('email',$req->textinput)->first();
+        $allacc=Account::where([['email' , '=' , $req->textinput],['deleted_at','=',null]])->first();
         if($allacc==null)
         {
-            return 0;
+            return view('UnknowAccount');
         } 
         $studentlis->stt=1;
         $studentlis->idaccount=$allacc->id;

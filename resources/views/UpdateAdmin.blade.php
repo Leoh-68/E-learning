@@ -19,52 +19,48 @@
  <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
  @endsection
  @section('func')
- <form action="{{route('xlThemSV')}}" method="POST">
+ <form action="{{route('xlSuaAd',['id' => $dsAD->id])}}" method="POST">
  @csrf
     <div class="">
         <div class="container">
-        <a class="btn btn-primary" href="{{route('StudentsList')}}"><i class="fa fa-arrow-alt-circle-left"></i> Quay lại</a>
+            <a class="btn btn-primary" href="{{route('AdminsList')}}"><i class="fa fa-arrow-alt-circle-left"></i> Quay lại</a>
             <div>
                 <br>
                 <div>
                     <div class="input">
-                        <label>Username</label><span id="font"> *</span>
+                        <label class="font">Username</label>
                         <br>
-                        <input type="text" name="username"/>
+                        <input type="text" name="username" value="{{$dsAD->username}}"/>
                         @error('username')
-                        <br>
-                        <span id="font">{{$message}}</span>
+                            <span id="font">{{$message}}</span>
                         @enderror
                     </div>
                     <div class="fixedbox">
-                        <label>Password</label><span id="font"> *</span>
+                        <label>Password</label>
                         <br>
-                        <input type="password" name="password"/>
+                        <input type="password" name="password" value="{{$dsAD->password}}" />
                         @error('password')
-                        <br>
-                        <span id="font">{{$message}}</span>
-                        @enderror
+                            <span id="font">{{$message}}</span>
+                            @enderror
                     </div>
                 </div>
                 <br>
                 <div>
                     <div class="input">
-                        <label>Họ tên</label><span id="font"> *</span>
+                        <label>Họ tên</label>
                         <br>
-                        <input type="text" name="hoten"/>
+                        <input type="text" name="hoten" value="{{$dsAD->hoten}}" />
                         @error('hoten')
-                        <br>
-                        <span id="font">{{$message}}</span>
-                        @enderror
+                            <span id="font">{{$message}}</span>
+                            @enderror
                     </div>
                     <div class="fixedbox">
-                        <label>Ngày sinh</label><span id="font"> *</span>
+                        <label>Ngày sinh</label>
                         <br>
-                        <input type="date" name="ngaysinh"/>
+                        <input type="date" name="ngaysinh" value="{{$dsAD->ngaysinh}}" />
                         @error('ngaysinh')
-                        <br>
-                        <span id="font">{{$message}}</span>
-                        @enderror
+                            <span id="font">{{$message}}</span>
+                            @enderror
                     </div>
                 </div>
                 <br>
@@ -72,35 +68,28 @@
                     <div class="input">
                         <label>Địa chỉ</label>
                         <br>
-                        <input type="text" name="diachi"/>
-                        @error('diachi')
-                        <br>
-                        <span id="font">{{$message}}</span>
-                        @enderror
+                        <input type="text" name="diachi" value="{{$dsAD->diachi}}" />
                     </div>
                     <div class="input">
-                        <label>Số điện thoại</label><span id="font"> *</span>
+                        <label>Số điện thoại</label>
                         <br>
-                        <input type="text" name="sdt"/>
+                        <input type="text" name="sdt" value="{{$dsAD->sdt}}" />
                         @error('sdt')
-                        <br>
-                        <span id="font">{{$message}}</span>
-                        @enderror
+                            <span id="font">{{$message}}</span>
+                            @enderror
                     </div>
                     <div class="fixedbox">
-                        <label>Email</label><span id="font"> *</span>
+                        <label>Email</label>
                         <br>
-                        <input type="email" name="email"/>
+                        <input type="text" name="email" value="{{$dsAD->email}}" />
                         @error('email')
-                        <br>
-                        <span id="font">{{$message}}</span>
+                            <span id="font">{{$message}}</span>
                         @enderror
                     </div>
                 </div>
+                
                 <br>
-                <div>
-                    <button class="btn btn-primary" type = "submit">Thêm <i class="fa fa-check"></i></button>
-                </div>
+                <button class="btn btn-primary" type = "submit">Sửa <i class="fa fa-check"></i></button>
             </div>
         </div>
     </div>

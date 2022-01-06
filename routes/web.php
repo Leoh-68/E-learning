@@ -5,6 +5,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\StudentListController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 // Khánh
@@ -59,7 +60,7 @@ Route::post('/ListStudent/{id}', [StudentListController::class,'AddStudent'])->n
 Route::get('/ListStudent/Delete/{id}/{code}', [StudentListController::class,'DeleteStudent'])->name('xoaSinhvien');
 //Bạch
 Route::get('/', function () {
-    return view('/Login');
+    return view('Login');
 })->name('Login');
 
 Route::get('/HomePage', function () {
@@ -90,6 +91,17 @@ Route::get('/Admin/Classrooms',[ClassroomController::class,'layDSLopHoc'])->name
 Route::get('/Admin/Classrooms/StudentsList/{id}',[ClassroomController::class,'layDSSVTL'])->name('loadDSSV');
 Route::post('/Admin/Classrooms/StudentsList/Add/{id}',[StudentListController::class,'AddStudentAdmin'])->name('xlThemSVTL');
 Route::get('/Admin/Classrooms/StudentsList/Delete/{id}/{code}', [StudentListController::class,'DeleteStudentAdmin'])->name('xlXoaSVTL');
+
+Route::get('/Admin/Admins',[AdminController::class,'layDanhSachAd'])->name('AdminsList');
+Route::get('/Admin/Admins/Add',[AdminController::class,'themAd'])->name('loadThemAd');
+Route::post('/Admin/Admins/Add',[AdminController::class,'xlThemAd'])->name('xlThemAd');
+Route::get('/Admin/Admins/Update/{id}',[AdminController::class,'suaAd'])->name('loadSuaAd');
+Route::post('/Admin/Admins/Update/{id}',[AdminController::class,'xlSuaAd'])->name('xlSuaAd');
+Route::get('/Admin/Admins/Delete/{id}',[AdminController::class,'xoaAd'])->name('xoaAd');
+
+Route::get('/Admin/UnknowAccount/', function () {
+    return view('UnknowAccount');
+})->name('error');
 
 
 Route::get('/Admin', function () {

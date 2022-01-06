@@ -22,48 +22,75 @@
  <form action="{{route('xlSuaGV',['id' => $dsGV->id])}}" method="POST">
  @csrf
     <div class="">
-    <div class="container">
+        <div class="container">
             <a class="btn btn-primary" href="{{route('TeachersList')}}"><i class="fa fa-arrow-alt-circle-left"></i> Quay lại</a>
-            <br><br>
-            <div class="input">
-                <label class="font">Username</label>
-                <br>
-                <input type="text" name="username" value="{{$dsGV->username}}" required/>
-            </div>
             <div>
-                <label>Password</label>
                 <br>
-                <input type="text" name="password" value="{{$dsGV->password}}" required/>
-            </div>
-            <br>
-            <div class="input">
-                <label>Họ tên</label>
+                <div>
+                    <div class="input">
+                        <label class="font">Username</label>
+                        <br>
+                        <input type="text" name="username" value="{{$dsGV->username}}"/>
+                        @error('username')
+                            <span id="font">{{$message}}</span>
+                        @enderror
+                    </div>
+                    <div class="fixedbox">
+                        <label>Password</label>
+                        <br>
+                        <input type="password" name="password" value="{{$dsGV->password}}" />
+                        @error('password')
+                            <span id="font">{{$message}}</span>
+                            @enderror
+                    </div>
+                </div>
                 <br>
-                <input type="text" name="hoten" value="{{$dsGV->hoten}}" required/>
-            </div>
-            <div>
-                <label>Ngày sinh</label>
+                <div>
+                    <div class="input">
+                        <label>Họ tên</label>
+                        <br>
+                        <input type="text" name="hoten" value="{{$dsGV->hoten}}" />
+                        @error('hoten')
+                            <span id="font">{{$message}}</span>
+                            @enderror
+                    </div>
+                    <div class="fixedbox">
+                        <label>Ngày sinh</label>
+                        <br>
+                        <input type="date" name="ngaysinh" value="{{$dsGV->ngaysinh}}" />
+                        @error('ngaysinh')
+                            <span id="font">{{$message}}</span>
+                            @enderror
+                    </div>
+                </div>
                 <br>
-                <input type="date" name="ngaysinh" value="{{$dsGV->ngaysinh}}" required/>
-            </div>
-            <br>
-            <div class="input">
-                <label>Địa chỉ</label>
+                <div>
+                    <div class="input">
+                        <label>Địa chỉ</label>
+                        <br>
+                        <input type="text" name="diachi" value="{{$dsGV->diachi}}" />
+                    </div>
+                    <div class="input">
+                        <label>Số điện thoại</label>
+                        <br>
+                        <input type="text" name="sdt" value="{{$dsGV->sdt}}" />
+                        @error('sdt')
+                            <span id="font">{{$message}}</span>
+                            @enderror
+                    </div>
+                    <div class="fixedbox">
+                        <label>Email</label>
+                        <br>
+                        <input type="text" name="email" value="{{$dsGV->email}}" />
+                        @error('email')
+                            <span id="font">{{$message}}</span>
+                        @enderror
+                    </div>
+                </div>
+                
                 <br>
-                <input type="text" name="diachi" value="{{$dsGV->diachi}}" required/>
+                <button class="btn btn-primary" type = "submit">Sửa <i class="fa fa-check"></i></button>
             </div>
-            <div class="input">
-                <label>Số điện thoại</label>
-                <br>
-                <input type="text" name="sdt" value="{{$dsGV->sdt}}" required/>
-            </div>
-            <div>
-                <label>Email</label>
-                <br>
-                <input type="email" name="email" value="{{$dsGV->email}}" required/>
-            </div>
-            <br>
-            <button class="btn btn-primary" type = "submit">Sửa <i class="fa fa-check"></i></button>
         </div>
     </div>
 </form>
