@@ -21,7 +21,12 @@ class AdminController extends Controller
     }
     public function xlThemAd(SubmitRequest $rq)
     {
+        $accList = Account::where([['accounttype','=','1'],['deleted_at','=',null]])->get();
         $ad = new Account;
+        foreach($accList as $dstk){
+            if($dstk->username==$rq->username);
+            return('Username này đã tồn tại');
+        }
         $ad->username = $rq->username;
         $ad->password = Hash::make($rq->password);
         $ad->hoten = $rq->hoten;

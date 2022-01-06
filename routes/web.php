@@ -105,7 +105,7 @@ Route::get('/Admin/UnknowAccount/', function () {
 
 
 Route::get('/Admin', function () {
-    return view('Admin');
+    return view('admin/Admin');
 })->name('Admin');
 
 //<-                Account                 ->
