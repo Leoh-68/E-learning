@@ -4,11 +4,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Account;
+use App\Http\Requests\SubmitRequest;
 use App\Models\Classroom;
 use App\Models\StudentList;
 use Illuminate\Support\Facades\Cookie;
-use App\Http\Requests\SubmitRequest;
-
 class StudentController extends Controller
 {
     public function layDanhSachSV()
