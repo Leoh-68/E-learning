@@ -137,6 +137,21 @@ header ul li a
 
 
   }
+  .imgpost
+  {
+    float:left;
+    
+  }
+  .postown
+  {
+    float:left;
+    width: 90%;
+  }
+  .postcontent{
+    word-break: break-word;
+    float:left;
+    margin-bottom: 20px;
+  }
   .post{
     padding: 20px 0px 20px 0px;
     float: right;
@@ -147,9 +162,9 @@ header ul li a
   }
   .posts{
     margin-top: 20px;
-    padding: 20px 0px 20px 0px;
-    float: right;
-    height: 150px;
+    margin-bottom: 20px;
+    padding: 10px;
+    display: inline-block;
     width: 100%;
     background-color: #ddd;
     border-color:white;

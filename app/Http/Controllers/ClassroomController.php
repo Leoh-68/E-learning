@@ -75,7 +75,7 @@ class ClassroomController extends Controller
     $class=Classroom::where('malop','=',$req->id)->first();
     $class->name=$req->classname;
     $class->save();
-   return redirect()->route('admin/showClass');
+   return redirect()->route('showClass');
   }
   public function deleteClass(Request $req)
   {

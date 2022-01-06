@@ -110,6 +110,7 @@ class StudentController extends Controller
         $class= new StudentList;
         $class->idaccount=$account->id;
         $class->idclassroom=$listClass->id;
+        $class->waitingqueue=0;
         $class->stt=1;
         $class->save();
         return redirect()->route('showClassStudent');

@@ -41,7 +41,7 @@ Route::get('ClassStudent/{id}', [ClassroomController::class,'showSingleClassStud
 
 Route::get('/UpdateClassView/{id}', [ClassroomController::class,'getUpdateClass'])->name('updateSingleClassGet');
 
-Route::post('/UpdateClassView/{id}', [ClassroomController::class,'getUpdateClass'])->name('updateSingleClassPost');
+Route::post('/UpdateClassView/{id}', [ClassroomController::class,'updateClass'])->name('updateSingleClassPost');
 
 Route::get('/deleteClass/{id}', [ClassroomController::class,'deleteClass'])->name('deleteClass');   
 

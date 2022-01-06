@@ -33,11 +33,37 @@
         <div class="form-group">     
             <textarea type="text" class="posttext"></textarea>
         </div>
-   <div class="posts">
-    <a href="{{route('loadAccount')}}"><img src="{{ asset('images/3.jpg') }}" alt="Avatar" class="avatarnavbar"></a>
-    <Span>Trần Phước Khánh</Span><br>
-
+   <div class="posts" >
+       <div class="imgpost">
+        <a href="{{route('loadAccount')}}"><img src="{{ asset('images/3.jpg') }}" alt="Avatar" class="avatarnavbar"></a>
+       </div>
+       <div class="postown">
+        <Span>Trần Phước Khánh</Span><br>
+        <Span style="font-size: 13px; color:grey">11/11/2001</Span><br>
+       </div>
+    <br>
+        <div class="postcontent">
+              Xin chào cả lớp, sắp tới cô có tổ chức 1 buổi hướng dẫn viết CV, các bạn tham gia để có 1 chiếc CV cho kỳ thực tập sắp tới thật tốt nhé.
+              Nội dung buổi chia sẻ:<br>
+              - Nắm được những điểm quan trọng trong 1 CV dành cho các bạn lập trình viên<br>
+              - Cách xây dựng hình ảnh của mình khi đi ứng tuyển.<br>
+              - Được BTC góp ý và chỉnh sửa CV<br>
+              - Kết nối doanh nghiệp phù hợp để apply sau khi hoàn tất CV<br>
+              Thời gian: 19h30, ngày 31/12/2021<br>
+              Hình thức: Online qua Zoom<br>
+              Số lượng: 100 slot<br>
+              Link đăng ký: https://forms.gle/c1hpn6NPu6kp5g869<br>
+              Hạn chót đăng ký: 28/12/2021.<br>
+              Thông tin Zoom sẽ được gửi qua email của các bạn, do vậy hãy gõ thật chính xác email của mình nhé.<br>
+              Hẹn gặp lại các bạn vào buổi webinar nhé<br>
+         </div>
+         <div>
+            <a href="{{route('loadAccount')}}"><img src="{{ asset('images/3.jpg') }}" alt="Avatar" class="avatarnavbar"></a>
+            
+         </div>
    </div>
+    </div>
+
     </div>
    
     <div class="idclass">

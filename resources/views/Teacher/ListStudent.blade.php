@@ -10,7 +10,7 @@
                 <span style="color: red">{{Cookie::get('error')}}</span>
             </form>
             <table class="table">
-            <thead>
+            <thead>     
                 <tr>
                     <th>Họ tên</th>
                     <th>Ngày sinh</th>
