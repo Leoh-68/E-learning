@@ -112,6 +112,8 @@ header ul li a
     height: 250px;
     width: 100%;
     border-radius: 12px;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
   .classname
   {
@@ -126,6 +128,13 @@ header ul li a
     position: relative;
     top: 190px;
     left: 20px;
+
+  }
+  .nameinclassStudent{
+    position: relative;
+    top: 190px;
+    left: 20px;
+
 
   }
   .post{
@@ -143,13 +152,15 @@ width: 100%;
 border-radius: 12px;
 }
 .status{
-  margin: 20px 0 0px 0;
+  padding-top: 20px;
+  margin: 40px 0 0px 0;
   float: right;
   height: 150px;
   width: 75%;
   border-radius: 12px;
 }
 .idclass{
+  margin-top: 20px;
   float: left;
   width: 20%;
   height: 150px;
@@ -157,6 +168,10 @@ border-radius: 12px;
   border-style: solid;
   border-color: grey;
   background-color: white;
+}
+.idclass h5{
+  float: left;
+  
 }
 .OpenMenuButton {
   cursor: pointer;
@@ -194,8 +209,10 @@ font-size: 10;
 }
 .listfunct{
   position: relative;
+  height: 30px;
+  width: 100px;
   top: 100px;
-  left: 90px;
+  float:  right;
 }
 .listfunct a{
   color: bla; 
@@ -233,7 +250,12 @@ font-size: 10;
     font-size: 36px;
     margin-left: 50px;
   }
-  
+  .navbar button{
+   width: 100px;
+   height: 100%;
+   background-color: white;
+   border-color: grey;
+  }
   @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
@@ -242,7 +264,8 @@ font-size: 10;
 .dropbtn {
 
   position: relative;
-  left: 6px;
+  
+  align-content: flex-end;
   background-color: white;
   height: 40px;
   width: 40px;
@@ -253,6 +276,8 @@ font-size: 10;
 .dropdown {
   position: relative;
   display: inline-block;
+
+  float: right;
   
 }
 
@@ -266,7 +291,8 @@ font-size: 10;
   border-radius: 12px;
 }
 .idcls{
-  padding: 0 110px 0 10px;
+ padding: 10px;
+  float: left ;
 }
 
 /* Links inside the dropdown */

@@ -1,10 +1,11 @@
 
 
+
  @extends('IndexHomePage')
- @section('MenuHomePage')
-<a href="{{route('showClass')}}">Lớp học</a>
-@endsection
  @section('library')
+ @section('MenuHomePage')
+ <a href="{{route('showClassStudent')}}">Lớp học</a>
+ @endsection
  <meta charset="utf-8">
  <meta name="viewport" content="width=device-width, initial-scale=1">
  <!-- CSRF Token -->
@@ -37,10 +38,10 @@
         <span class="idcls">Mã lớp</span>
         <div class="dropdown">
             <button onclick="myFunction()" class="dropbtn"><i class="fa fa-ellipsis-v"></i></button>
-            <div id="myDropdown" class="dropdown-content">
+            {{-- <div id="myDropdown" class="dropdown-content">
               <a href="{{route('lstStudent',['id'=>$item->id])}}">Danh sách sinh viên</a>
               
-            </div>
+            </div> --}}
           </div>
          <br> <h5 style="padding: 10px">{{$item->malop}}<h5>
     </div>
@@ -52,4 +53,5 @@
 
  @endsection
  
+
 
