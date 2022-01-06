@@ -26,7 +26,7 @@ Route::get('/Class', function () {
 //<-                Classroom                 ->
 //-----------------------------//
 Route::get('/showClassStudent',[StudentController::class,'showClassStudent'])->name('showClassStudent')->middleware('auth');
-Route::group(['prefix'=>'/', 'middleware' => ['auth','giangvien','login']],function(){
+Route::group(['prefix'=>'/', 'middleware' => ['auth','giangvien']],function(){
 
 Route::get('/showClass',[ClassroomController::class,'showClass'])->name('showClass');
 
@@ -80,7 +80,7 @@ Route::post('/Password/{id}', [DangNhapController::class,'taoMoiMatKhau'])->name
 
 Route::get('/dangXuat', [DangNhapController::class,'dangXuat'])->name('dangXuat');
 
-Route::group(['prefix'=>'/', 'middleware' => ['auth','admin','login']],function(){
+Route::group(['prefix'=>'/', 'middleware' => ['auth','admin']],function(){
 
 Route::get('/Admin/Students',[StudentController::class,'layDanhSachSV'])->name('StudentsList');
 Route::get('/Admin/Students/Add',[StudentController::class,'themSV'])->name('loadThemSV');
@@ -112,11 +112,12 @@ Route::get('/Admin/UnknowAccount/', function () {
     return view('UnknowAccount');
 })->name('error');
 
-
 Route::get('/Admin', function () {
     return view('Admin');
-})->name('Admin')->middleware('login');
+})->name('Admin');
+
 });
+
 //<-                Account                 ->
 Route::get('/loadAccount',[AccountController::class,'loadAccount'])->name('loadAccount');
 

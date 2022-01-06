@@ -16,9 +16,9 @@ class CheckLogout
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->check()){
+        if (Auth::user()){
             if (Auth::user()->accounttype == 1) {
-                return redirect()->route('admin')->with('message','Bạn đang đăng nhập!!!');
+                return redirect()->route('Admin')->with('message','Bạn đang đăng nhập!!!');
             }
             if (Auth::user()->accounttype == 3) {
                 return redirect()->route('showClassStudent')->with('message','Bạn đang đăng nhập!!!');

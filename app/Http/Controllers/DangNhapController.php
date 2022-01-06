@@ -33,18 +33,16 @@ class DangNhapController extends Controller
     public function xuLyDangNhap(DangNhapRequest $request)
     {
         if (Auth::attempt(['username' =>$request->username, 'password' =>  $request->password])) { 
-            $user = Account::where('username',$request->username)->first();
             Cookie::queue('username',$request->username,3600);
             Cookie::queue('password',$request->password,3600);
-            if($user->accounttype==2){
+            if(Auth::user()->accounttype==2){
             return redirect()->route('showClass');
-            }elseif($user->accounttype==1){
+            }elseif(Auth::user()->accounttype==1){
                 return redirect()->route('Admin');
             }
             return  redirect()->route('showClassStudent');
          }else{
-             $Text = "Username hoặc password không tồn tại";
-             return redirect()->route('Login')->with('Text');
+             return redirect()->route('Login')->with('Text','Username hoặc password không tồn tại');
          }      
             
     }
@@ -97,7 +95,7 @@ class DangNhapController extends Controller
         $user = Account::find($id);
         if($request->password!=$request->password2){
             $title = " Password không khớp";
-            return redirect()->route('Password')->with('title','user');
+            return view('Password',compact('title','user'));
          }else{
             $user->password = Hash::make($request->password);
             $user->save();

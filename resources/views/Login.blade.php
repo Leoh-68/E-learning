@@ -56,16 +56,13 @@
 						Session::put('title',null);
 				}
 				@endphp
-				@if (!empty($Text))
-						<div class="alert alert-danger">
-						<span>
-						<ul>
-						<li>{{$Text }}</li>
-						</ul>
-						</span>
-						</div>
-				@endif
-				
+				@php 
+				$Text = Session::get('Text');
+				if($Text){
+						echo '<div class="alert alert-danger">'.$Text.'</div>';
+						Session::put('Text',null);
+				}
+				@endphp
 					<div class="p-t-31 p-b-9">
 						<span class="txt1">
 							Username
