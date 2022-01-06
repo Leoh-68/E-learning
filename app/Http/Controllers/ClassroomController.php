@@ -30,7 +30,7 @@ class ClassroomController extends Controller
   public function layDSLopHoc(){
 
     $lst=Classroom::all();
-    return View('ClassroomsList',compact('lst'));
+    return View('admin/ClassroomsList',compact('lst'));
   }
 /*Lớp của sinh viên*/
   public function addClass(Request $req)
@@ -75,7 +75,7 @@ class ClassroomController extends Controller
     $class=Classroom::where('malop','=',$req->id)->first();
     $class->name=$req->classname;
     $class->save();
-   return redirect()->route('showClass');
+   return redirect()->route('admin/showClass');
   }
   public function deleteClass(Request $req)
   {

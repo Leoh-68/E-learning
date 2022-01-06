@@ -60,7 +60,7 @@ Route::post('/ListStudent/{id}', [StudentListController::class,'AddStudent'])->n
 Route::get('/ListStudent/Delete/{id}/{code}', [StudentListController::class,'DeleteStudent'])->name('xoaSinhvien');
 //Bạch
 Route::get('/', function () {
-    return view('/Login');
+    return view('Login');
 })->name('Login');
 
 Route::get('/HomePage', function () {
@@ -105,7 +105,7 @@ Route::get('/Admin/UnknowAccount/', function () {
 
 
 Route::get('/Admin', function () {
-    return view('Admin');
+    return view('admin/Admin');
 })->name('Admin');
 
 //<-                Account                 ->
