@@ -53,7 +53,7 @@ class DangNhapController extends Controller
         ]);     
          //$validated = $request->validated();
          if (Auth::attempt(['username' =>$request->username, 'password' =>  $request->password])) { 
-            $user = Account::where('username',$request->username)->first();
+           // $user = Account::where('username',$request->username)->first();
             //----------------------Cookie *Khánh làm
             Cookie::queue('username',$request->username,3600);
             Cookie::queue('password',$request->password,3600);
@@ -78,7 +78,7 @@ class DangNhapController extends Controller
            
          }
          else{
-            if($user->username != $request->username){
+            if($user == null){
                 $userText = " không đúng";
                 return view('Login',compact('userText'));   
              }else 

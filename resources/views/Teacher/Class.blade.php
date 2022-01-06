@@ -25,7 +25,7 @@
  @section('body')
  @foreach ($class as $item)
  <div class="classbody">
-    <div class="imgclass" style="background-image: url('../images/bg.jpg')">
+    <div class="imgclass" style="background-image: url('../images/1.jpg')">
         <h1 class="nameinclass">{{$item->name}}</h1>
     </div>
     <div class="post">

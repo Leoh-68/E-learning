@@ -13,11 +13,11 @@ class TeacherController extends Controller
     {
         $dsGV = Account::where([['accounttype','=','2'],['deleted_at','=',null]])->get();
 
-        return view('TeachersList',compact('dsGV'));   
+        return view('admin/TeachersList',compact('dsGV'));   
     }
     public function themGV()
     {
-        return view('AddTeacher');
+        return view('admin/AddTeacher');
     }
     public function xlThemGV(SubmitRequest $rq)
     {
@@ -41,7 +41,7 @@ class TeacherController extends Controller
         {
             return view('UnknowAccount');
         }
-        return view('UpdateTeacher',compact('dsGV'));
+        return view('admin/UpdateTeacher',compact('dsGV'));
     }
     public function xlSuaGV(SubmitRequest $rq,$id)
     {
@@ -63,7 +63,7 @@ class TeacherController extends Controller
         $dsGV = Account::find($id);
         if($dsGV == null||$dsGV->deleted_at != NULL)
         {
-            return view('UnknowAccount');
+            return view('admin/UnknowAccount');
         }
         $dsGV->deleted_at = date("Y-m-d");
         $dsGV->save();

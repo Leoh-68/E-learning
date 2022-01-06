@@ -7,6 +7,7 @@ use app\Http\Controllers\ClassroomController;
 @endsection
 @section('MenuHomePage')
 <a href="{{route('showClass')}}">Lớp học</a>
+<a href="{{route('Logout')}}">Sủi</a>
 @endsection
 
 @section('logo')
@@ -29,7 +30,7 @@ use app\Http\Controllers\ClassroomController;
     <span class="classcode">
      Mã lớp: {{$var->malop}}
     </span>
-     <img src="{{ asset('images/3.jpg') }}" class="avatar" align="right">
+     <img src="{{ asset('images/3.png') }}" class="avatar" align="right">
     <div class="listfunct">
       <a href="{{route('updateSingleClassPost',['id' => $var->malop])}}">Sửa</a>
       <a  onclick="return confirm('Bạn có chắc muốn xóa ?')" href="/deleteClass/{{$var->malop}}">Xóa</a>
