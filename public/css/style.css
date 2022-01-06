@@ -145,10 +145,21 @@ header ul li a
     border-color:white;
     border-radius: 12px;
   }
+  .posts{
+    margin-top: 20px;
+    padding: 20px 0px 20px 0px;
+    float: right;
+    height: 150px;
+    width: 100%;
+    background-color: #ddd;
+    border-color:white;
+    border-radius: 12px;
+  }
 .posttext{
 padding-bottom: 20px;
 height: 150px;
 width: 100%;
+float: right;
 border-radius: 12px;
 }
 .status{
@@ -160,6 +171,7 @@ border-radius: 12px;
   border-radius: 12px;
 }
 .idclass{
+  position: relative;
   margin-top: 20px;
   float: left;
   width: 20%;

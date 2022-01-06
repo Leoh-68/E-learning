@@ -33,7 +33,13 @@
         <div class="form-group">     
             <textarea type="text" class="posttext"></textarea>
         </div>
+   <div class="posts">
+    <a href="{{route('loadAccount')}}"><img src="{{ asset('images/3.jpg') }}" alt="Avatar" class="avatarnavbar"></a>
+    <Span>Trần Phước Khánh</Span><br>
+
+   </div>
     </div>
+   
     <div class="idclass">
         <span class="idcls">Mã lớp</span>
         <div class="dropdown">
@@ -45,7 +51,9 @@
           </div>
          <br> <h5 style="padding: 10px">{{$item->malop}}<h5>
     </div>
- @endforeach    ~
+ @endforeach
+
+    
     </div>
     </div>
 </div>
