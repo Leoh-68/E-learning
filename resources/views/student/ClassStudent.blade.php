@@ -45,8 +45,7 @@
           </div>
          <br> <h5 style="padding: 10px">{{$item->malop}}<h5>
     </div>
- @endforeach
- <a href="{{route('loadAccount')}}"><img src="{{ asset('images/3.jpg') }}" alt="Avatar" class="avatarnavbar"></a>
+ @endforeach    ~
     </div>
     </div>
 </div>

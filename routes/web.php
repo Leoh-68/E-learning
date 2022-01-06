@@ -29,7 +29,7 @@ Route::get('/Class', function () {
 //-----------------------------//
 Route::get('/showClass',[ClassroomController::class,'showClass'])->name('showClass');
 
-Route::get('/showClassStudent',[StudentController::class,'showClassStudent'])->name('showClassStudent');
+Route::get('/Student/Class',[StudentController::class,'showClassStudent'])->name('showClassStudent');
 //-----------------------------//
 Route::post('/updateClass/{id}', [ClassroomController::class,'updateClass'])->name('updateClassPost');  
 
@@ -116,19 +116,3 @@ Route::post('/updateAccount',[AccountController::class,'updateAccount'])->name('
 Route::post('Student/AddClass',[StudentController::class,'addClassStudent'])->name('addClassStudent');
 
 Route::get('/logout',[DangNhapController::class,'dangXuat'])->name('Logout');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Route::get('/ahihi',[AccountController::class,'AccountLogin']);
