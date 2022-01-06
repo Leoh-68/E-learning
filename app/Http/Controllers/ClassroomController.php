@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use App\Models\Classroom;
 use App\Models\Account;
+use App\Models\StudentList;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Http\Repsponse;
 use Illuminate\Http\Request;
@@ -118,8 +119,13 @@ class ClassroomController extends Controller
   }
   public function layDSSVTL (Request $req)
   {
-    $lstStudent= Classroom::find($req->id)->dsStudentJoined;
-    return View('SCL',compact('lstStudent'));
+    $lstStudent= Classroom::where('id',$req->id)->first()->dsStudentJoined;
+    return View('admin/SCL',compact('lstStudent'));
+  }
+  public static function TheoIdAccount($idacc,$idclass)
+  {
+    $a=StudentList::where([['idaccount','=',$idacc],['idclassroom','=',$idclass]])->first();
+    return $a->waitingqueue;
   }
 
 }

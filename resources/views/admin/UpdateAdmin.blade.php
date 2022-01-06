@@ -31,6 +31,7 @@
                         <label class="font">Username</label>
                         <br>
                         <input type="text" name="username" value="{{$dsAD->username}}"/>
+                        <br>
                         @error('username')
                             <span id="font">{{$message}}</span>
                         @enderror
@@ -39,6 +40,7 @@
                         <label>Password</label>
                         <br>
                         <input type="password" name="password" value="{{$dsAD->password}}" />
+                        <br>
                         @error('password')
                             <span id="font">{{$message}}</span>
                             @enderror
@@ -50,6 +52,7 @@
                         <label>Họ tên</label>
                         <br>
                         <input type="text" name="hoten" value="{{$dsAD->hoten}}" />
+                        <br>
                         @error('hoten')
                             <span id="font">{{$message}}</span>
                             @enderror
@@ -58,6 +61,7 @@
                         <label>Ngày sinh</label>
                         <br>
                         <input type="date" name="ngaysinh" value="{{$dsAD->ngaysinh}}" />
+                        <br>
                         @error('ngaysinh')
                             <span id="font">{{$message}}</span>
                             @enderror
@@ -74,6 +78,7 @@
                         <label>Số điện thoại</label>
                         <br>
                         <input type="text" name="sdt" value="{{$dsAD->sdt}}" />
+                        <br>
                         @error('sdt')
                             <span id="font">{{$message}}</span>
                             @enderror
@@ -82,6 +87,7 @@
                         <label>Email</label>
                         <br>
                         <input type="text" name="email" value="{{$dsAD->email}}" />
+                        <br>
                         @error('email')
                             <span id="font">{{$message}}</span>
                         @enderror

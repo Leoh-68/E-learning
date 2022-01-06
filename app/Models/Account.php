@@ -20,4 +20,8 @@ class Account extends Authenticatable
     {
        return $this->belongsToMany('App\Models\Classroom','studentlist','idaccount','idclassroom','id','id');
     }
+    public function TheoIdAccount()
+    {
+       return $this->belongsTo('App\Models\StudentList','id','idaccount');
+    }
 }

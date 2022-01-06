@@ -17,7 +17,7 @@ class Updatestudentlist extends Migration
             return;
         }
         Schema::table('studentlist', function (Blueprint $table) {
-            $table->boolean('waitingqueue');
+            $table->boolean('waitingqueue')->default('0');
         });
     }
 

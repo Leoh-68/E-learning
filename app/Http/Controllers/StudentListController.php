@@ -49,7 +49,7 @@ class StudentListController extends Controller
         $allacc=Account::where([['email' , '=' , $req->textinput],['deleted_at','=',null]])->first();
         if($allacc==null)
         {
-            return view('UnknowAccount');
+            return view('admin/UnknowAccount');
         } 
         $studentlis->stt=1;
         $studentlis->idaccount=$allacc->id;
