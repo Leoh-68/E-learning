@@ -5,6 +5,7 @@ use App\Models\Account;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Http\Repsponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Carbon\Carbon;
 
 class ClassroomController extends Controller
@@ -44,15 +45,18 @@ class ClassroomController extends Controller
       'classcode.min'=>'Mã lớp phải có :min ký tự',
       'classcode.max'=>'Mã lớp phải có :max ký tự'
     ]);
-    $account=Account::where('username', session('username'))->first();
-    $listClass=Classroom::all();
-    $account=Account::where('username', session('username'))->first();
-    $class=new Classroom;
-    $class->idaccount=$account->id;
-    $class->name=$req->classname;
-    $class->malop=$req->classcode;
-    $class->save();
-    return redirect()->route('showClass');
+    
+      $image = $req->file('image')->storeAs('images','image.img');
+      $imagePath = $image->move('images', $image->getClientOriginalName());
+      // $account=Account::where('username', session('username'))->first();
+      // $listClass=Classroom::all();
+      // $account=Account::where('username', session('username'))->first();
+      // $class=new Classroom;
+      // $class->idaccount=$account->id;
+      // $class->name=$req->classname;
+      // $class->malop=$req->classcode;
+      // $class->save();
+      // return redirect()->route('showClass');
   }
   public function showSingleClass(Request $req){
     $class=Classroom::where('malop','=',$req->id)->get();

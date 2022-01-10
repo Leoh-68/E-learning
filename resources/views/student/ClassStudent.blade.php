@@ -57,8 +57,9 @@
                     Thông tin Zoom sẽ được gửi qua email của các bạn, do vậy hãy gõ thật chính xác email của mình nhé.
                     Hẹn gặp lại các bạn vào buổi webinar nhé
          </div>
-         <div>
+         <div class="comment">
               <a href="{{route('loadAccount')}}"><img src="{{ asset('images/3.jpg') }}" alt="Avatar" class="avatarnavbar"></a>
+              <input>
          </div>
    </div>
     </div>
