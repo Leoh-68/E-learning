@@ -38,10 +38,8 @@
 	    }
 	    @endphp
             @yield('AddButton')
-            @php
-                  $account= App\Http\Controllers\AccountController::AccountLogin();  
-                     echo $account->hoten;
-               @endphp  
+           
+            {{Auth::user()->hoten;}} 
             <li>
                 <a href="{{route('loadAccount')}}"><img src="{{ asset('images/3.jpg') }}" alt="Avatar" class="avatarnavbar"></a>
             </li>
@@ -58,3 +56,4 @@
 </body>
 
 </html>
+ 

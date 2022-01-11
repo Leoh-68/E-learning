@@ -20,7 +20,7 @@ class AdminAccess
                 return redirect()->route('showClass')->with('message','Tài khoản của bạn không có quyền truy cập trang này!!!');
             }
             if (Auth::check()==false) {
-                return redirect()->route('Login')->with('message','Bạn chưa đăng nhập!!!');
+                return redirect()->route('login');
             }     
     }
 }

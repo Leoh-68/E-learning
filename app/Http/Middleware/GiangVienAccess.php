@@ -10,12 +10,17 @@ class GiangVienAccess
   
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->accounttype == 2 || Auth::user()->accounttype == 1) {
+        if (Auth::user()->accounttype == 2) {
             return $next($request);
         }
+        if (Auth::user()->accounttype == 1) {
+            return redirect()->route('Admin')->with('message','URL không hoạt động!!!');
+         }
         if (Auth::user()->accounttype == 3) {
             return redirect()->route('showClassStudent')->with('message','Tài khoản của bạn không có quyền truy cập trang này!!!');
         }
-        
+        if (Auth::check()==false) {
+            return redirect()->route('login');
+        }     
     }
 }

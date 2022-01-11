@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Http\Repsponse;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class ClassroomController extends Controller
 {
@@ -19,7 +20,7 @@ class ClassroomController extends Controller
 /*Lớp của giáo viên*/
   public function showClass(){
     $account=Account::where('username',Cookie::get('username'))->first();
-    $classlst=Classroom::where('idaccount',$account->id)->get();
+    $classlst=Classroom::where('idaccount',Auth::user()->id)->get();
     if($classlst==null)
     {
       return 0;

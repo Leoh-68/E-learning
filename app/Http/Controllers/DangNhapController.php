@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\Account;
 use App\Http\Requests\DangNhapRequest;
 use App\Http\Requests\EmailRequest;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 // Bạch: Ngộ thêm cả thư mục fonts(~E-learning\public\fonts) 
 // và vendor(~E-learning\public\vendor) nhưng ghi chú hết thì trầm cảm lắm
@@ -17,7 +18,7 @@ class DangNhapController extends Controller
 {
     public function dangNhap()
     {
-        return view('Login');
+        return view('login');
     }
     public function messages()
     {
@@ -32,18 +33,21 @@ class DangNhapController extends Controller
 
     public function xuLyDangNhap(DangNhapRequest $request)
     {
+        $validated = $request->validated();
         if (Auth::attempt(['username' =>$request->username, 'password' =>  $request->password])) { 
-            Cookie::queue('username',$request->username,3600);
-            Cookie::queue('password',$request->password,3600);
-            if(Auth::user()->accounttype==2){
-            return redirect()->route('showClass');
-            }elseif(Auth::user()->accounttype==1){
+            //Cookie::queue('username',$request->username,3600);
+            //Cookie::queue('password',$request->password,3600);
+            if(Auth::user()->accounttype==2) {
+                // dd($request);
+                return redirect()->route('showClass');
+            } else if(Auth::user()->accounttype==1) {
                 return redirect()->route('Admin');
-            }
-            return  redirect()->route('showClassStudent');
-         }else{
-             return redirect()->route('Login')->with('Text','Username hoặc password không tồn tại');
-         }      
+            } else {
+                return  redirect()->route('showClassStudent');
+            }      
+        } 
+        return redirect()->route('login')->with('Text','Username hoặc password không tồn tại');
+             
             
     }
 
@@ -66,7 +70,7 @@ class DangNhapController extends Controller
             $email->to($user->email,$user->hoten);
         });  
         //return redirect()->route('Login');  
-        return redirect()->route('Login')->with('title', 'Vui lòng kiểm tra hòm thư của bạn!!!');
+        return redirect()->route('login')->with('title', 'Vui lòng kiểm tra hòm thư của bạn!!!');
     }
 
     public function guiMail($id)
@@ -100,7 +104,7 @@ class DangNhapController extends Controller
             $user->password = Hash::make($request->password);
             $user->save();
            
-            return redirect()->route('Login')->with('title', 'Cập nhật mật khẩu thành công');
+            return redirect()->route('login')->with('title', 'Cập nhật mật khẩu thành công');
          }           
     }
 
@@ -108,7 +112,14 @@ class DangNhapController extends Controller
     public function dangXuat()
     {
         Auth::logout();
-        return redirect()->route('Login');
+        $cookie = Cookie::forget('username');
+        $cookiep = Cookie::forget('password');
+        $cookie2 = Cookie::forget('ajs_anonymous_id');
+        $cookie3 = Cookie::forget('XSRF-TOKEN');
+        $cookie4 = Cookie::forget('laravel_session');
+        $cookie5 = Cookie::forget('1P_JAR');
+        return redirect()->route('Wellcome')->withCookie($cookie)->withCookie($cookiep)
+        ->withCookie($cookie2)->withCookie($cookie3)->withCookie($cookie4)->withCookie($cookie5);  
     }
 
 }
