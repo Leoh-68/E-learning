@@ -13,7 +13,7 @@ Route::get('/HomePage', function () {
     return view('HomePage');
 })->name('HomePage');
 
-Route::get('/AddClass', function () {
+Route::get('/Class/Add', function () {
     return view('Teacher/AddClass');
 })->name('Addclass');
 
@@ -27,33 +27,37 @@ Route::get('/Class', function () {
 
 //<-                Classroom                 ->
 //-----------------------------//
-Route::get('/showClass',[ClassroomController::class,'showClass'])->name('showClass');
+Route::get('/Class',[ClassroomController::class,'showClass'])->name('showClass');
 
 Route::get('/Student/Class',[StudentController::class,'showClassStudent'])->name('showClassStudent');
 //-----------------------------//
 Route::post('/updateClass/{id}', [ClassroomController::class,'updateClass'])->name('updateClassPost');  
 
-Route::post('/AddClass',[ClassroomController::class,'addClass'])->name('addClass');
+Route::post('/Class/Add',[ClassroomController::class,'addClass'])->name('addClass');
 
 Route::get('/Class/{id}', [ClassroomController::class,'showSingleClass'])->name('showSingleClass');
 
 Route::get('ClassStudent/{id}', [ClassroomController::class,'showSingleClassStudent'])->name('showSingleClassStudent');
 
-Route::get('/UpdateClassView/{id}', [ClassroomController::class,'getUpdateClass'])->name('updateSingleClassGet');
+Route::get('/Class/Update/{id}', [ClassroomController::class,'getUpdateClass'])->name('updateSingleClassGet');
 
-Route::post('/UpdateClassView/{id}', [ClassroomController::class,'updateClass'])->name('updateSingleClassPost');
+Route::post('/Class/Update/{id}', [ClassroomController::class,'updateClass'])->name('updateSingleClassPost');
 
-Route::get('/deleteClass/{id}', [ClassroomController::class,'deleteClass'])->name('deleteClass');   
+Route::get('/Class/Delete/{id}', [ClassroomController::class,'deleteClass'])->name('deleteClass');   
 
-Route::post('/deleteClass/{id}', [ClassroomController::class,'deleteClass'])->name('deleteClass'); 
+Route::post('/Class/Delete/{id}', [ClassroomController::class,'deleteClass'])->name('deleteClassPost'); 
 
 Route::post('/randomCode', [ClassroomController::class,'randomCode'])->name('randomCode');   
 
 Route::get('/randomCode', [ClassroomController::class,'randomCode'])->name('randomCode');   
 
-Route::get('/lstStudent/{id}',[ClassroomController::class,'dsSinhVien'] )->name('lstStudent');
+Route::get('/List/{id}',[ClassroomController::class,'listStudent'] )->name('lstStudent');
 
-Route::get('/ListStudent', [ClassroomController::class,'dsSinhVien']);
+Route::get('/ListWait/{id}',[ClassroomController::class,'listStudentWaiting'] )->name('lstStudentWating');
+
+Route::get('/AcceptStudent/{class}/{account}',[StudentListController::class,'acceptStudent'] )->name('acceptStudent');
+
+Route::get('/ListStudent', [ClassroomController::class,'listStudent']);
 
 Route::post('/ListStudent/{id}', [StudentListController::class,'AddStudent'])->name('dsSinhVienPost');
 
@@ -116,6 +120,8 @@ Route::post('/updateAccount',[AccountController::class,'updateAccount'])->name('
 Route::post('Student/AddClass',[StudentController::class,'addClassStudent'])->name('addClassStudent');
 
 Route::get('/logout',[DangNhapController::class,'dangXuat'])->name('Logout');
+
+Route::get('/Student/Waiting', [StudentController::class,'listClassWaiting'])->name('classWaiting');
 
 
 

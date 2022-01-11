@@ -74,7 +74,10 @@ class StudentController extends Controller
     public function showClassStudent(Request $request){
         $account=Account::where('username',$request->session()->get('username'))->first();
         $id=$account->id;
-        $classlst=Account::find($id)->lstClassJoined;
+        $lst=Account::find($id)->lstClassJoined;
+        $classlst = $lst->reject(function ($value, $key) {
+            return $value->pivot->waitingqueue ==0;
+        });
         return View('student/HomePageStudent',compact('classlst'));
       }
 
@@ -104,7 +107,6 @@ class StudentController extends Controller
 
                 Cookie::queue('error',"Lớp đã tồn tại",0.09);
                 return redirect()->route('AddClassStudent');
-               
             }      
         }
         $class= new StudentList;
@@ -114,5 +116,16 @@ class StudentController extends Controller
         $class->stt=1;
         $class->save();
         return redirect()->route('showClassStudent');
+      }
+
+      public function listClassWaiting()
+      {
+        $account=Account::where('username',session()->get('username'))->first();
+        $lst= Account::find($account->id)->lstClassJoined;
+        $lstStudent = $lst->reject(function ($value, $key) {
+          return $value->pivot->waitingqueue ==1;
+      });
+        return View('Student/waitingRoomStudent',compact('lstStudent'));
+     
       }
 }

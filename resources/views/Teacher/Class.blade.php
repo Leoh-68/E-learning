@@ -70,7 +70,8 @@
         <div class="dropdown">
             <button onclick="myFunction()" class="dropbtn"><i class="fa fa-ellipsis-v"></i></button>
             <div id="myDropdown" class="dropdown-content">
-              <a href="{{route('lstStudent',['id'=>$item->id])}}">Danh sách sinh viên</a>
+              <a href="{{route('lstStudent',['id'=>$item->malop])}}">Thành viên</a>
+              <a href="{{route('lstStudentWating',['id'=>$item->malop])}}">Phòng chờ</a>
             </div>
           </div>
          <br> <h5 style="padding: 10px">{{$item->malop}}<h5>

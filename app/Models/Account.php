@@ -18,6 +18,6 @@ class Account extends Authenticatable
 
     public function lstClassJoined ()
     {
-       return $this->belongsToMany('App\Models\Classroom','studentlist','idaccount','idclassroom','id','id');
+       return $this->belongsToMany('App\Models\Classroom','studentlist','idaccount','idclassroom','id','id')->withPivot('waitingqueue','stt');
     }
 }
