@@ -55,8 +55,8 @@ class DangNhapController extends Controller
          if (Auth::attempt(['username' =>$request->username, 'password' =>  $request->password])) { 
            // $user = Account::where('username',$request->username)->first();
             //----------------------Cookie *Khánh làm
-            Cookie::queue('username',$request->username,3600);
-            Cookie::queue('password',$request->password,3600);
+            session(['username' => $request->username]);
+            session(['password' => $request->username]);
             //---------------------------
 
             //--------------------Xét quyền truy cập *Khánh làm

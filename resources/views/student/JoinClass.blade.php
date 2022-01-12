@@ -33,6 +33,7 @@
       @error('classcode')
       <span style="color: red">{{$message}}</span>
   @enderror
+  <span style="color: red">{{Cookie::get('error')}}</span>
   </div>
   <button type="submit" class="btn btn-primary" style="margin: 20px 0px 0px">Submit</button>
 </form>
