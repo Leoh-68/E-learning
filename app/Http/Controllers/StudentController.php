@@ -74,7 +74,7 @@ class StudentController extends Controller
     public function showClassStudent(){
         $account=Account::where('username',Cookie::get('username'))->first();
         $id=$account->id;
-        $classlst=Account::find($id)->lstClassJoined;
+        $classlst=Account::find($id)->lstClassJoined->TheoIdAccount;
         return View('student/HomePageStudent',compact('classlst'));
       }
 

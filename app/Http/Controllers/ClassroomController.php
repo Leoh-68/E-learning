@@ -125,7 +125,11 @@ class ClassroomController extends Controller
   public static function TheoIdAccount($idacc,$idclass)
   {
     $a=StudentList::where([['idaccount','=',$idacc],['idclassroom','=',$idclass]])->first();
-    return $a->waitingqueue;
+    if ($a->waitingqueue==1)
+    {
+      return "Đã xác nhận";
+    }
+    else
+    return "Chưa xác nhận";
   }
-
 }
