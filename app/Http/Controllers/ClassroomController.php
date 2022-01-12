@@ -35,6 +35,9 @@ class ClassroomController extends Controller
     return View('admin/ClassroomsList',compact('lst'));
   }
 /*Lớp của sinh viên*/
+
+
+// Thêm lớp
   public function addClass(Request $req)
   {
     $req->validate([
@@ -53,8 +56,6 @@ class ClassroomController extends Controller
         $image_name=$image->getClientoriginalName();
         $image->move(public_path('images'),$image_name);
       }
-      dd($req->all());
-     
       $listClass=Classroom::where('malop',$req->classcode)->first();
       // if($listClass!=null )
       // {
