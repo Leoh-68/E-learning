@@ -35,8 +35,8 @@ class DangNhapController extends Controller
     {
         $validated = $request->validated();
         if (Auth::attempt(['username' =>$request->username, 'password' =>  $request->password])) { 
-            //Cookie::queue('username',$request->username,3600);
-            //Cookie::queue('password',$request->password,3600);
+            // Cookie::queue('username',$request->username,3600);
+            // Cookie::queue('password',$request->password,3600);
             if(Auth::user()->accounttype==2) {
                 // dd($request);
                 return redirect()->route('showClass');
@@ -61,16 +61,15 @@ class DangNhapController extends Controller
         
         $validated = $request->validated();   
         $user = Account::where('email',$request->email)->first();
-        if(empty($user)||$user->email != $request->email){
-            $title = " Email không tồn tại";
-            return redirect()->route('ForgotPassword')->with('title');
+        if(!empty($user)||$user->email == $request->email){
+                Mail::send('SendMail',compact('user'),function($email) use($user){
+                    $email->subject('E-learning - Quên mật khẩu');
+                    $email->to($user->email,$user->hoten);
+                }); 
+            return redirect()->route('login')->with('title', 'Vui lòng kiểm tra hòm thư của bạn!!!'); 
         }
-        Mail::send('SendMail',compact('user'),function($email) use($user){
-            $email->subject('E-learning - Quên mật khẩu');
-            $email->to($user->email,$user->hoten);
-        });  
-        //return redirect()->route('Login');  
-        return redirect()->route('login')->with('title', 'Vui lòng kiểm tra hòm thư của bạn!!!');
+        
+        return redirect()->route('ForgotPassword')->with('title','Email không tồn tại');
     }
 
     public function guiMail($id)

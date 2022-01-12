@@ -19,8 +19,6 @@ class GiangVienAccess
         if (Auth::user()->accounttype == 3) {
             return redirect()->route('showClassStudent')->with('message','Tài khoản của bạn không có quyền truy cập trang này!!!');
         }
-        if (Auth::check()==false) {
-            return redirect()->route('login');
-        }     
+         
     }
 }

@@ -33,7 +33,9 @@
         @php
 	    $message = Session::get('message');
 	    if($message){
-		    echo '<span class="alert alert-danger">'.$message.'</span>';
+		    echo '<span class="alert alert-danger">'.$message.'
+            <button type="button" class="close" data-dismiss="alert">x</button>
+            </span>';
 		    Session::put('message',null);
 	    }
 	    @endphp

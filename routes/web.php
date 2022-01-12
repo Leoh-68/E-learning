@@ -70,11 +70,11 @@ Route::get('/', function () {
 })->name('Wellcome')->middleware('logout');
 
 // Route::get('/Login', [DangNhapController::class,'dangNhap'])->name('Login')->middleware('logout');
-Route::get('/login', [DangNhapController::class,'dangNhap'])->name('login');
-Route::post('/login', [DangNhapController::class,'xuLyDangNhap'])->name('xl-dang-nhap');
+Route::get('/login', [DangNhapController::class,'dangNhap'])->name('login')->middleware('logout');
+Route::post('/login', [DangNhapController::class,'xuLyDangNhap'])->name('xl-dang-nhap')->middleware('logout');
 // Route::post('/Login', [DangNhapController::class,'xuLyDangNhap'])->name('xl-dang-nhap')->middleware('logout');
 
-Route::get('/ForgotPassword', [DangNhapController::class,'forgotPassword'])->name('/ForgotPassword')->middleware('logout');
+Route::get('/ForgotPassword', [DangNhapController::class,'forgotPassword'])->name('ForgotPassword')->middleware('logout');
 Route::post('/ForgotPassword', [DangNhapController::class,'xuLyMatKhau'])->name('xl-mat-khau')->middleware('logout');
 
 Route::get('/Password/{id}', [DangNhapController::class,'Password'])->name('/Password')->middleware('logout');
@@ -125,12 +125,11 @@ Route::group(['prefix'=>'/', 'middleware' => ['auth','hocsinh']],function(){
     Route::get('/AddClassStudent', function () {
         return view('Student/JoinClass');
     })->name('AddClassStudent')->middleware('auth');
-    Route::get('/showClassStudent',[StudentController::class,'showClassStudent'])->name('showClassStudent')->middleware('auth');
+    Route::get('/showClassStudent',[StudentController::class,'showClassStudent'])->name('showClassStudent');
     Route::post('Student/AddClass',[StudentController::class,'addClassStudent'])->name('addClassStudent');
     //<-                Account                 ->
-Route::get('/loadAccount',[AccountController::class,'loadAccount'])->name('loadAccount');
 
-Route::post('/updateAccount',[AccountController::class,'updateAccount'])->name('updateAccount');
 });
-
+Route::get('/loadAccount',[AccountController::class,'loadAccount'])->name('loadAccount')->middleware('auth');
+Route::post('/updateAccount',[AccountController::class,'updateAccount'])->name('updateAccount')->middleware('auth');
 Route::get('/Logout', [DangNhapController::class,'dangXuat'])->name('Logout');

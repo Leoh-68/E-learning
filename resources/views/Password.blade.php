@@ -80,6 +80,7 @@
                             <div class="alert alert-danger">
                             <ul>
                             <li>{{$title }}</li>
+							<button type="button" class="close" data-dismiss="alert">x</button>
                             </ul>
                             </div>
                             @endif

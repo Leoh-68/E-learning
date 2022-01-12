@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="Webpixels">
-    <title>E-learning landing</title>
+    <title>E-learning</title>
     <!-- Preloader -->
     <style>
         @keyframes hidePreloader {
@@ -102,7 +102,7 @@
                     </p>
                     <!-- Buttons -->
                     <div class="text-center text-md-left mt-5">
-                        <a href="{{ route('xl-dang-nhap') }}" class="btn btn-primary btn-icon">
+                        <a href="{{ route('login') }}" class="btn btn-primary btn-icon">
                             <span class="btn-inner--text">Đăng nhập</span>
                         </a>
                     </div>

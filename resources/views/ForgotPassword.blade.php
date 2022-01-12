@@ -79,13 +79,17 @@
                             @error('email')
 						        <span class="alert alert-danger">>{{ $message }}</span>
 					        @enderror
-					        @if (!empty($title))
-						        <div class="alert alert-danger">
-						        <ul>
-						        <li>{{$title }}</li>
-						        </ul>
-						        </div>
-					        @endif
+					        @php 
+				                $title = Session::get('title');
+				                if($title){
+						            echo '<div class="alert alert-danger">'.$title.'
+                                    <button type="button" class="close" data-dismiss="alert">x</button>
+                                    </div>
+                                   
+                                    ';
+						            Session::put('title',null);
+				                }
+				            @endphp
                            
                                 <div class="form-group">
                                     <label class="form-control-label">Email</label>

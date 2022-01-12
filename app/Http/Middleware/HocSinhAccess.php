@@ -19,8 +19,6 @@ class HocSinhAccess
         if (Auth::user()->accounttype == 3) {
             return $next($request);
         }
-        if (Auth::check()==false) {
-            return redirect()->route('Login');
-        }     
+       
     }
 }

@@ -79,23 +79,28 @@
                             @php
 	    		                $message = Session::get('message');
 	    		                if($message){
-		   			                echo '<span class="alert alert-danger">'.$message.'</span>
-                                       <span class="fFW7wc XKSfm-Sx9Kwc-r4nke-TvD9Pc" role="button" tabindex="0" aria-label="Đóng" style="display: none;"></span>';
+		   			                echo '<span class="alert alert-danger">'.$message.'
+                                       <button type="button" class="close" data-dismiss="alert">x</button>
+                                    </span>';
 		    		                Session::put('message',null);
 	    		                }
 	    		            @endphp
 				            @php 
 				                $title = Session::get('title');
 				                if($title){
-						            echo '<div class="alert alert-success">'.$title.'</div>';
+						            echo '<div class="alert alert-success">'.$title.'
+                                    <button type="button" class="close" data-dismiss="alert">x</button>
+                                    </div>';
 						            Session::put('title',null);
 				                }
 				            @endphp
 				            @php 
 				                $Text = Session::get('Text');
 				                if($Text){
-						            echo '<div class="alert alert-danger">'.$Text.'</div>
-                                    <span class="fFW7wc XKSfm-Sx9Kwc-r4nke-TvD9Pc" role="button" tabindex="0" aria-label="Đóng" style="display: none;"></span>';
+						            echo '<div class="alert alert-danger">'.$Text.'
+                                    <button type="button" class="close" data-dismiss="alert">x</button>
+                                    </div>
+                                    ';
 						            Session::put('Text',null);
 				                }
 				            @endphp

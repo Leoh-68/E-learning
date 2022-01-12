@@ -19,8 +19,5 @@ class AdminAccess
             if (Auth::user()->accounttype == 2) {
                 return redirect()->route('showClass')->with('message','Tài khoản của bạn không có quyền truy cập trang này!!!');
             }
-            if (Auth::check()==false) {
-                return redirect()->route('login');
-            }     
     }
 }
