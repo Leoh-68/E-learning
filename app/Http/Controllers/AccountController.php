@@ -9,9 +9,9 @@ use Carbon\Carbon;
 
 class AccountController extends Controller
 {
-    public function loadAccount(){
-        $username= Cookie::get('username');
-        $password= Cookie::get('password');
+    public function loadAccount(Request $request){
+        $username = session('username');
+        $password = session('password');
         $account= Account::where('username',$username)->first();
         return View('Account',compact('account'));
     }
@@ -35,7 +35,7 @@ class AccountController extends Controller
             'sdt.min'=>'Số điện thoại phải có :min số',
             'email.required'=>'Vui lòng nhập đầy đủ thông tin',
         ]);
-    $account1=Account::where('username',Cookie::get('username'))->first();
+    $account1=Account::where('username',session('username'))->first();
     $account=Account::where('id',$account1->id)->first();
     $account->hoten=$request->hoten;
     $account->ngaysinh=$request->ngaysinh;
@@ -48,7 +48,7 @@ class AccountController extends Controller
     }
 
     public static function AccountLogin(){
-        $account=Account::where('username',Cookie::get('username'))->first();
+        $account=Account::where('username',session('username'))->first();
         return $account;
     }
 }

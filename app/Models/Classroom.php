@@ -17,7 +17,7 @@ class Classroom extends Model
 
     public function dsStudentJoined ()
     {
-       return $this->belongsToMany('App\Models\Account','studentlist','idclassroom','idaccount','id','id');
+       return $this->belongsToMany('App\Models\Account','studentlist','idclassroom','idaccount','id','id')->withPivot('waitingqueue','stt');
     }
     public function dsClassJoined ()
     {

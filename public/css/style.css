@@ -137,6 +137,22 @@ header ul li a
 
 
   }
+  .imgpost
+  {
+    float:left;
+    
+  }
+  .postown
+  {
+    float:left;
+    width: 90%;
+  }
+  .postcontent{
+    word-break: break-word;
+    float:left;
+    margin-bottom: 20px;
+  }
+
   .post{
     padding: 20px 0px 20px 0px;
     float: right;
@@ -145,10 +161,25 @@ header ul li a
     border-color:white;
     border-radius: 12px;
   }
+  .posts{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    display: inline-block;
+    width: 100%;
+    background-color: #ddd;
+    border-color:white;
+    border-radius: 12px;
+  }
+  .comment input{
+    width: 95%;
+    border-radius: 10px;
+  }
 .posttext{
 padding-bottom: 20px;
 height: 150px;
 width: 100%;
+float: right;
 border-radius: 12px;
 }
 .status{
@@ -160,6 +191,7 @@ border-radius: 12px;
   border-radius: 12px;
 }
 .idclass{
+  position: relative;
   margin-top: 20px;
   float: left;
   width: 20%;
@@ -275,8 +307,6 @@ font-size: 10;
 }
 .dropdown {
   position: relative;
-  display: inline-block;
-
   float: right;
   
 }
