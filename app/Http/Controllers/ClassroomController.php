@@ -34,6 +34,9 @@ class ClassroomController extends Controller
     return View('ClassroomsList',compact('lst'));
   }
 /*Lớp của sinh viên*/
+
+
+// Thêm lớp
   public function addClass(Request $req)
   {
     $req->validate([
@@ -45,15 +48,35 @@ class ClassroomController extends Controller
       'classcode.min'=>'Mã lớp phải có :min ký tự',
       'classcode.max'=>'Mã lớp phải có :max ký tự'
     ]);
-    $account=Account::where('username',Cookie::get('username'))->first();
-    $listClass=Classroom::all();
-    $account=Account::where('username',Cookie::get('username'))->first();
-    $class=new Classroom;
-    $class->idaccount=$account->id;
-    $class->name=$req->classname;
-    $class->malop=$req->classcode;
-    $class->save();
-    return redirect()->route('showClass');
+      // Upload ảnh 
+      if($req->has('image'))
+      {
+        $image = $req->image;
+        $image_name=$image->getClientoriginalName();
+        $image->move(public_path('images'),$image_name);
+      }
+      $listClass=Classroom::where('malop',$req->classcode)->first();
+      // if($listClass!=null )
+      // {
+      //   Cookie::queue('error',"Lớp này đã tồn tại hoặc bị xóa",0.09);
+      // }
+      // if($listClass!=null && $listClass->deleted_at=!null)
+      // {
+      //   return 0;
+      // }
+      // *******
+      // if($listClass!=null&&  $listClass->deleted_at==null )
+      // {
+      //   return 0;
+      // }   
+      $account=Account::where('username', session('username'))->first();
+      $class=new Classroom;
+      $class->idaccount=$account->id;
+      $class->name=$req->classname;
+      $class->malop=$req->classcode;
+      $class->save();
+      session()->flash('success', 'Thêm thành công');
+      return redirect()->route('showClass');
   }
   public function showSingleClass(Request $req){
     $class=Classroom::where('malop','=',$req->id)->get();
