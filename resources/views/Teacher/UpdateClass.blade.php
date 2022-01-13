@@ -29,7 +29,7 @@
     </div>
     <div class="form-group">
       <label for="">Giảng viên</label>
-      <input type="subject" value="  {{\App\Http\Controllers\ClassroomController::LayTenTheoMa($item->idaccount)}}"  class="form-control"  placeholder="Enter suject name" name="username" readonly>
+      <input type="subject" value="{{\App\Http\Controllers\ClassroomController::LayTenTheoMa($item->idaccount)}}"  class="form-control"  placeholder="Enter suject name" name="username" readonly>
     </div>
       @endforeach
   <button type="submit" class="btn btn-primary" style="margin: 20px 0px 0px">Submit</button>
