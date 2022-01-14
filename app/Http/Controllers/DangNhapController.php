@@ -35,10 +35,9 @@ class DangNhapController extends Controller
     {
         $validated = $request->validated();
         if (Auth::attempt(['username' =>$request->username, 'password' =>  $request->password])) { 
-            // Cookie::queue('username',$request->username,3600);
-            // Cookie::queue('password',$request->password,3600);
+            Cookie::queue('username',$request->username,3600);
+            Cookie::queue('password',$request->password,3600);
             if(Auth::user()->accounttype==2) {
-                // dd($request);
                 return redirect()->route('showClass');
             } else if(Auth::user()->accounttype==1) {
                 return redirect()->route('Admin');
@@ -46,9 +45,7 @@ class DangNhapController extends Controller
                 return  redirect()->route('showClassStudent');
             }      
         } 
-        return redirect()->route('login')->with('Text','Username hoặc password không tồn tại');
-             
-            
+        return redirect()->route('login')->with('Text','Username hoặc password không tồn tại');         
     }
 
     public function forgotPassword()
@@ -110,14 +107,14 @@ class DangNhapController extends Controller
     //Cái này là đăng xuất
     public function dangXuat()
     {
-        Auth::logout();
         $cookie = Cookie::forget('username');
         $cookiep = Cookie::forget('password');
         $cookie2 = Cookie::forget('ajs_anonymous_id');
         $cookie3 = Cookie::forget('XSRF-TOKEN');
         $cookie4 = Cookie::forget('laravel_session');
         $cookie5 = Cookie::forget('1P_JAR');
-        return redirect()->route('Wellcome')->withCookie($cookie)->withCookie($cookiep)
+        Auth::logout();
+        return redirect()->route('wellcome')->withCookie($cookie)->withCookie($cookiep)
         ->withCookie($cookie2)->withCookie($cookie3)->withCookie($cookie4)->withCookie($cookie5);  
     }
 

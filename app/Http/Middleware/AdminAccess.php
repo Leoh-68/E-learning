@@ -11,13 +11,15 @@ class AdminAccess
     public function handle(Request $request, Closure $next)
     {
             if (Auth::user()->accounttype == 1) {
-               return $next($request);
+                return $next($request);  
             }
-            if (Auth::user()->accounttype == 3) {
+            elseif (Auth::user()->accounttype == 3) {
                 return redirect()->route('showClassStudent')->with('message','Tài khoản của bạn không có quyền truy cập trang này!!!');
             }
-            if (Auth::user()->accounttype == 2) {
+            elseif (Auth::user()->accounttype == 2) {
                 return redirect()->route('showClass')->with('message','Tài khoản của bạn không có quyền truy cập trang này!!!');
-            }
+            }else if (Auth::check()==false) {
+                return redirect()->route('wellcome');
+            }     
     }
 }

@@ -104,6 +104,12 @@
 						            Session::put('Text',null);
 				                }
 				            @endphp
+                            @error('password')				
+						                <span class="alert alert-danger">{{ $message }}</span>
+					        @enderror
+                            @error('username')
+						                <span class="alert alert-danger">{{ $message }}</span>
+					        @enderror
                            
                                 <div class="form-group">
                                     <label class="form-control-label">Username</label>
@@ -113,9 +119,7 @@
                                         </div>
                                         <input type="text" class="input100 @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required>
                                     </div>
-                                    @error('username')
-						                <span class="alert alert-danger">>{{ $message }}</span>
-					                @enderror
+                                    
                                 </div>
                                 <div class="form-group mb-0">
                                     <div class="d-flex align-items-center justify-content-between">
@@ -132,9 +136,7 @@
                                         </div>
                                         <input class="input100 @error('password') is-invalid @enderror " type="password" name="password" value="{{ old('password') }}" required>
                                     </div>
-                                    @error('password')				
-						                <span class="alert alert-danger">>{{ $message }}</span>
-					                @enderror
+                                   
                                 </div>
                                 <div class="mt-4">
                                     <button type="submit" class="btn btn-block btn-primary">Đăng nhập</button></div>

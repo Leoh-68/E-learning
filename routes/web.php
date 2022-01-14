@@ -13,11 +13,11 @@ Route::get('/HomePage', function () {
     return view('HomePage');
 })->name('HomePage');
 
-
+Route::group(['middleware' => ['login']],function(){
 
 Route::get('/AddClassStudent', function () {
     return view('Student/JoinClass');
-})->name('AddClassStudent')->middleware('auth');
+})->name('AddClassStudent');
 
 Route::get('/Class', function () {
     return view('Class');
@@ -26,7 +26,7 @@ Route::get('/Class', function () {
 //<-                Classroom                 ->
 //-----------------------------//
 
-Route::group(['prefix'=>'/', 'middleware' => ['auth','giangvien']],function(){
+Route::group(['prefix'=>'/', 'middleware' => ['giangvien']],function(){
 
 Route::get('/showClass',[ClassroomController::class,'showClass'])->name('showClass');
 
@@ -63,26 +63,7 @@ Route::post('/ListStudent/{id}', [StudentListController::class,'AddStudent'])->n
 Route::get('/ListStudent/Delete/{id}/{code}', [StudentListController::class,'DeleteStudent'])->name('xoaSinhvien');
 
 });
-
-//Bạch
-Route::get('/', function () {
-    return view('/Wellcome');
-})->name('Wellcome')->middleware('logout');
-
-// Route::get('/Login', [DangNhapController::class,'dangNhap'])->name('Login')->middleware('logout');
-Route::get('/login', [DangNhapController::class,'dangNhap'])->name('login')->middleware('logout');
-Route::post('/login', [DangNhapController::class,'xuLyDangNhap'])->name('xl-dang-nhap')->middleware('logout');
-// Route::post('/Login', [DangNhapController::class,'xuLyDangNhap'])->name('xl-dang-nhap')->middleware('logout');
-
-Route::get('/ForgotPassword', [DangNhapController::class,'forgotPassword'])->name('ForgotPassword')->middleware('logout');
-Route::post('/ForgotPassword', [DangNhapController::class,'xuLyMatKhau'])->name('xl-mat-khau')->middleware('logout');
-
-Route::get('/Password/{id}', [DangNhapController::class,'Password'])->name('/Password')->middleware('logout');
-Route::post('/Password/{id}', [DangNhapController::class,'taoMoiMatKhau'])->name('mat-khau-moi')->middleware('logout');
-
-Route::get('/dangXuat', [DangNhapController::class,'dangXuat'])->name('dangXuat');
-
-Route::group(['prefix'=>'/', 'middleware' => ['auth','admin']],function(){
+Route::group(['prefix'=>'/', 'middleware' => ['admin']],function(){
 
 Route::get('/Admin/Students',[StudentController::class,'layDanhSachSV'])->name('StudentsList');
 Route::get('/Admin/Students/Add',[StudentController::class,'themSV'])->name('loadThemSV');
@@ -121,15 +102,36 @@ Route::get('/Admin', function () {
 });
 
 // Học Sinh
-Route::group(['prefix'=>'/', 'middleware' => ['auth','hocsinh']],function(){
+Route::group(['prefix'=>'/', 'middleware' => ['hocsinh']],function(){
     Route::get('/AddClassStudent', function () {
         return view('Student/JoinClass');
-    })->name('AddClassStudent')->middleware('auth');
-    Route::get('/showClassStudent',[StudentController::class,'showClassStudent'])->name('showClassStudent');
+    })->name('AddClassStudent');
+    Route::get('/showClassStudent',[StudentController::class,'showClassStudent'])->name('showClassStudent')->middleware('auth');
     Route::post('Student/AddClass',[StudentController::class,'addClassStudent'])->name('addClassStudent');
     //<-                Account                 ->
 
 });
-Route::get('/loadAccount',[AccountController::class,'loadAccount'])->name('loadAccount')->middleware('auth');
-Route::post('/updateAccount',[AccountController::class,'updateAccount'])->name('updateAccount')->middleware('auth');
+Route::get('/loadAccount',[AccountController::class,'loadAccount'])->name('loadAccount');
+Route::post('/updateAccount',[AccountController::class,'updateAccount'])->name('updateAccount');
+});
+
+
+
+//Bạch
+Route::get('/', function () {
+    return view('/Wellcome');
+})->name('wellcome')->middleware('logout');
+
+// Route::get('/Login', [DangNhapController::class,'dangNhap'])->name('Login')->middleware('logout');
+Route::get('/login', [DangNhapController::class,'dangNhap'])->name('login')->middleware('logout');
+Route::post('/login', [DangNhapController::class,'xuLyDangNhap'])->name('xl-dang-nhap')->middleware('logout');
+// Route::post('/Login', [DangNhapController::class,'xuLyDangNhap'])->name('xl-dang-nhap')->middleware('logout');
+
+Route::get('/ForgotPassword', [DangNhapController::class,'forgotPassword'])->name('ForgotPassword')->middleware('logout');
+Route::post('/ForgotPassword', [DangNhapController::class,'xuLyMatKhau'])->name('xl-mat-khau')->middleware('logout');
+
+Route::get('/Password/{id}', [DangNhapController::class,'Password'])->name('Password')->middleware('logout');
+Route::post('/Password/{id}', [DangNhapController::class,'taoMoiMatKhau'])->name('mat-khau-moi')->middleware('logout');
+
+Route::get('/dangXuat', [DangNhapController::class,'dangXuat'])->name('dangXuat');
 Route::get('/Logout', [DangNhapController::class,'dangXuat'])->name('Logout');

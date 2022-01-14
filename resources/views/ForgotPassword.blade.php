@@ -77,7 +77,9 @@
                                 <h6 class="h3">Kiểm tra email</h6>
                             </div>
                             @error('email')
-						        <span class="alert alert-danger">>{{ $message }}</span>
+						        <span class="alert alert-danger">>{{ $message }}
+                                <button type="button" class="close" data-dismiss="alert">x</button>
+                                </span>
 					        @enderror
 					        @php 
 				                $title = Session::get('title');
