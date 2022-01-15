@@ -1,89 +1,103 @@
-
-
- @extends('IndexHomePage')
- @section('MenuHomePage')
-<a href="{{route('showClass')}}">Lớp học</a>
+@extends('IndexHomePage')
+@section('MenuHomePage')
+    <a href="{{ route('showClass') }}">Lớp học</a>
 @endsection
- @section('library')
- <meta charset="utf-8">
- <meta name="viewport" content="width=device-width, initial-scale=1">
- <!-- CSRF Token -->
- <meta name="csrf-token" content="{{ csrf_token() }}">
- <title>{{ config('app.name', 'Laravel') }}</title>
- <!-- Scripts -->
- <script src="{{ asset('js/app.js') }}" defer></script>
- <!-- Fonts -->
- <link rel="dns-prefetch" href="//fonts.gstatic.com">
- <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
- <!-- Styles -->
- <link href="{{ asset('css/app.css') }}" rel="stylesheet">
- {{-- link --}}
- @endsection
- @section('html')
- <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
- @endsection
- @section('body')
- @foreach ($class as $item)
- <div class="classbody">
-    <div class="imgclass" style="background-image: url('../images/1.jpg')">
-        <h1 class="nameinclass">{{$item->name}}</h1>
-    </div>
-    <div class="post">
-        <div class="form-group">     
-            <textarea type="text" class="posttext"></textarea>
-            <button>submit</button>
+@section('library')
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>{{ config('app.name', 'Laravel') }}</title>
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{-- link --}}
+@endsection
+@section('html')
+    <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@endsection
+@section('body')
+    @foreach ($class as $item)
+        <div class="classbody">
+            <div class="imgclass" style="background-image: url('../images/1.jpg')">
+                <h1 class="nameinclass">{{ $item->name }}</h1>
+            </div>
+            @if (session()->has('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session()->get('success') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+            @if (session()->has('fail'))
+                <div class="alert alert-danger" style="width: 500px">
+                    {{ session()->get('fail') }}
+                </div>
+            @endif
+            <div class="post">
+                <div class="formpost">
+                    <form action="{{ route('post', ['id' => $item->malop]) }}" method="POST">
+                        @csrf
+                        <textarea type="text" class="postname" name="name" required></textarea>
+                        @error('name')
+                            <span style="color: red">{{ $message }}</span>
+                        @enderror
+                        <textarea type="text" class="posttext" name="post" required></textarea>
+                        @error('name')
+                            <span style="color: red">{{ $message }}</span>
+                        @enderror
+                        <button style="float: right" type="submit" class="btn btn-secondary">submit</button>
+                    </form>
+                </div>
+                @foreach ($post as $var)
+                    <div class="posts">
+                        <div class="postown">
+                            <div class="imgpost">
+                                <a href="{{ route('loadAccount') }}"><img src="{{ asset('images/3.jpg') }}"
+                                        alt="Avatar" class="avatarnavbar"></a>
+                            </div>
+                            <div class="dropdown">
+                                <button class="btn btn-basic dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                  <a class="dropdown-item" href="#">Sửa</a>
+                                  <a class="dropdown-item" href="#">Xóa</a>
+
+                                </div>
+                              </div>
+                            <Span> {{\App\Http\Controllers\ClassroomController::TheoAccount($var->idclassroom)}}</Span><br>
+                            <Span style="font-size: 13px; color:grey">{{$var->created_at->format('d/m/Y')}}</Span>
+
+                        </div>
+                        <br>
+                        <div class="postcontent"> {{ $var->mota }} </div>
+                        <div class="comment">
+                            <a href="{{ route('loadAccount') }}"><img src="{{ asset('images/3.jpg') }}" alt="Avatar"class="avatarnavbar"></a>
+                            <input>
+                        </div>
+                    </div>
+                @endforeach
+
+            </div>
         </div>
-
-        <div class="posts" >
-            <div class="imgpost">
-             <a href="{{route('loadAccount')}}"><img src="{{ asset('images/3.jpg') }}" alt="Avatar" class="avatarnavbar"></a>
+        <div class="idclass">
+            <span class="idcls">Mã lớp</span>
+            <div class="dropdown">
+                <button onclick="myFunction()" class="dropbtn"><i class="fa fa-ellipsis-v"></i></button>
+                <div id="myDropdown" class="dropdown-content">
+                    <a href="{{ route('lstStudent', ['id' => $item->malop]) }}">Thành viên</a>
+                    <a href="{{ route('lstStudentWating', ['id' => $item->malop]) }}">Phòng chờ</a>
+                </div>
             </div>
-            <div class="postown">
-             <Span>Trần Phước Khánh</Span><br>
-             <Span style="font-size: 13px; color:grey">11/11/2001</Span><br>
-            </div>
-         <br>
-             <div class="postcontent">
-                         Xin chào cả lớp, sắp tới cô có tổ chức 1 buổi hướng dẫn viết CV, các bạn tham gia để có 1 chiếc CV cho kỳ thực tập sắp tới thật tốt nhé.
-                         Nội dung buổi chia sẻ:
-                         - Nắm được những điểm quan trọng trong 1 CV dành cho các bạn lập trình viên<
-                         - Cách xây dựng hình ảnh của mình khi đi ứng tuyển.
-                         - Được BTC góp ý và chỉnh sửa CV
-                         - Kết nối doanh nghiệp phù hợp để apply sau khi hoàn tất CV
-                         Thời gian: 19h30, ngày 31/12/2021
-                         Hình thức: Online qua Zoom
-                         Số lượng: 100 slot
-                         Link đăng ký: https://forms.gle/c1hpn6NPu6kp5g869
-                         Hạn chót đăng ký: 28/12/2021.
-                         Thông tin Zoom sẽ được gửi qua email của các bạn, do vậy hãy gõ thật chính xác email của mình nhé.
-                         Hẹn gặp lại các bạn vào buổi webinar nhé
-              </div>
-              <div class="comment">
-                   <a href="{{route('loadAccount')}}"><img src="{{ asset('images/3.jpg') }}" alt="Avatar" class="avatarnavbar"></a>
-                   <input>
-              </div>
+            <br>
+            <h5 style="padding: 10px">{{ $item->malop }}<h5>
         </div>
-         </div>
-    </div>
-    <div class="idclass">
-        <span class="idcls">Mã lớp</span>
-        <div class="dropdown">
-            <button onclick="myFunction()" class="dropbtn"><i class="fa fa-ellipsis-v"></i></button>
-            <div id="myDropdown" class="dropdown-content">
-              <a href="{{route('lstStudent',['id'=>$item->malop])}}">Thành viên</a>
-              <a href="{{route('lstStudentWating',['id'=>$item->malop])}}">Phòng chờ</a>
-            </div>
-          </div>
-         <br> <h5 style="padding: 10px">{{$item->malop}}<h5>
-    </div>
- @endforeach
-           <div>
-           
-           </div>
-    </div>
-    </div>
-</div>
-
- @endsection
- 
-
+    @endforeach
+    <div>
+    @endsection
