@@ -19,7 +19,7 @@
     {{-- Fontware --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
     @yield('library')
-    @yield('title')
+    <title>E-Learning</title>
 </head>
 <body>
     <header>
@@ -29,6 +29,7 @@
             <li>
                 <a href="{{route('loadAccount')}}"><img src="{{ asset('images/3.jpg') }}" alt="Avatar" class="avatarnavbar"></a>
             </li>
+            <a href="{{route('dangXuat')}}"><img src="{{ asset('images/logout.png') }}" alt="Avatar" class="avatarnavbar"></a>    
         </ul>
     </header>
      <section class="banner">
