@@ -6,11 +6,11 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Account;
-use App\Models\AccountType;
 use App\Http\Requests\DangNhapRequest;
 use App\Http\Requests\EmailRequest;
-use Illuminate\Support\Str;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 // Bạch: Ngộ thêm cả thư mục fonts(~E-learning\public\fonts) 
 // và vendor(~E-learning\public\vendor) nhưng ghi chú hết thì trầm cảm lắm
@@ -18,7 +18,7 @@ class DangNhapController extends Controller
 {
     public function dangNhap()
     {
-        return view('Login');
+        return view('login');
     }
     public function messages()
     {
@@ -33,58 +33,21 @@ class DangNhapController extends Controller
 
     public function xuLyDangNhap(DangNhapRequest $request)
     {
-        $rep= new Response();
-       
-        $user = Account::where('username',$request->username)->first();
-       
-        //  if(empty($user)){
-        //     echo"Tên đăng nhập hoặc mật khẩu không đúng";
-        //  }else if($user->password != $request->password){
-        //     echo"Tên đăng nhập hoặc mật khẩu không đúng";
-        //  }else{
-        //      echo $user->hoTen;
-        //  }
-        // $request->validate([
-        //     'username' => 'required',
-        //     'password' => 'required|min:5'
-        //     ]);  
-        $request->validate([
-           
-        ]);     
-         //$validated = $request->validated();
-         if (Auth::attempt(['username' =>$request->username, 'password' =>  $request->password])) { 
-           // $user = Account::where('username',$request->username)->first();
-            //----------------------Cookie *Khánh làm
+        $validated = $request->validated();
+        if (Auth::attempt(['username' =>$request->username, 'password' =>  $request->password])) { 
             session(['username' => $request->username]);
             session(['password' => $request->username]);
-            //---------------------------
-
-            //--------------------Xét quyền truy cập *Khánh làm
-            if($user->accounttype==1)
-            {
-                return  redirect()->route('Admin');
-            }
-            if($user->accounttype==2)
-            {
-                return  redirect()->route('showClass');
-            }
-            if($user->accounttype==3)
-            {
+            if(Auth::user()->accounttype==2) {
+                // dd($request);
+                return redirect()->route('showClass');
+            } else if(Auth::user()->accounttype==1) {
+                return redirect()->route('Admin');
+            } else {
                 return  redirect()->route('showClassStudent');
-            }   
-            //--------------------------
-            //$Type = AccountType::where('id',$user->accounttype)->first();
-            //$AccType = $Type->type;
-           
-         }
-         else{
-            if($user == null){
-                $userText = " không đúng";
-                return view('Login',compact('userText'));   
-             }else 
-             $pwText = " không đúng";
-             return view('Login',compact('pwText'));
-         }
+            }      
+        } 
+        return redirect()->route('login')->with('Text','Username hoặc password không tồn tại');
+             
             
     }
 
@@ -96,37 +59,66 @@ class DangNhapController extends Controller
     public function xuLyMatKhau(EmailRequest $request)
     {
         
-        $request->validate([
-        ]);    
+        $validated = $request->validated();   
         $user = Account::where('email',$request->email)->first();
-         if(empty($user)||$user->email != $request->email){
-            $title = " không đúng";
-            return view('ForgotPassword',compact('title'));
-         }else{
-            $number = Str::random(5);
-            $id = $user->id;
-            $data = Account::find($id);
-            $data->password = Hash::make($number);
-            $data->save();
-            return view('Login',compact('number'));
-         }           
+        if(!empty($user)||$user->email == $request->email){
+                Mail::send('SendMail',compact('user'),function($email) use($user){
+                    $email->subject('E-learning - Quên mật khẩu');
+                    $email->to($user->email,$user->hoten);
+                }); 
+            return redirect()->route('login')->with('title', 'Vui lòng kiểm tra hòm thư của bạn!!!'); 
+        }
+        
+        return redirect()->route('ForgotPassword')->with('title','Email không tồn tại');
     }
 
-    //MÃ hóa mật khẩu
-    public function update()
-        {
-        $id=1;
-        $data = Account::find($id);
-        $data->password = Hash::make('123456');
-        $data->save();
-        echo 'Cập nhật thành viên thành công!';
+    public function guiMail($id)
+    {
+        $user = Account::find($id);
+        Mail::send('SendMail',compact('user'),function($email) use($user){
+            $email->subject('Forgot Password');
+            $email->to($user->email,$user->hoTen);
+        });
+    }
+
+    public function Password($id)
+    {
+        $user = Account::find($id);
+        return view('Password',compact('user'));
+    }
+
+    public function taoMoiMatKhau(Request $request,$id)
+    {
+        
+        $request->validate([
+            'password' => 'required|min:5',
+            'password2' => 'required|min:5'
+        ]
+        );  
+        $user = Account::find($id);
+        if($request->password!=$request->password2){
+            $title = " Password không khớp";
+            return view('Password',compact('title','user'));
+         }else{
+            $user->password = Hash::make($request->password);
+            $user->save();
+           
+            return redirect()->route('login')->with('title', 'Cập nhật mật khẩu thành công');
+         }           
     }
 
     //Cái này là đăng xuất
     public function dangXuat()
     {
         Auth::logout();
-        return view('Login');
+        $cookie = session()->forget('username');
+        $cookiep = session()->forget('password');
+        $cookie2 = session()->forget('ajs_anonymous_id');
+        $cookie3 = session()->forget('XSRF-TOKEN');
+        $cookie4 = session()->forget('laravel_session');
+        $cookie5 = session()->forget('1P_JAR');
+        return redirect()->route('Wellcome')->withSession($cookie)->withSession($cookiep)
+        ->withSession($cookie2)->withSession($cookie3)->withSession($cookie4)->withSession($cookie5);  
     }
 
 }
