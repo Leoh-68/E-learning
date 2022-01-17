@@ -48,6 +48,7 @@ class ClassroomController extends Controller
         // Upload ảnh
         if ($req->has('image')) {
             $image = $req->image;
+            dd($image);
             $image_name = $image->getClientoriginalName();
             $image->move(public_path('images'), $image_name);
         }
