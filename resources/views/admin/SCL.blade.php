@@ -40,6 +40,7 @@ use \App\Http\Controllers\ClassroomController;
                     <th>Địa chỉ</th>
                     <th>Số điện thoại</th>
                     <th>Email</th>
+                    <th>Đợi xác nhận</th>
                     <th>Chức năng</th>
                 </tr>
             </thead>
@@ -51,6 +52,7 @@ use \App\Http\Controllers\ClassroomController;
                     <td>{{ $item->diachi}}</td>
                     <td>{{ $item->sdt }}</td>
                     <td>{{ $item->email }}</td>
+                    <td>{{ ClassroomController::TheoIdAccount($item->id,request()->id) }}</td>
                     <td>
                     <a class="btn btn-danger" onclick="return confirm('Bạn có chắc không?')" href="{{route('xlXoaSVTL',['id'=>$item->id,'code'=>request()->id])}}"><i class="fa fa-trash"></i> Xóa</a></td>
                 </tr>

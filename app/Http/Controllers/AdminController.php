@@ -23,10 +23,18 @@ class AdminController extends Controller
     {
         $accList = Account::where([['accounttype','=','1'],['deleted_at','=',null]])->get();
         $ad = new Account;
-        foreach($accList as $dstk){
-            if($dstk->username==$rq->username);
-            return('Username này đã tồn tại');
-        }
+        foreach($accList as $var)
+           {
+               if($var->username == $rq->username)
+               {
+                session()->flash('unique',"Tài khoản $rq->username đã tồn tại");
+                return redirect()->route('loadThemAd');
+               }
+               else if($var->email == $rq->email){
+                session()->flash('unique',"Email $rq->email đã tồn tại");
+                return redirect()->route('loadThemAd');
+               }
+           }
         $ad->username = $rq->username;
         $ad->password = Hash::make($rq->password);
         $ad->hoten = $rq->hoten;

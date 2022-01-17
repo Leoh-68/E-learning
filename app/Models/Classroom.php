@@ -19,4 +19,8 @@ class Classroom extends Model
     {
        return $this->belongsToMany('App\Models\Account','studentlist','idclassroom','idaccount','id','id')->withPivot('waitingqueue','stt');
     }
+    public function dsClassJoined ()
+    {
+       return $this->belongsTo('App\Models\Account','studentlist','idclassroom','idaccount','id','id');
+    }
 }
