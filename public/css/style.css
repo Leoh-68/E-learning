@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap'); 
-*{
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+* {
     margin: 0;
     padding: 0;
-    font-family: 'Poppins',sans-serif;
+    font-family: "Poppins", sans-serif;
     box-sizing: border-box;
 }
 body    
@@ -17,16 +17,15 @@ header
     left: 0;
     width: 100%;
     height: 80px;
-    display:flex;
-    justify-content:space-between;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
     transition: 0.6s;
     padding: 20px 20px ;
     background-color:white;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2) ;
 }
-header .logo
-{
+header .logo {
     position: relative;
     text-decoration: none;
     font-weight: 700;
@@ -35,20 +34,17 @@ header .logo
     color: black;
     transition: 0.6s;
 }
-header ul 
-{
+header ul {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-header ul li
-{
+header ul li {
     position: relative;
     list-style: none;
 }
-header ul li a
-{
+header ul li a {
     color: black;
     position: relative;
     margin: 0 15px;
@@ -57,18 +53,16 @@ header ul li a
     font-weight: 500;
     transition: 0.6s;
 }
-.banner
-{
-    position: relative; 
+.banner {
+    position: relative;
     width: 100%;
     height: 10vh;
     background-image: url(pg.png);
-    background-size:cover;
+    background-size: cover;
     background-attachment: scroll;
     background-repeat: no-repeat;
 }
-.icon
-{
+.icon {
     position: relative;
 }
 .column {
@@ -77,8 +71,8 @@ header ul li a
     height: 400px;
     padding: 40px 20px 10px 20px;
     border-color: black;
-  }
-  .card {
+}
+.card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     padding: 20px 16px 16px 16px;
     text-align: center;
@@ -87,271 +81,278 @@ header ul li a
     border-radius: 10px;
     background-repeat: no-repeat;
     background-size: 99% 31%;
-  }
-  @media screen and (max-width: 600px) {
+}
+@media screen and (max-width: 600px) {
     .column {
-      width: 100%;
-      display: block;
-      margin-bottom: 20px;
+        width: 100%;
+        display: block;
+        margin-bottom: 20px;
     }
-  }
-  .avatar
-  {
-      vertical-align:middle;
-      height: 70px;
-      width: 70px;
-      border-radius: 50%;
-      top: 100px;
-  }
-  .classbody{
-  padding: 50px;
-  }
-  .imgclass{
+}
+.avatar {
+    vertical-align: middle;
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    top: 100px;
+}
+.classbody {
+    padding: 0px;
+}
+.imgclass {
     height: 250px;
     width: 100%;
     border-radius: 12px;
     background-repeat: no-repeat;
     background-size: cover;
-  }
-  .classname
-  {
-      position: relative;
-      justify-content: start;
-      text-align: left;
-      text-overflow: ellipsis; 
-      white-space: nowrap;
-      overflow: hidden;
-  }
-  .nameinclass{
+}
+.classname {
+    position: relative;
+    justify-content: start;
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.nameinclass {
     position: relative;
     top: 190px;
     left: 20px;
-
-  }
-  .nameinclassStudent{
+}
+.nameinclassStudent {
     position: relative;
     top: 190px;
     left: 20px;
-
-
-  }
-  .imgpost
-  {
-    float:left;
-    
-  }
-  .postown
-  {
-    float:left;
-    width: 90%;
-  }
-  .postcontent{
+}
+.imgpost {
+    float: left;
+}
+.postown {
+    float: left;
+    width: 100%;
+}
+.postcontent {
     word-break: break-word;
-    float:left;
+    float: left;
+    width: 100%;
     margin-bottom: 20px;
-  }
+}
 
-  .post{
+.post {
     padding: 20px 0px 20px 0px;
     float: right;
     height: 150px;
     width: 75%;
-    border-color:white;
+    border-color: white;
     border-radius: 12px;
-  }
-  .posts{
+}
+.posts {
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 10px;
     display: inline-block;
     width: 100%;
     background-color: #ddd;
-    border-color:white;
+    border-color: white;
     border-radius: 12px;
-  }
-  .comment input{
+}
+.comment input {
     width: 95%;
     border-radius: 10px;
-  }
-.posttext{
-padding-bottom: 20px;
-height: 150px;
-width: 100%;
-float: right;
-border-radius: 12px;
 }
-.status{
-  padding-top: 20px;
-  margin: 40px 0 0px 0;
-  float: right;
-  height: 150px;
-  width: 75%;
-  border-radius: 12px;
+.posttext {
+    padding-bottom: 20px;
+    height: 150px;
+    width: 100%;
+    float: right;
+    border-radius: 12px;
 }
-.idclass{
-  position: relative;
-  margin-top: 20px;
-  float: left;
-  width: 20%;
-  height: 150px;
-  border-radius: 12px;
-  border-style: solid;
-  border-color: grey;
-  background-color: white;
+.postname {
+    padding-bottom: 20px;
+    height: 80px;
+    margin-bottom: 20pxs;
+    width: 100%;
+    float: right;
+    border-radius: 12px;
 }
-.idclass h5{
-  float: left;
-  
+.status {
+    padding-top: 20px;
+    margin: 40px 0 0px 0;
+    float: right;
+    height: 150px;
+    width: 75%;
+    border-radius: 12px;
+}
+.idclass {
+    position: relative;
+    margin-top: 20px;
+    float: left;
+    width: 20%;
+    height: 150px;
+    border-radius: 12px;
+    border-style: solid;
+    border-color: grey;
+    background-color: white;
+    padding-bottom: 20px;
+}
+.idclass h5 {
+    float: left;
+    padding: 1px;
 }
 .OpenMenuButton {
-  cursor: pointer;
-  font-size: 1.5rem;
-  font-weight: 900;
-  word-spacing: 140%;
-  letter-spacing: 4px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    font-weight: 900;
+    word-spacing: 140%;
+    letter-spacing: 4px;
 }
 .avatarnavbar {
     vertical-align: middle;
     width: 40px;
     height: 40px;
     border-radius: 50%;
-  }
+}
 .nameteacher {
-position:static;
-color: white;
-text-align: left;
-position: relative;
-justify-content: start;
+    position: static;
+    color: white;
+    text-align: left;
+    position: relative;
+    justify-content: start;
 
-text-overflow: ellipsis; 
-white-space: nowrap;
-overflow: hidden;
-font-size: 10;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 10;
 }
-.classcode{
-  font-size: 10;
-  float: left;
-  
+.classcode {
+    font-size: 10;
+    float: left;
 }
-.linkname{
-  color: white; 
-
+.linkname {
+    color: white;
 }
-.listfunct{
-  position: relative;
-  height: 30px;
-  width: 100px;
-  top: 100px;
-  float:  right;
+.listfunct {
+    position: relative;
+    height: 30px;
+    width: 100px;
+    top: 100px;
+    float: right;
 }
-.listfunct a{
-  color: bla; 
+.listfunct a {
+    color: bla;
 }
-  /* Drawer menu */
+/* Drawer menu */
 .sidenav {
-    height: 100%; 
-    width: 0; 
-    position: fixed; 
-    z-index: 1; 
-    top: 0; 
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
     left: 0;
-    background-color: white; 
-    overflow-x: hidden; 
-    padding-top: 60px; 
-    transition: 0.5s; 
-  }
-  /* The navigation menu links */
-  .sidenav a {
+    background-color: white;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.5s;
+}
+/* The navigation menu links */
+.sidenav a {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
     color: #818181;
     display: block;
     transition: 0.3s;
-  }
+}
 
-  .sidenav a:hover {
+.sidenav a:hover {
     color: #f1f1f1;
-  }
-  .sidenav .closebtn {
+}
+.sidenav .closebtn {
     position: absolute;
     top: 0;
     right: 25px;
     font-size: 36px;
     margin-left: 50px;
-  }
-  .navbar button{
-   width: 100px;
-   height: 100%;
-   background-color: white;
-   border-color: grey;
-  }
-  @media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
-  }
-  /* Dropdown Button */
+}
+.navbar button {
+    width: 100px;
+    height: 100%;
+    background-color: white;
+    border-color: grey;
+}
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+    .sidenav a {
+        font-size: 18px;
+    }
+}
+/* Dropdown Button */
 .dropbtn {
+    position: relative;
 
-  position: relative;
-  
-  align-content: flex-end;
-  background-color: white;
-  height: 40px;
-  width: 40px;
-  border: none;
-  cursor: pointer;
-  border-radius: 50%;
+    align-content: flex-end;
+    background-color: white;
+    height: 40px;
+    width: 40px;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
 }
 .dropdown {
-  position: relative;
-  float: right;
-  
+    position: relative;
+    float: right;
 }
 
 .dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: white;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  border-radius: 12px;
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 12px;
 }
-.idcls{
- padding: 10px;
-  float: left ;
+.idcls {
+    padding: 10px;
+    float: left;
 }
 
 /* Links inside the dropdown */
 .dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #ddd}
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
-.show {display:block;}
-div.input{
-  float:left;
-  padding-right: 100px;
+.show {
+    display: block;
 }
-div.fixedbox{
-  display: inline-block;
+div.input {
+    float: left;
+    padding-right: 100px;
 }
-div,label{
-  font-weight: bold;
+div.fixedbox {
+    display: inline-block;
 }
-tr{
-  font-weight: normal;
+div,
+label {
+    font-weight: bold;
 }
-#btn{
-  margin-right: 20px;
+tr {
+    font-weight: normal;
 }
-#font{
-  color: rgb(255, 0, 0);
+#btn {
+    margin-right: 20px;
+}
+#font {
+    color: rgb(255, 0, 0);
 }
