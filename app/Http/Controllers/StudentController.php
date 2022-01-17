@@ -32,6 +32,7 @@ class StudentController extends Controller
         $sv->email = $rq->email;
         $sv->accounttype = 3;
         $sv->created_at = date("Y-m-d");
+        $sv->hinhanh = "default.jpg";
         $sv->save();
         return redirect()->route('StudentsList');
     }
@@ -46,6 +47,27 @@ class StudentController extends Controller
     }
     public function xlSuaSV(SubmitRequest $rq,$id)
     {
+        $image_name = "";
+        if($rq->has('image'))
+        {
+            $image = $rq->image;
+            $image_name=$image->getClientoriginalName();
+            $i = explode('.', $image_name);
+            $explain =  $rq->id.".".$i[1];
+            $image->move(public_path('images'),$explain);
+            $sv = Account::find($id);
+            $sv->username = $rq->username;
+            $sv->password = Hash::make($rq->password);
+            $sv->hoten = $rq->hoten;
+            $sv->ngaysinh = $rq->ngaysinh;
+            $sv->diachi = $rq->diachi;
+            $sv->sdt = $rq->sdt;
+            $sv->email = $rq->email;
+            $sv->accounttype = 3;
+            $sv->updated_at = date("Y-m-d");
+            $sv->hinhanh = $image_name;
+            $sv->save();
+        }
         $sv = Account::find($id);
         $sv->username = $rq->username;
         $sv->password = Hash::make($rq->password);

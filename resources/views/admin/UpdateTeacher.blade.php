@@ -19,7 +19,7 @@
  <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
  @endsection
  @section('func')
- <form action="{{route('xlSuaGV',['id' => $dsGV->id])}}" method="POST">
+ <form action="{{route('xlSuaGV',['id' => $dsGV->id])}}" method="POST" enctype="multipart/form-data">
  @csrf
     <div class="">
         <div class="container">
