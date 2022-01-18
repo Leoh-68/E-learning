@@ -133,5 +133,8 @@ Route::post('/ForgotPassword', [DangNhapController::class,'xuLyMatKhau'])->name(
 Route::get('/Password/{id}', [DangNhapController::class,'Password'])->name('Password')->middleware('logout');
 Route::post('/Password/{id}', [DangNhapController::class,'taoMoiMatKhau'])->name('mat-khau-moi')->middleware('logout');
 
+Route::get('/Create', [DangNhapController::class,'taoTaiKhoan'])->name('Create')->middleware('logout');
+Route::post('/Create', [DangNhapController::class,'xlTaoTaiKhoan'])->name('xl-tao-tai-khoan')->middleware('logout');
+
 Route::get('/dangXuat', [DangNhapController::class,'dangXuat'])->name('dangXuat');
 Route::get('/Logout', [DangNhapController::class,'dangXuat'])->name('Logout');

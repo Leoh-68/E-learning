@@ -143,7 +143,7 @@
                             </form>
                         </div>
                         <div class="card-footer px-md-5"><small>Not registered?</small>
-                            <a href="#" class="small font-weight-bold">Create account</a></div>
+                            <a href="{{ route('xl-tao-tai-khoan') }}" class="small font-weight-bold">Create account</a></div>
                     </div>
                 </div>
             </div>

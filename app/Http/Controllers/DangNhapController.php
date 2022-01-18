@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\Account;
 use App\Http\Requests\DangNhapRequest;
 use App\Http\Requests\EmailRequest;
+use Carbon\Carbon;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 // Bạch: Ngộ thêm cả thư mục fonts(~E-learning\public\fonts) 
@@ -118,4 +119,42 @@ class DangNhapController extends Controller
         ->withCookie($cookie2)->withCookie($cookie3)->withCookie($cookie4)->withCookie($cookie5);  
     }
 
+    public function taoTaiKhoan(Request $request)
+    {
+        return view('Create');
+    }
+
+    public function xlTaoTaiKhoan(Request $request)
+    {
+        $dt = Carbon::now('Asia/Ho_Chi_Minh');
+        $user = Account::where('username',$request->username)->first();
+        $user2 = Account::where('email',$request->email)->first();
+        if(!empty($user) && !empty($user2)){
+            if($request->password!=$request->password2){
+                return redirect()->route('Create')->with('message', 'Password không khớp!!!');
+            }else if(strlen($request->phone)<10||strlen($request->phone)>10)
+            {
+                return redirect()->route('Create')->with('message', 'SDT không hợp lệ!!!'); 
+            }
+            // else if($request->day >= $dt)
+            // {
+            //     return redirect()->route('Create')->with('message1', 'Ngày lớn hơn ngày hiện tại!!!');
+            // }
+            else{
+             $account=new Account();
+             $account->hoten=$request->fullname;
+             $account->username=$request->username;
+             $account->email=$request->email;
+             $account->password=Hash::make($request->password);
+             $account->accounttype = 3;
+             $account->ngaysinh=$request->day;
+             $account->diachi=$request->address;
+             $account->sdt=$request->phone;
+             $account->save();
+             return redirect()->route('login')->with('title', 'Tạo tài khoản thành công');
+            }
+        }
+        return redirect()->route('Create')->with('message', 'Username hoặc email đã tồn tại!!!'); 
+    
+    }
 }
