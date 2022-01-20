@@ -17,19 +17,32 @@ class RedirectIfAuthenticated
      * @param  string|null  ...$guards
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next, ...$guards)
+    // public function handle(Request $request, Closure $next, ...$guards)
+    // {
+    //     $guards = empty($guards) ? [null] : $guards;
+
+    //     foreach ($guards as $guard) {
+    //         if (Auth::guard($guard)->check()){
+    //            return redirect('HomePage'); 
+    //         }
+    //     }
+    //     return $next($request);
+    // }
+    public function handle($request, Closure $next, $guard = null)
     {
-        $guards = empty($guards) ? [null] : $guards;
-
-        foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
-                return redirect('/HomePage');
+            if (Auth::guard($guard)->check()){
+                if (Auth::user()->accounttype == 1) {
+                    return redirect()->route('admin');
+                }
+                if (Auth::user()->accounttype == 3) {
+                    return redirect()->route('showClassStudent');
+                }
+                if (Auth::user()->accounttype == 2) {
+                    return redirect()->route('showClass');
+                }
             }
-        }
-
         return $next($request);
     }
-
     // public function handle($request, Closure $next, $guard = null) { 
     //     if (Auth::guard($guard)->check()) { 
     //     return redirect('/HomePage');
