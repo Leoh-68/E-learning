@@ -22,8 +22,8 @@
     <title>E-Learning</title>
 </head>
 <body>
-    <header>
-        <div id="mySidenav" class="sidenav">
+    <header class="fixed-top">
+            <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             @yield('MenuHomePage')
          </div>
@@ -51,9 +51,9 @@
             </li>
         </ul>
     </header>
-     </section>
-     
-     @yield('body')
+    <div class="">
+        @yield('body')
+    </div>
 </body>
 
 </html>

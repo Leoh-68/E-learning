@@ -62,14 +62,15 @@ class StudentListController extends Controller
 
     public function AddStudentAdmin(Request $req)
     {
-        $studentlis = new StudentList;
-        $allacc = Account::where([['email', '=', $req->textinput], ['deleted_at', '=', null]])->first();
-        if ($allacc == null) {
+        $studentlis= new StudentList;
+        $allacc=Account::where([['email' , '=' , $req->textinput],['deleted_at','=',null]])->first();
+        if($allacc==null)
+        {
             return view('admin/UnknowAccount');
-        }
-        $studentlis->stt = 1;
-        $studentlis->idaccount = $allacc->id;
-        $studentlis->idclassroom = $req->id;
+        } 
+        $studentlis->stt=1;
+        $studentlis->idaccount=$allacc->id;
+        $studentlis->idclassroom=$req->id;
         $studentlis->save();
         return redirect()->route('loadDSSV', ['id' => $req->id]);
     }

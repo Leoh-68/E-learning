@@ -23,7 +23,7 @@ class TeacherController extends Controller
     {
         $gv = new Account;
         $gv->username = $rq->username;
-        $gv->password = $rq->password;
+        $sv->password = Hash::make($rq->password);
         $gv->hoten = $rq->hoten;
         $gv->ngaysinh = $rq->ngaysinh;
         $gv->diachi = $rq->diachi;
@@ -47,7 +47,7 @@ class TeacherController extends Controller
     {
         $gv = Account::find($id);
         $gv->username = $rq->username;
-        $gv->password = $rq->password;
+        $gv->password = Hash::make($rq->password);
         $gv->hoten = $rq->hoten;
         $gv->ngaysinh = $rq->ngaysinh;
         $gv->diachi = $rq->diachi;
