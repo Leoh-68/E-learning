@@ -105,7 +105,7 @@ Route::post('/Admin/Admins/Update/{id}', [AdminController::class, 'xlSuaAd'])->n
 Route::get('/Admin/Admins/Delete/{id}', [AdminController::class, 'xoaAd'])->name('xoaAd');
 
 Route::get('/Admin/UnknowAccount/', function () {
-    return view('UnknowAccount');
+    return view('admin/UnknowAccount');
 })->name('error');
 
 Route::get('/Admin', function () {
@@ -127,3 +127,5 @@ Route::group(['prefix'=>'/', 'middleware' => ['auth','hocsinh']],function(){
 Route::get('/loadAccount',[AccountController::class,'loadAccount'])->name('loadAccount')->middleware('auth');
 Route::post('/updateAccount',[AccountController::class,'updateAccount'])->name('updateAccount')->middleware('auth');
 Route::get('/Logout', [DangNhapController::class,'dangXuat'])->name('Logout');
+
+Route::get('/Student/Waiting', [StudentController::class, 'listClassWaiting'])->name('classWaiting');

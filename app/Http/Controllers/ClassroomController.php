@@ -140,7 +140,7 @@ class ClassroomController extends Controller
     public function layDSSVTL(Request $req)
     {
         $lstStudent = Classroom::find($req->id)->dsStudentJoined;
-        return View('SCL', compact('lstStudent'));
+        return View('admin/SCL', compact('lstStudent'));
     }
     // Danh sách học sinh được cah61p nhận
     public function listStudent(Request $req)

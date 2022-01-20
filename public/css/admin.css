@@ -5,7 +5,7 @@
     font-family: "Poppins", sans-serif;
     box-sizing: border-box;
 }
-body {
+.bodyfixed {
     margin-top: 130px;
     background-color: white;
     min-height: 100vh;
@@ -98,6 +98,7 @@ header ul li a {
 }
 .classbody {
     padding: 0px;
+    margin-bottom: 20px;
 }
 .imgclass {
     height: 250px;
