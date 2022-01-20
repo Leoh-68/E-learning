@@ -39,7 +39,7 @@ class TeacherController extends Controller
         $dsGV = Account::find($id);
         if($dsGV == null||$dsGV->deleted_at != NULL)
         {
-            return view('UnknowAccount');
+            return view('admin/UnknowAccount');
         }
         return view('admin/UpdateTeacher',compact('dsGV'));
     }

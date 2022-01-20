@@ -11,7 +11,7 @@ class AdminController extends Controller
 {
     public function layDanhSachAd()
     {
-        $dsAD = Account::where([['accounttype','=','1'],['deleted_at','=',null]])->get();
+        $dsAD = Account::where([['username','!=',session()->get("username")],['accounttype','=','1'],['deleted_at','=',null]])->get();
         
         return view('admin/AdminsList',compact('dsAD'));   
     }
