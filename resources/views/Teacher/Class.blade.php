@@ -43,11 +43,11 @@
                 <div class="formpost">
                     <form action="{{ route('post', ['id' => $item->malop]) }}" method="POST">
                         @csrf
-                        <textarea type="text" class="postname" name="name" required></textarea>
+                        <textarea type="text" class="form-control"  name="name" required></textarea>
                         @error('name')
                             <span style="color: red">{{ $message }}</span>
                         @enderror
-                        <textarea type="text" class="posttext" name="post" required></textarea>
+                        <textarea type="text" class="form-control" rows="4" name="post" required></textarea>
                         @error('name')
                             <span style="color: red">{{ $message }}</span>
                         @enderror
@@ -66,7 +66,7 @@
 
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                  <a class="dropdown-item" href="#">Sửa</a>
+                                  <a class="dropdown-item" href="{{route('UpdatePost',['id'=>$var->id,'code'=>$item->id])}}">Sửa</a>
                                   <a class="dropdown-item" href="#">Xóa</a>
 
                                 </div>

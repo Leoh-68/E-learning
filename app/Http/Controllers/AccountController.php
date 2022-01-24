@@ -19,7 +19,7 @@ class AccountController extends Controller
     {
     }
     public function updateAccount(Request $request)
-    { 
+    {
         $request->validate([
             'hoten'=>'required',
             'diachi'=>'required|',
@@ -43,10 +43,9 @@ class AccountController extends Controller
     $account->sdt=$request->sdt;
     $account->email=$request->email;
     $account->save();
-    return redirect()->route('loadAccount');    
+    return redirect()->route('loadAccount');
 
     }
-
     public static function AccountLogin(){
         $account=Account::where('username',session('username'))->first();
         return $account;

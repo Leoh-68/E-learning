@@ -52,6 +52,8 @@ Route::post('/ListStudent/{id}', [StudentListController::class, 'AddStudent'])->
 Route::get('/ListStudent/Delete/{id}/{code}', [StudentListController::class, 'DeleteStudent'])->name('xoaSinhvien');
 Route::get('/Class/Post/{id}', [PostController::class, 'Post'])->name('post');
 Route::post('/Class/Post/{id}', [PostController::class, 'Post'])->name('post');
+Route::get('/Class/Post/Update/{code}/{id}', [PostController::class, 'updatePostShow'])->name('UpdatePost');
+Route::post('/Class/Post/Update/{code}/{id}', [PostController::class, 'updatePost'])->name('UpdatePostP');
 //Bạch
 Route::get('/', function () {
     return view('Login');
@@ -60,7 +62,6 @@ Route::get('/', function () {
 Route::get('/HomePage', function () {
     return view('HomePage');
 })->name('HomePage')->middleware('auth');
-
 Route::get('/Login', [DangNhapController::class, 'dangNhap'])->name('Login')->middleware('guest');
 Route::post('/Login', [DangNhapController::class, 'xuLyDangNhap'])->name('xl-dang-nhap');
 //Route::get('/mk', [DangNhapController::class,'update'])->name('Login'); mã hóa mật khẩu
