@@ -3,17 +3,18 @@
 <a href="{{route('showClass')}}">Lớp học</a>
 <a href="{{route('Logout')}}">Sủi</a>
 @endsection
+
+@section('body')
 @if(session()->has('success'))
-<div class="shadow mx-auto d-block alert alert-success" style="width: 500px">
+<div class="alert alert-success" style="width: 500px">
   {{ session()->get('success') }}
 </div>
 @endif
 @if(session()->has('fail'))
-<div class="shadow mx-auto d-block alert alert-danger" style="width: 500px">
+<div class="alert alert-danger" style="width: 500px">
   {{ session()->get('fail') }}
 </div>
 @endif
-@section('body')
     <div class="classbody">
         <div class="container">
             <a href="{{route('showSingleClass',['id'=>request()->id])}}">Quay lại</a>
@@ -43,7 +44,10 @@
                     <td>{{ $item->sdt }}</td>
                     <td>{{ $item->email }}</td>
                     <td>
-                    <a  onclick="return confirm('Bạn có chắc muốn xóa ?')" href="{{route('xoaSinhvien',['id'=>$item->id,'code'=>request()->id])}}">Xóa</a></td>
+                    <a  onclick="return confirm('Bạn có chắc muốn xóa ?')" href="{{route('xoaSinhvien',['id'=>$item->id,'code'=>request()->id])}}">Xóa</a>
+                    <a  href="{{route('acceptStudent',['account'=>$item->id,'class'=>request()->id])}}" >Chấp nhận</a>
+                    </td>
+                    
                 </tr>
                 @endforeach
             </tbody>

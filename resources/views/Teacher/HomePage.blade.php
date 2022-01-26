@@ -14,6 +14,16 @@ use app\Http\Controllers\ClassroomController;
 <a href="#" class="logo">E-Learning Project</a>   
 @endsection
 @section('body')
+@if(session()->has('success'))
+<div class="shadow mx-auto d-block alert alert-success" style="width: 500px">
+  {{ session()->get('success') }}
+</div>
+@endif
+@if(session()->has('fail'))
+<div class="shadow mx-auto d-block alert alert-danger" style="width: 500px">
+  {{ session()->get('fail') }}
+</div>
+@endif
 @foreach ($classlst as $var)
 @if ($var->deleted_at==null)
 <div class="column">
@@ -21,7 +31,7 @@ use app\Http\Controllers\ClassroomController;
     @php
      $id=$var->malop;   
     @endphp
-      <a class="linkname" style="text-decoration: none" href="Class/{{$id}}">
+      <a class="linkname" style="text-decoration: none" href="{{route('showSingleClass',['id'=>$id])}}">
         <h1 class="classname">{{$var->name}}</h1>
       <a>
     <h2 class="nameteacher">
@@ -33,7 +43,7 @@ use app\Http\Controllers\ClassroomController;
      <img src="{{ asset('images/3.png') }}" class="avatar" align="right">
     <div class="listfunct">
       <a href="{{route('updateSingleClassPost',['id' => $var->malop])}}">Sửa</a>
-      <a  onclick="return confirm('Bạn có chắc muốn xóa ?')" href="/deleteClass/{{$var->malop}}">Xóa</a>
+      <a  onclick="return confirm('Bạn có chắc muốn xóa ?')" href="{{route('deleteClassPost',['id' => $var->malop])}}">Xóa</a>
     </div>
    </div> 
 </div>

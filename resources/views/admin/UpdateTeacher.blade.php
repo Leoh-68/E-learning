@@ -50,6 +50,7 @@
                         <label>Họ tên</label>
                         <br>
                         <input type="text" name="hoten" value="{{$dsGV->hoten}}" />
+                        <br>
                         @error('hoten')
                             <span id="font">{{$message}}</span>
                             @enderror
@@ -58,6 +59,7 @@
                         <label>Ngày sinh</label>
                         <br>
                         <input type="date" name="ngaysinh" value="{{$dsGV->ngaysinh}}" />
+                        <br>
                         @error('ngaysinh')
                             <span id="font">{{$message}}</span>
                             @enderror
@@ -74,6 +76,7 @@
                         <label>Số điện thoại</label>
                         <br>
                         <input type="text" name="sdt" value="{{$dsGV->sdt}}" />
+                        <br>
                         @error('sdt')
                             <span id="font">{{$message}}</span>
                             @enderror
@@ -82,6 +85,7 @@
                         <label>Email</label>
                         <br>
                         <input type="text" name="email" value="{{$dsGV->email}}" />
+                        <br>
                         @error('email')
                             <span id="font">{{$message}}</span>
                         @enderror

@@ -36,8 +36,8 @@ class DangNhapController extends Controller
     {
         $validated = $request->validated();
         if (Auth::attempt(['username' =>$request->username, 'password' =>  $request->password])) { 
-            Cookie::queue('username',$request->username,3600);
-            Cookie::queue('password',$request->password,3600);
+            session(['username' => $request->username]);
+            session(['password' => $request->username]);
             if(Auth::user()->accounttype==2) {
                 return redirect()->route('showClass');
             } else if(Auth::user()->accounttype==1) {
@@ -108,15 +108,15 @@ class DangNhapController extends Controller
     //Cái này là đăng xuất
     public function dangXuat()
     {
-        $cookie = Cookie::forget('username');
-        $cookiep = Cookie::forget('password');
-        $cookie2 = Cookie::forget('ajs_anonymous_id');
-        $cookie3 = Cookie::forget('XSRF-TOKEN');
-        $cookie4 = Cookie::forget('laravel_session');
-        $cookie5 = Cookie::forget('1P_JAR');
         Auth::logout();
-        return redirect()->route('wellcome')->withCookie($cookie)->withCookie($cookiep)
-        ->withCookie($cookie2)->withCookie($cookie3)->withCookie($cookie4)->withCookie($cookie5);  
+        $session = session()->forget('username');
+        $session1 = session()->forget('password');
+        $session2 = session()->forget('ajs_anonymous_id');
+        $session3 = session()->forget('XSRF-TOKEN');
+        $session4 = session()->forget('laravel_session');
+        $session5 = session()->forget('1P_JAR');
+        return redirect()->route('Wellcome')->withSession($session)->withSession($session1)
+        ->withSession($session2)->withSession($session3)->withSession($session4)->withSession($session5);  
     }
 
     public function taoTaiKhoan(Request $request)

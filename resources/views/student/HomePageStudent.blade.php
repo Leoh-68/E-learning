@@ -14,6 +14,7 @@ use app\Http\Controllers\ClassroomController;
 {{--  --}}
 @section('MenuHomePage')
 <a href="{{route('showClassStudent')}}">Lớp học</a>
+<a href="{{route('classWaiting')}}">Phòng chờ</a>
 @endsection
 
 @section('body')

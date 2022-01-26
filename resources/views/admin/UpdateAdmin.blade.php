@@ -19,18 +19,19 @@
  <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
  @endsection
  @section('func')
- <form action="{{route('xlSuaSV',['id' => $dsSV->id])}}" method="POST">
+ <form action="{{route('xlSuaAd',['id' => $dsAD->id])}}" method="POST">
  @csrf
     <div class="">
         <div class="container">
-            <a class="btn btn-primary" href="{{route('StudentsList')}}"><i class="fa fa-arrow-alt-circle-left"></i> Quay lại</a>
+            <a class="btn btn-primary" href="{{route('AdminsList')}}"><i class="fa fa-arrow-alt-circle-left"></i> Quay lại</a>
             <div>
                 <br>
                 <div>
                     <div class="input">
                         <label class="font">Username</label>
                         <br>
-                        <input type="text" name="username" value="{{$dsSV->username}}"/>
+                        <input type="text" name="username" value="{{$dsAD->username}}"/>
+                        <br>
                         @error('username')
                             <span id="font">{{$message}}</span>
                         @enderror
@@ -38,7 +39,8 @@
                     <div class="fixedbox">
                         <label>Password</label>
                         <br>
-                        <input type="password" name="password" value="{{$dsSV->password}}" />
+                        <input type="password" name="password" value="{{$dsAD->password}}" />
+                        <br>
                         @error('password')
                             <span id="font">{{$message}}</span>
                             @enderror
@@ -49,7 +51,8 @@
                     <div class="input">
                         <label>Họ tên</label>
                         <br>
-                        <input type="text" name="hoten" value="{{$dsSV->hoten}}" />
+                        <input type="text" name="hoten" value="{{$dsAD->hoten}}" />
+                        <br>
                         @error('hoten')
                             <span id="font">{{$message}}</span>
                             @enderror
@@ -57,7 +60,8 @@
                     <div class="fixedbox">
                         <label>Ngày sinh</label>
                         <br>
-                        <input type="date" name="ngaysinh" value="{{$dsSV->ngaysinh}}" />
+                        <input type="date" name="ngaysinh" value="{{$dsAD->ngaysinh}}" />
+                        <br>
                         @error('ngaysinh')
                             <span id="font">{{$message}}</span>
                             @enderror
@@ -68,12 +72,13 @@
                     <div class="input">
                         <label>Địa chỉ</label>
                         <br>
-                        <input type="text" name="diachi" value="{{$dsSV->diachi}}" />
+                        <input type="text" name="diachi" value="{{$dsAD->diachi}}" />
                     </div>
                     <div class="input">
                         <label>Số điện thoại</label>
                         <br>
-                        <input type="text" name="sdt" value="{{$dsSV->sdt}}" />
+                        <input type="text" name="sdt" value="{{$dsAD->sdt}}" />
+                        <br>
                         @error('sdt')
                             <span id="font">{{$message}}</span>
                             @enderror
@@ -81,7 +86,8 @@
                     <div class="fixedbox">
                         <label>Email</label>
                         <br>
-                        <input type="text" name="email" value="{{$dsSV->email}}" />
+                        <input type="text" name="email" value="{{$dsAD->email}}" />
+                        <br>
                         @error('email')
                             <span id="font">{{$message}}</span>
                         @enderror

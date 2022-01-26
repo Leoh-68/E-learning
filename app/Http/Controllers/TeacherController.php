@@ -13,17 +13,17 @@ class TeacherController extends Controller
     {
         $dsGV = Account::where([['accounttype','=','2'],['deleted_at','=',null]])->get();
 
-        return view('TeachersList',compact('dsGV'));   
+        return view('admin/TeachersList',compact('dsGV'));   
     }
     public function themGV()
     {
-        return view('AddTeacher');
+        return view('admin/AddTeacher');
     }
     public function xlThemGV(SubmitRequest $rq)
     {
         $gv = new Account;
         $gv->username = $rq->username;
-        $gv->password = $rq->password;
+        $sv->password = Hash::make($rq->password);
         $gv->hoten = $rq->hoten;
         $gv->ngaysinh = $rq->ngaysinh;
         $gv->diachi = $rq->diachi;
@@ -39,15 +39,15 @@ class TeacherController extends Controller
         $dsGV = Account::find($id);
         if($dsGV == null||$dsGV->deleted_at != NULL)
         {
-            return view('UnknowAccount');
+            return view('admin/UnknowAccount');
         }
-        return view('UpdateTeacher',compact('dsGV'));
+        return view('admin/UpdateTeacher',compact('dsGV'));
     }
     public function xlSuaGV(SubmitRequest $rq,$id)
     {
         $gv = Account::find($id);
         $gv->username = $rq->username;
-        $gv->password = $rq->password;
+        $gv->password = Hash::make($rq->password);
         $gv->hoten = $rq->hoten;
         $gv->ngaysinh = $rq->ngaysinh;
         $gv->diachi = $rq->diachi;
@@ -63,7 +63,7 @@ class TeacherController extends Controller
         $dsGV = Account::find($id);
         if($dsGV == null||$dsGV->deleted_at != NULL)
         {
-            return view('UnknowAccount');
+            return view('admin/UnknowAccount');
         }
         $dsGV->deleted_at = date("Y-m-d");
         $dsGV->save();

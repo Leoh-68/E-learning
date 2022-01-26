@@ -4,22 +4,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Account;
+use App\Http\Requests\SubmitRequest;
 use App\Models\Classroom;
 use App\Models\StudentList;
 use Illuminate\Support\Facades\Cookie;
-use App\Http\Requests\SubmitRequest;
-
 class StudentController extends Controller
 {
     public function layDanhSachSV()
     {
         $dsSV = Account::where([['accounttype','=','3'],['deleted_at','=',null]])->get();
         
-        return view('StudentsList',compact('dsSV'));   
+        return view('admin/StudentsList',compact('dsSV'));   
     }
     public function themSV()
     {
-        return view('AddStudent');
+        return view('admin/AddStudent');
     }
     public function xlThemSV(SubmitRequest $rq)
     {
@@ -41,9 +40,9 @@ class StudentController extends Controller
         $dsSV = Account::find($id);
         if($dsSV == null||$dsSV->deleted_at != NULL)
         {
-            return view('UnknowAccount');
+            return view('admin/UnknowAccount');
         }
-        return view('UpdateStudent',compact('dsSV'));
+        return view('admin/UpdateStudent',compact('dsSV'));
     }
     public function xlSuaSV(SubmitRequest $rq,$id)
     {
@@ -65,17 +64,20 @@ class StudentController extends Controller
         $dsSV = Account::find($id);
         if($dsSV == null||$dsSV->deleted_at != NULL)
         {
-            return view('UnknowAccount');
+            return view('admin/UnknowAccount');
         }
         $dsSV->deleted_at = date("Y-m-d");
         $dsSV->save();
         return redirect()->route('StudentsList');
     }
 
-    public function showClassStudent(){
-        $account=Account::where('username',Cookie::get('username'))->first();
+    public function showClassStudent(Request $request){
+        $account=Account::where('username',$request->session()->get('username'))->first();
         $id=$account->id;
-        $classlst=Account::find($id)->lstClassJoined;
+        $lst=Account::find($id)->lstClassJoined;
+        $classlst = $lst->reject(function ($value, $key) {
+            return $value->pivot->waitingqueue ==0;
+        });
         return View('student/HomePageStudent',compact('classlst'));
       }
 
@@ -88,23 +90,42 @@ class StudentController extends Controller
           'classcode.min'=>'Mã lớp phải có :min ký tự',
           'classcode.max'=>'Mã lớp phải có :max ký tự'
         ]);
-        $account=Account::where('username',Cookie::get('username'))->first();
+        $account=Account::where('username',session('username'))->first();
 
         $Class=Classroom::all();
         $listClass=Classroom::where('malop',$req->classcode)->first();
+        if($listClass==null||$listClass->deleted_at!=null)
+        {
+                Cookie::queue('error',"Lớp không tồn tại",0.09);
+            return redirect()->route('AddClassStudent');
+        }
         $IdExs= StudentList::all();
         foreach($IdExs as $var)
         {
             if($var->idaccount == $account->id && $var->idclassroom==$listClass->id)
             {
-                return 0;
+
+                Cookie::queue('error',"Lớp đã tồn tại",0.09);
+                return redirect()->route('AddClassStudent');
             }      
         }
         $class= new StudentList;
         $class->idaccount=$account->id;
         $class->idclassroom=$listClass->id;
+        $class->waitingqueue=0;
         $class->stt=1;
         $class->save();
         return redirect()->route('showClassStudent');
+      }
+
+      public function listClassWaiting()
+      {
+        $account=Account::where('username',session()->get('username'))->first();
+        $lst= Account::find($account->id)->lstClassJoined;
+        $lstStudent = $lst->reject(function ($value, $key) {
+          return $value->pivot->waitingqueue ==1;
+      });
+        return View('Student/waitingRoomStudent',compact('lstStudent'));
+     
       }
 }
