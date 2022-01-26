@@ -7,6 +7,7 @@
 <div class="alert alert-success" style="width: 500px">
   {{ session()->get('success') }}
 </div>
+
 @endif
 @if(session()->has('fail'))
 <div class="alert alert-danger" style="width: 500px">
@@ -24,7 +25,7 @@
                 <span style="color: red">{{Cookie::get('error')}}</span>
             </form>
             <table class="table">
-            <thead>     
+            <thead>
                 <tr>
                     <th>Họ tên</th>
                     <th>Ngày sinh</th>
@@ -50,5 +51,5 @@
         </table>
         </div>
       </div>
-   
+
 @endsection

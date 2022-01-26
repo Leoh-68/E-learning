@@ -6,6 +6,7 @@
 <a href="{{route('showClass')}}">Lớp học</a>
 <a href="{{route('Logout')}}">Sủi</a>
 @endsection
+
  @section('library')
  <meta charset="utf-8">
  <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,14 +36,14 @@
     @enderror
   </div>
   <div class="form-group">
-      <label for="">Mã lớp</label> 
+      <label for="">Mã lớp</label>
       <input type="text" class="form-control"  value="{{ClassroomController::randomCode()}}"  placeholder="Enter class code" name="classcode">
       @error('classcode')
       <span style="color: red">{{$message}}</span>
-  @enderror
+      @enderror
   </div>
   <div class="form-group">
-    <label for="">Hình ảnh</label> 
+    <label for="">Hình ảnh</label>
     <input type="file" class="form-control"  name="image">
     @error('classcode')
     <span style="color: red">{{$message}}</span>

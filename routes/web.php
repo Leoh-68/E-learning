@@ -8,6 +8,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\StudentListController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 
 // Khánh
@@ -50,10 +51,13 @@ Route::get('/AcceptStudent/{class}/{account}', [StudentListController::class, 'a
 Route::get('/ListStudent', [ClassroomController::class, 'listStudent']);
 Route::post('/ListStudent/{id}', [StudentListController::class, 'AddStudent'])->name('dsSinhVienPost');
 Route::get('/ListStudent/Delete/{id}/{code}', [StudentListController::class, 'DeleteStudent'])->name('xoaSinhvien');
-Route::get('/Class/Post/{id}', [PostController::class, 'Post'])->name('post');
-Route::post('/Class/Post/{id}', [PostController::class, 'Post'])->name('post');
+Route::get('/Class/Post/{id}', [PostController::class, 'post'])->name('post');
+Route::post('/Class/Post/{id}', [PostController::class, 'post'])->name('post');
+Route::get('/Class/PostShow/{id}', [PostController::class, 'showPost'])->name('ShowPost');
 Route::get('/Class/Post/Update/{code}/{id}', [PostController::class, 'updatePostShow'])->name('UpdatePost');
 Route::post('/Class/Post/Update/{code}/{id}', [PostController::class, 'updatePost'])->name('UpdatePostP');
+Route::get('/Class/Post/View/{id}', [PostController::class,'singlePost'])->name('ViewPost');
+Route::get('/Class/Post/Comment/{idaccount}/{idpost}', [CommentController::class,'addComment'])->name('AddComment');
 //Bạch
 Route::get('/', function () {
     return view('Login');
@@ -113,3 +117,7 @@ Route::post('Student/AddClass', [StudentController::class, 'addClassStudent'])->
 Route::get('/logout', [DangNhapController::class, 'dangXuat'])->name('Logout');
 
 Route::get('/Student/Waiting', [StudentController::class, 'listClassWaiting'])->name('classWaiting');
+
+Route::get('/TestRoute', [PostController::class, 'attachmentfromID'])->name("TestRoute");
+
+

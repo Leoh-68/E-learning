@@ -48,9 +48,8 @@ class ClassroomController extends Controller
         // Upload ảnh
         if ($req->has('image')) {
             $image = $req->image;
-            dd($image);
             $image_name = $image->getClientoriginalName();
-            $image->move(public_path('images'), $image_name);
+            $image->move(public_path('images/FileUpload'), $image_name);
         }
         $listClass = Classroom::where('malop', $req->classcode)->first();
         // if($listClass!=null )
@@ -163,6 +162,12 @@ class ClassroomController extends Controller
         $lstStudent = $lst->reject(function ($value, $key) {
             return $value->pivot->waitingqueue == 1;
         });
-        return View('Teacher/waitingroom  ', compact('lstStudent'));
+        return View('Teacher/waitingroom', compact('lstStudent'));
     }
+    //Chech thông tin phiên bản php
+    public function phpinfo()
+    {
+        return phpinfo();
+    }
+
 }

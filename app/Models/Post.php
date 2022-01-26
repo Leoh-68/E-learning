@@ -9,4 +9,12 @@ class Post extends Model
 {
     use HasFactory;
     protected $table='post';
+    public function dsTep()
+    {
+     return $this->belongsTo('App\Models\Attachment','id','idpost');
+    }
+    public function dsComment()
+    {
+     return $this->belongsTo('App\Models\Comment','idpost','id');
+    }
 }
