@@ -59,6 +59,7 @@ class Kernel extends HttpKernel
         'giangvien' => \App\Http\Middleware\GiangVienAccess::class,
         'hocsinh' => \App\Http\Middleware\HocSinhAccess::class,
         'logout' => \App\Http\Middleware\CheckLogout::class,
+        'login' => \App\Http\Middleware\CheckLogin::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,

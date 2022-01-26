@@ -98,7 +98,9 @@
                                     <input class="input100 @error('password') is-invalid @enderror " type="password" name="password" value="{{ old('password') }}" required>
                                 </div>
                                 @error('password')				
-                                    <span class="alert alert-danger">>{{ $message }}</span>
+                                    <span class="alert alert-danger">>{{ $message }}
+									<button type="button" class="close" data-dismiss="alert">x</button>
+									</span>
                                 @enderror
                             </div>
 									<br>
@@ -115,7 +117,9 @@
                                     <input class="input100 @error('password') is-invalid @enderror " type="password" name="password2" value="{{ old('password2') }}" required>
                                 </div>
                                 @error('password2')				
-                                    <span class="alert alert-danger">>{{ $message }}</span>
+                                    <span class="alert alert-danger">>{{ $message }}
+									<button type="button" class="close" data-dismiss="alert">x</button>
+									</span>
                                 @enderror
                             </div>
                                 <div class="mt-4">

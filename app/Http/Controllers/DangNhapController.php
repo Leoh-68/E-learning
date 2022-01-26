@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\Account;
 use App\Http\Requests\DangNhapRequest;
 use App\Http\Requests\EmailRequest;
+use Carbon\Carbon;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 // Bạch: Ngộ thêm cả thư mục fonts(~E-learning\public\fonts) 
@@ -38,7 +39,6 @@ class DangNhapController extends Controller
             session(['username' => $request->username]);
             session(['password' => $request->username]);
             if(Auth::user()->accounttype==2) {
-                // dd($request);
                 return redirect()->route('showClass');
             } else if(Auth::user()->accounttype==1) {
                 return redirect()->route('Admin');
@@ -46,9 +46,7 @@ class DangNhapController extends Controller
                 return  redirect()->route('showClassStudent');
             }      
         } 
-        return redirect()->route('login')->with('Text','Username hoặc password không tồn tại');
-             
-            
+        return redirect()->route('login')->with('Text','Username hoặc password không tồn tại');         
     }
 
     public function forgotPassword()
@@ -111,14 +109,52 @@ class DangNhapController extends Controller
     public function dangXuat()
     {
         Auth::logout();
-        $cookie = session()->forget('username');
-        $cookiep = session()->forget('password');
-        $cookie2 = session()->forget('ajs_anonymous_id');
-        $cookie3 = session()->forget('XSRF-TOKEN');
-        $cookie4 = session()->forget('laravel_session');
-        $cookie5 = session()->forget('1P_JAR');
-        return redirect()->route('Wellcome')->withSession($cookie)->withSession($cookiep)
-        ->withSession($cookie2)->withSession($cookie3)->withSession($cookie4)->withSession($cookie5);  
+        $session = session()->forget('username');
+        $session1 = session()->forget('password');
+        $session2 = session()->forget('ajs_anonymous_id');
+        $session3 = session()->forget('XSRF-TOKEN');
+        $session4 = session()->forget('laravel_session');
+        $session5 = session()->forget('1P_JAR');
+        return redirect()->route('Wellcome')->withSession($session)->withSession($session1)
+        ->withSession($session2)->withSession($session3)->withSession($session4)->withSession($session5);  
     }
 
+    public function taoTaiKhoan(Request $request)
+    {
+        return view('Create');
+    }
+
+    public function xlTaoTaiKhoan(Request $request)
+    {
+        $dt = Carbon::now('Asia/Ho_Chi_Minh');
+        $user = Account::where('username',$request->username)->first();
+        $user2 = Account::where('email',$request->email)->first();
+        if(!empty($user) && !empty($user2)){
+            if($request->password!=$request->password2){
+                return redirect()->route('Create')->with('message', 'Password không khớp!!!');
+            }else if(strlen($request->phone)<10||strlen($request->phone)>10)
+            {
+                return redirect()->route('Create')->with('message', 'SDT không hợp lệ!!!'); 
+            }
+            // else if($request->day >= $dt)
+            // {
+            //     return redirect()->route('Create')->with('message1', 'Ngày lớn hơn ngày hiện tại!!!');
+            // }
+            else{
+             $account=new Account();
+             $account->hoten=$request->fullname;
+             $account->username=$request->username;
+             $account->email=$request->email;
+             $account->password=Hash::make($request->password);
+             $account->accounttype = 3;
+             $account->ngaysinh=$request->day;
+             $account->diachi=$request->address;
+             $account->sdt=$request->phone;
+             $account->save();
+             return redirect()->route('login')->with('title', 'Tạo tài khoản thành công');
+            }
+        }
+        return redirect()->route('Create')->with('message', 'Username hoặc email đã tồn tại!!!'); 
+    
+    }
 }

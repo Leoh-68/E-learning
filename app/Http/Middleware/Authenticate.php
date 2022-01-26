@@ -15,7 +15,7 @@ class Authenticate extends Middleware
     {
         if (Auth::check()==false) {
             return redirect()->route('login');
-        }     
+        }          
         
     }
 }
