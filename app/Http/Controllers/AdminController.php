@@ -44,6 +44,7 @@ class AdminController extends Controller
         $ad->email = $rq->email;
         $ad->accounttype = 1;
         $ad->created_at = date("Y-m-d");
+        $ad->hinhanh="default.jpg";
         $ad->save();
         return redirect()->route('AdminsList');
     }
@@ -58,6 +59,27 @@ class AdminController extends Controller
     }
     public function xlSuaAd(SubmitRequest $rq,$id)
     {
+        $image_name = "";
+        if($rq->has('image'))
+        {
+            $image = $rq->image;
+            $image_name=$image->getClientoriginalName();
+            $i = explode('.', $image_name);
+            $explain =  $rq->id.".".$i[1];
+            $image->move(public_path('images'),$explain);
+            $ad = Account::find($id);
+            $ad->username = $rq->username;
+            $ad->password = Hash::make($rq->password);
+            $ad->hoten = $rq->hoten;
+            $ad->ngaysinh = $rq->ngaysinh;
+            $ad->diachi = $rq->diachi;
+            $ad->sdt = $rq->sdt;
+            $ad->email = $rq->email;
+            $ad->accounttype = 1;
+            $ad->updated_at = date("Y-m-d");
+            $ad->hinhanh = $image_name;
+            $ad->save();
+        }
         $ad = Account::find($id);
         $ad->username = $rq->username;
         $ad->password = Hash::make($rq->password);

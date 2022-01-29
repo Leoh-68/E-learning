@@ -21,7 +21,7 @@
     @yield('library')
     @yield('title')
 </head>
-<body class="bodyfixed">
+<body class="bodyadmin">
     <header>
           <span></span>
         <a href="#" class="logo">E-Learning Project</a>
@@ -35,7 +35,6 @@
             </li>
         </ul>
     </header>
-     </section>
     <div class="classbody">
         <div class="container">
             <a id="btn" class="btn btn-primary" href="{{route('TeachersList')}}">Quản lý Giảng viên</a>

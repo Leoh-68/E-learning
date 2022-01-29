@@ -115,7 +115,7 @@ Route::post('/updateAccount',[AccountController::class,'updateAccount'])->name('
 //Bạch
 Route::get('/', function () {
     return view('/Wellcome');
-})->name('wellcome')->middleware('logout');
+})->name('Wellcome')->middleware('logout');
 
 // Route::get('/Login', [DangNhapController::class,'dangNhap'])->name('Login')->middleware('logout');
 Route::get('/login', [DangNhapController::class,'dangNhap'])->name('login')->middleware('logout');

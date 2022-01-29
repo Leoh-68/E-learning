@@ -19,7 +19,7 @@
  <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
  @endsection
  @section('func')
- <form action="{{route('xlSuaSV',['id' => $dsSV->id])}}" method="POST">
+ <form action="{{route('xlSuaSV',['id' => $dsSV->id])}}" method="POST" enctype="multipart/form-data">
  @csrf
     <div class="">
         <div class="container">
@@ -74,7 +74,7 @@
                         <br>
                         <input type="text" name="diachi" value="{{$dsSV->diachi}}" />
                     </div>
-                    <div class="input">
+                    <div class="fixedbox">
                         <label>Số điện thoại</label>
                         <br>
                         <input type="text" name="sdt" value="{{$dsSV->sdt}}" />
@@ -83,7 +83,10 @@
                             <span id="font">{{$message}}</span>
                             @enderror
                     </div>
-                    <div class="fixedbox">
+                </div>
+                <br>
+                <div>
+                    <div class="input">
                         <label>Email</label>
                         <br>
                         <input type="text" name="email" value="{{$dsSV->email}}" />
@@ -92,8 +95,13 @@
                             <span id="font">{{$message}}</span>
                         @enderror
                     </div>
+                    <div class="fixedbox">
+                        <label>Hình ảnh</label>
+                        <br>
+                        <input type="file" name="image">
+                        <br>
+                    </div>
                 </div>
-                
                 <br>
                 <button class="btn btn-primary" type = "submit">Sửa <i class="fa fa-check"></i></button>
             </div>

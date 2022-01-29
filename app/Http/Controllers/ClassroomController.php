@@ -70,6 +70,7 @@ class ClassroomController extends Controller
         $class->idaccount = $account->id;
         $class->name = $req->classname;
         $class->malop = $req->classcode;
+        $class->hinhanh = $image_name;
         $class->save();
         session()->flash('success', 'Thêm thành công');
         return redirect()->route('showClass');
@@ -136,33 +137,32 @@ class ClassroomController extends Controller
         $account = Account::where('id', $id)->first();
         return $account->hoten;
     }
-  public function layDSSVTL (Request $req)
-  {
-    $lstStudent= Classroom::where('id',$req->id)->first()->dsStudentJoined;
-    return View('admin/SCL',compact('lstStudent'));
-  }
-  // Danh sách học sinh được cah61p nhận
-  public function listStudent(Request $req)
-  {
-    $student=Classroom::where('malop',$req->id)->first();
-    $lst= Classroom::find($student->id)->dsStudentJoined;
-    // Truy cập thuộc tính bảng trung gian
-    $lstStudent = $lst->reject(function ($value, $key) {
-      return $value->pivot->waitingqueue ==0;
-  });
-    return View('Teacher/ListStudent',compact('lstStudent'));
-  }
-  // Danh sách học sinh đang chờ
-  public function listStudentWaiting(Request $req)
-  {
-    $student=Classroom::where('malop',$req->id)->first();
-    $lst= Classroom::find($student->id)->dsStudentJoined;
-    // Truy cập thuộc tính bảng trung gian
-    $lstStudent = $lst->reject(function ($value, $key) {
-      return $value->pivot->waitingqueue ==1;
-  });
-   
-    return View('Teacher/waitingroom  ',compact('lstStudent'));
- 
-  }
+
+    public function layDSSVTL(Request $req)
+    {
+        $lstStudent = Classroom::find($req->id)->dsStudentJoined;
+        return View('SCL', compact('lstStudent'));
+    }
+    // Danh sách học sinh được cah61p nhận
+    public function listStudent(Request $req)
+    {
+        $student = Classroom::where('malop', $req->id)->first();
+        $lst = Classroom::find($student->id)->dsStudentJoined;
+        // Truy cập thuộc tính bảng trung gian
+        $lstStudent = $lst->reject(function ($value, $key) {
+            return $value->pivot->waitingqueue == 0;
+        });
+        return View('Teacher/ListStudent', compact('lstStudent'));
+    }
+    // Danh sách học sinh đang chờ
+    public function listStudentWaiting(Request $req)
+    {
+        $student = Classroom::where('malop', $req->id)->first();
+        $lst = Classroom::find($student->id)->dsStudentJoined;
+        // Truy cập thuộc tính bảng trung gian
+        $lstStudent = $lst->reject(function ($value, $key) {
+            return $value->pivot->waitingqueue == 1;
+        });
+        return View('Teacher/waitingroom  ', compact('lstStudent'));
+    }
 }
