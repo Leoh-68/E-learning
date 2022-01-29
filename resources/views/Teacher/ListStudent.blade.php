@@ -4,13 +4,13 @@
 <a href="{{route('Logout')}}">Sủi</a>
 @endsection
 @if(session()->has('success'))
-<div class="alert alert-success" style="width: 500px">
+<div class="shadow mx-auto d-block alert alert-success" style="width: 500px">
   {{ session()->get('success') }}
 </div>
 
 @endif
 @if(session()->has('fail'))
-<div class="alert alert-danger" style="width: 500px">
+<div class="shadow mx-auto d-block alert alert-danger" style="width: 500px">
   {{ session()->get('fail') }}
 </div>
 @endif

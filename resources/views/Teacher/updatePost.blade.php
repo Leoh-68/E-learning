@@ -30,17 +30,24 @@
   <div class="form-group">
     <label for="">Tên bài đăng</label>
     <input type="text" class="form-control"  value="{{$post->ten}}"  placeholder="Enter class code" name="name">
-    @error('classname')
+    @error('name')
         <span style="color: red">{{$message}}</span>
     @enderror
   </div>
   <div class="form-group">
       <label for="">Nội dung</label>
       <textarea class="form-control"  rows="10" name='mota'>{{$post->mota}}</textarea>
-      @error('classcode')
+      @error('mota')
       <span style="color: red">{{$message}}</span>
   @enderror
   </div>
+  <div class="form-group">
+    <label for="">Tệp đính kèm</label>
+    <input class="form-control"  type="file" rows="10" name='image'>
+    @error('image')
+    <span style="color: red">{{$message}}</span>
+@enderror
+</div>
   <button type="submit" class="btn btn-primary" style="margin: 20px 0px 0px">Submit</button>
 </form>
 </div>

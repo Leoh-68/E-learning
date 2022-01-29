@@ -86,7 +86,6 @@ $account= App\Http\Controllers\AccountController::AccountLogin();
             </form>
             @foreach ($cmt as $res)
             <div>
-
                 <div style="float: left">
                     <img src="{{ asset('images/3.jpg') }}" alt="Avatar" class="avatarnavbar">
                 </div>
@@ -96,7 +95,22 @@ $account= App\Http\Controllers\AccountController::AccountLogin();
                     </span><br>
                     <span>{{$res->comment}}</span><br>
                 </div>
-            </div><br><br>
+            </div>
+            <form action="#">
+                <div class="dropdown" style="padding-right: 20px">
+                    <button class="btn btn-basic dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item"
+                            href="{{route('UpdateCommentG',['idcomment'=>$res->id])}}">Sửa</a>
+                        <a class="dropdown-item" href="{{route('DeleteCommentP',['idcomment'=>$res->id])}}">Xóa</a>
+                    </div>
+                </div>
+            </form>
+
+            <br>
+            <br>
             @endforeach
             </div>
 

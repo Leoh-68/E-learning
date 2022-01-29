@@ -22,30 +22,38 @@
     <title>E-Learning</title>
 </head>
 <body>
-    <header>
-        <div id="mySidenav" class="sidenav">
+    <header class="fixed-top">
+            <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             @yield('MenuHomePage')
          </div>
           <span onclick="openNav()"><i class="fas fa-stream fa-2x"></i></span>
         <a href="#" class="logo">E-Learning Project</a>
         <ul>
+        @php
+	    $message = Session::get('message');
+	    if($message){
+		    echo '<span class="alert alert-danger">'.$message.'
+            <button type="button" class="close" data-dismiss="alert">x</button>
+            </span>';
+		    Session::put('message',null);
+	    }
+	    @endphp
             @yield('AddButton')
-            @php
-                  $account= App\Http\Controllers\AccountController::AccountLogin();
-                  echo $account->hoten;
-            @endphp
+
+            {{Auth::user()->hoten;}}
             <li>
                 <a href="{{route('loadAccount')}}"><img src="{{ asset('images/3.jpg') }}" alt="Avatar" class="avatarnavbar"></a>
             </li>
-            <li>
+             <a href="{{route('dangXuat')}}"><img src="{{ asset('images/logout.png') }}" alt="Avatar" class="avatarnavbar"></a>
+             <li>
+
             </li>
         </ul>
     </header>
-     <section class="banner">
-     </section>
-
-     @yield('body')
+    <div class="">
+        @yield('body')
+    </div>
 </body>
 
 </html>

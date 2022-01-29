@@ -79,8 +79,8 @@ class ClassroomController extends Controller
     {
         $class = Classroom::where('malop', '=', $req->id)->get();
         $idclass = Classroom::where('malop', '=', $req->id)->first();
-        $post=Post::orderBy('created_at', 'desc')->where('idclassroom',$idclass->id)->get();
-        return View('Teacher/Class', compact('class','post'));
+        $post = Post::orderBy('created_at', 'desc')->where('idclassroom', $idclass->id)->get();
+        return View('Teacher/Class', compact('class', 'post'));
     }
     //Hiện thông tin lớp Học sinh
     public function showSingleClassStudent(Request $req)
@@ -106,8 +106,7 @@ class ClassroomController extends Controller
     public function deleteClass(Request $req)
     {
         $class = Classroom::where([['malop', '=', $req->id], ['deleted_at', null]])->first();
-        $class->deleted_at = Carbon::now();
-        $class->save();
+        $class->delete();
         session()->flash('success', 'Xóa thành công');
         return redirect()->route('showClass');
     }
@@ -169,5 +168,4 @@ class ClassroomController extends Controller
     {
         return phpinfo();
     }
-
 }
