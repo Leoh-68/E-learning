@@ -65,7 +65,7 @@ class StudentController extends Controller
             $sv->email = $rq->email;
             $sv->accounttype = 3;
             $sv->updated_at = date("Y-m-d");
-            $sv->hinhanh = $image_name;
+            $sv->hinhanh = $explain;
             $sv->save();
         }
         $sv = Account::find($id);
