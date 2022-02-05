@@ -7,7 +7,6 @@
 <div class="shadow mx-auto d-block alert alert-success" style="width: 500px">
   {{ session()->get('success') }}
 </div>
-
 @endif
 @if(session()->has('fail'))
 <div class="shadow mx-auto d-block alert alert-danger" style="width: 500px">
@@ -18,7 +17,7 @@
     <div class="classbody">
         <div class="container">
             <a href="{{route('showSingleClass',['id'=>request()->id])}}">Quay lại</a>
-            <form method="POST" action="{{route('dsSinhVienPost',['id' => request()->id])}}">
+            <form method="POST" action="{{route('SendMailP',['id' => request()->id,'name'=>$accountname])}}">
             @csrf
                 <br><input name="textinput">
                 <button type="submit"> Thêm</button>

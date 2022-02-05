@@ -7,12 +7,11 @@
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
       <a class="dropdown-item" href="#">Đăng bài</a>
       <a class="dropdown-item" href="#">Đăng bài tập</a>
-
     </div>
   </div>
-
 @endsection
 @section('MenuHomePage')
+    <a href="{{route('showSingleClass',['id'=>$idclass])}}"> Trở về</a>
     <a href="{{ route('showClass') }}">Lớp học</a>
 @endsection
 @section('library')
@@ -44,10 +43,11 @@
   {{ session()->get('fail') }}
 </div>
 @endif
-<div class="formpost" style="padding-top: 50px">
+<div class="formpost" style="padding-top: 50px; padding-left: 20px;">
     <form action="{{ route('post', ['id' => $idclass]) }}" method="POST" enctype="multipart/form-data">
         @csrf
-        <label >Tên bài đăng</label>
+
+        <label >Tên bài đăng </label>
         <textarea type="text" class="form-control" name="name" required></textarea>
         @error('name')
             <span style="color: red">{{ $message }}</span>
@@ -57,9 +57,18 @@
         @error('name')
             <span style="color: red">{{ $message }}</span>
         @enderror
-        <label>Hình ảnh</label>
-        <input type="file" class="form-control"  name="image">
-        <button type="submit" class="btn btn-secondary">submit</button>
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Loại bài đăng</label>
+            <select class="form-control" name="type" id="type" type="text">
+              <option value="Thông báo">Thông báo</option>
+              <option value="Bài tập">Bài tập</option>
+            </select>
+          </div>
+
+            <label>Hình ảnh</label>
+            <input style="margin-bottom: 10px" type="file" class="form-control"  name="image">
+            <button  type="submit" class="btn btn-secondary">submit</button>
+
     </form>
 </div>
 @endsection

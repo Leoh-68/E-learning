@@ -61,7 +61,7 @@ Route::get('/Class/Post/{id}', [PostController::class, 'post'])->name('post');
 Route::post('/Class/Post/{id}', [PostController::class, 'post'])->name('post');
 Route::get('/Class/PostShow/{id}', [PostController::class, 'showPost'])->name('ShowPost');
 Route::get('/Class/Post/Update/{code}/{id}', [PostController::class, 'updatePostShow'])->name('UpdatePost');
-Route::post('/Class/Post/Update/{code}/{id}', [PostController::class, 'updatePost'])->name('UpdatePostG');
+Route::post('/Class/Post/Update/{code}/{id}', [PostController::class, 'updatePost'])->name('UpdatePostP');
 Route::get('/Class/Post/Delete/{code}/{id}', [PostController::class, 'deletePost'])->name('DeletePostP');
 Route::post('/Class/Post/Delete/{code}/{id}', [PostController::class, 'deletePost'])->name('DeletePostP');
 Route::get('/Class/Post/View/{id}', [PostController::class,'singlePost'])->name('ViewPost');
@@ -70,6 +70,9 @@ Route::get('/Class/Comment/Update/{idcomment}', [CommentController::class,'updat
 Route::post('/Class/Comment/Update/{idcomment}', [CommentController::class,'updateComment'])->name('UpdateCommentP');
 Route::post('/Class/Comment/Delete/{idcomment}', [CommentController::class,'deleteComment'])->name('DeleteCommentP');
 Route::get('/Class/Comment/Delete/{idcomment}', [CommentController::class,'deleteComment'])->name('DeleteCommentG');
+Route::post('/SendMail/{name}/{id}', [ClassroomController::class, 'sendMail'])->name("SendMailP");
+Route::get('/Accept/{id}/{idclass}', [ClassroomController::class, 'Acp'])->name("AcceptG");
+Route::post('/Accept/{id}/{idclass}', [ClassroomController::class, 'Acp'])->name("AcceptP");
 //Bạch
 Route::get('/', function () {
     return view('Login');
@@ -135,9 +138,6 @@ Route::group(['prefix'=>'/', 'middleware' => ['hocsinh']],function(){
 Route::get('/loadAccount',[AccountController::class,'loadAccount'])->name('loadAccount');
 Route::post('/updateAccount',[AccountController::class,'updateAccount'])->name('updateAccount');
 });
-
-
-
 //Bạch
 Route::get('/', function () {
     return view('/Wellcome');
@@ -164,6 +164,8 @@ Route::post('/updateAccount',[AccountController::class,'updateAccount'])->name('
 
 Route::get('/Student/Waiting', [StudentController::class, 'listClassWaiting'])->name('classWaiting');
 
-Route::get('/TestRoute', [PostController::class, 'attachmentfromID'])->name("TestRoute");
+Route::get('/TestRoute', [ClassroomController::class, 'sendMail'])->name("TestRoute");
+
+Route::get('/SendMail', [ClassroomController::class, 'sendMail'])->name("SendMailG");
 
 

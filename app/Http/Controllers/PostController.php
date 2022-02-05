@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Post;
 use App\Models\Classroom;
 use App\Models\Attachment;
@@ -10,9 +11,21 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    //Hiện post
+    //Thêm post
     public function post(Request $req)
     {
+        $type = 0;
+        if ($req->type == "Thông báo") {
+            $type = 1;
+        }
+        else
+        {
+            $type = 2;
+        }
+        if($type==0)
+        {
+            session()->flash('fail', 'Sai phần loại bài đăng');
+        }
         $idclass = Classroom::where('malop', $req->id)->first();
         $req->validate([
             'post' => 'required',
@@ -24,8 +37,8 @@ class PostController extends Controller
         $post->ten = $req->name;
         $post->mota = $req->post;
         $post->idclassroom = $idclass->id;
+        $post->posttype=$type;
         $post->save();
-
         if ($req->has('image')) {
             $size = $req->image->getSize();
             $extention = $req->image->extension();
@@ -63,6 +76,7 @@ class PostController extends Controller
         $post = Post::where('id', $req->id)->first();
         $post->ten = $req->name;
         $post->mota = $req->mota;
+        $post->save();
         if ($req->has('image')) {
             $size = $req->image->getSize();
             $extention = $req->image->extension();

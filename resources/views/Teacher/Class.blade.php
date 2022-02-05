@@ -43,6 +43,39 @@
             <div class="post">
                 @foreach ($post as $var)
                     <div class="posts">
+                        @php
+                            if($var->posttype==2)
+                            {
+                        @endphp
+                            <div class="postown">
+                                <div class="imgpost">
+                                    <a  href="{{route('ViewPost',['id'=>$var->id])}}"><img src="{{ asset('images/baitap.jpg') }}"
+                                            alt="Avatar" class="avatarnavbar"></a>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-basic dropdown-toggle" type="button" id="dropdownMenuButton"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item"
+                                            href="{{ route('UpdatePost', ['id' => $var->id, 'code' => $item->id]) }}">Sửa</a>
+                                        <a class="dropdown-item" href="{{ route('DeletePostP', ['id' => $var->id, 'code' => $item->id]) }}">Xóa</a>
+                                    </div>
+                                </div>
+                                <a href="{{route('ViewPost',['id'=>$var->id])}}" >  <Span>
+                                    {{ App\Http\Controllers\ClassroomController::TheoAccount($var->idclassroom)}} Đã đăng một bài tập mới: {{$var->ten}}</Span><br>
+                                <Span style="font-size: 13px; color:grey">{{ $var->created_at->format('d/m/Y') }}</Span></a>
+
+                            </div>
+
+                                @php
+                            };
+                                @endphp
+
+@php
+if($var->posttype!=2)
+{
+                        @endphp
                         <div class="postown">
                             <div class="imgpost">
                                 <a href="{{ route('loadAccount') }}"><img src="{{ asset('images/3.jpg') }}"
@@ -55,7 +88,8 @@
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item"
                                         href="{{ route('UpdatePost', ['id' => $var->id, 'code' => $item->id]) }}">Sửa</a>
-                                    <a class="dropdown-item" href="{{ route('DeletePostP', ['id' => $var->id, 'code' => $item->id]) }}">Xóa</a>
+
+                                    <a onclick="return confirm('Bạn có chắc muốn xóa ?')" class="dropdown-item" href="{{ route('DeletePostP', ['id' => $var->id, 'code' => $item->id]) }}">Xóa</a>
                                 </div>
                             </div>
                             <Span>
@@ -76,6 +110,10 @@
                                 }
                             @endphp
                         </div>
+    @php
+};
+    @endphp
+
                     </div>
                 @endforeach
             </div>
@@ -94,21 +132,20 @@
         </div>
     @endforeach
 @section('AddButton')
-    <div class="dropdown">
+            <li><a href="{{ route('ShowPost', ['id' => $idclass]) }}"> <i class="fa fa-plus fa-2x"></i> </a></li>
+    {{-- <div class="dropdown">
         <button type="button" style="background-color: white" class="btn btn-light" id="dropdownMenuButton"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <li><a href=""> <i class="fa fa-plus fa-2x"></i> </a></li>
+            <li><a href="{{ route('ShowPost', ['id' => $idclass]) }}"> <i class="fa fa-plus fa-2x"></i> </a></li>
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="{{ route('ShowPost', ['id' => $idclass]) }}">Đăng bài</a>
-            <a class="dropdown-item" href="#">Đăng bài tập</a>
         </div>
-    </div>
+    </div> --}}
 @endsection
 @section('MenuHomePage')
     <a href="{{ route('showClass') }}">Lớp học</a>
     <a href="{{ route('ShowPost', ['id' => $idclass]) }}">Đăng bài</a>
-    <a href="#">Đăng bài tập</a>
 @endsection
 <div>
 @endsection

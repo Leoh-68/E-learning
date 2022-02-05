@@ -13,8 +13,8 @@ class StudentController extends Controller
     public function layDanhSachSV()
     {
         $dsSV = Account::where([['accounttype','=','3'],['deleted_at','=',null]])->get();
-        
-        return view('admin/StudentsList',compact('dsSV'));   
+
+        return view('admin/StudentsList',compact('dsSV'));
     }
     public function themSV()
     {
@@ -126,10 +126,9 @@ class StudentController extends Controller
         {
             if($var->idaccount == $account->id && $var->idclassroom==$listClass->id)
             {
-
-                Cookie::queue('error',"Lớp đã tồn tại",0.09);
+                Cookie::queue('error',"Lớp đã tồn tại hoặc đang chờ chấp thuận",0.09);
                 return redirect()->route('AddClassStudent');
-            }      
+            }
         }
         $class= new StudentList;
         $class->idaccount=$account->id;
@@ -137,6 +136,7 @@ class StudentController extends Controller
         $class->waitingqueue=0;
         $class->stt=1;
         $class->save();
+        session()->flash('success', 'Gửi yên cầu tham gia thành công');
         return redirect()->route('showClassStudent');
       }
 
@@ -148,6 +148,6 @@ class StudentController extends Controller
           return $value->pivot->waitingqueue ==1;
       });
         return View('Student/waitingRoomStudent',compact('lstStudent'));
-     
+
       }
 }

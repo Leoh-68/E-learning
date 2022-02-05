@@ -3,18 +3,13 @@
 use app\Http\Controllers\ClassroomController;
 @endphp -->
 @section('AddButton')
-<div class="dropdown">
-    <button type="button"  style="background-color: white" class="btn btn-light" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <li><a href=""> <i class="fa fa-plus fa-2x" ></i> </a></li>
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="#">Đăng bài</a>
-      <a class="dropdown-item" href="#">Đăng bài tập</a>
-    </div>
-  </div>
 @endsection
 @section('MenuHomePage')
-    <a href="{{ route('showClass') }}">Lớp học</a>
+@php
+$malop=App\Http\Controllers\ClassroomController::Trans($post->idclassroom);
+@endphp
+<a href="{{route('showSingleClass',['id'=>$malop])}}"> Trở về</a>
+<a href="{{ route('showClass') }}">Lớp học</a>
 @endsection
 @section('library')
     <meta charset="utf-8">
@@ -49,7 +44,7 @@ use app\Http\Controllers\ClassroomController;
 </div>
 @endif
 @php
-$account= App\Http\Controllers\AccountController::AccountLogin();
+$account=App\Http\Controllers\AccountController::AccountLogin();
 @endphp
 <div class="formpost" style="padding-top: 50px">
         <div>
