@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Account;
 use App\Http\Requests\SubmitRequest;
+use Illuminate\Http\UploadedFile;
 
 class TeacherController extends Controller
 {
@@ -31,6 +32,7 @@ class TeacherController extends Controller
         $gv->email = $rq->email;
         $gv->accounttype = 2;
         $gv->created_at = date("Y-m-d");
+        $gv->hinhanh = "default.jpg";
         $gv->save();
         return redirect()->route('TeachersList');
     }
@@ -45,6 +47,27 @@ class TeacherController extends Controller
     }
     public function xlSuaGV(SubmitRequest $rq,$id)
     {
+        $image_name = "";
+        if($rq->has('image'))
+        {
+            $image = $rq->image;
+            $image_name=$image->getClientoriginalName();
+            $i = explode('.', $image_name);
+            $explain =  $rq->id.".".$i[1];
+            $image->move(public_path('images'),$explain);
+            $gv = Account::find($id);
+            $gv->username = $rq->username;
+            $gv->password = Hash::make($rq->password);
+            $gv->hoten = $rq->hoten;
+            $gv->ngaysinh = $rq->ngaysinh;
+            $gv->diachi = $rq->diachi;
+            $gv->sdt = $rq->sdt;
+            $gv->email = $rq->email;
+            $gv->accounttype = 2;
+            $gv->updated_at = date("Y-m-d");
+            $gv->hinhanh = $explain;
+            $gv->save();
+        }
         $gv = Account::find($id);
         $gv->username = $rq->username;
         $gv->password = Hash::make($rq->password);

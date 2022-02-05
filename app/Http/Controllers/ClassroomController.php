@@ -6,8 +6,9 @@ use App\Models\Classroom;
 use App\Models\Account;
 use App\Models\Post;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
-
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Mail;
+use App\Models\StudentList;
 class ClassroomController extends Controller
 {
     public function Classroom()
@@ -70,11 +71,12 @@ class ClassroomController extends Controller
         $class->idaccount = $account->id;
         $class->name = $req->classname;
         $class->malop = $req->classcode;
+        $class->hinhanh = $image_name;
         $class->save();
         session()->flash('success', 'Thêm thành công');
         return redirect()->route('showClass');
     }
-    //Hiện thông tin lớp Giáo viên
+    //Hiện thông tin lớp Giáo viên thei mã lớp
     public function showSingleClass(Request $req)
     {
         $class = Classroom::where('malop', '=', $req->id)->get();
@@ -82,11 +84,29 @@ class ClassroomController extends Controller
         $post = Post::orderBy('created_at', 'desc')->where('idclassroom', $idclass->id)->get();
         return View('Teacher/Class', compact('class', 'post'));
     }
+
+    //Hiện thông tin lớp Giáo viên thei id lớp
+    public function showSingleClassId(Request $req)
+    {
+        $class = Classroom::find($req->id);
+        $idclass = Classroom::where('malop', '=', $req->id)->first();
+        $post = Post::orderBy('created_at', 'desc')->where('idclassroom', $req->id)->get();
+        return View('Teacher/Class', compact('class', 'post'));
+    }
+
+    public function Trans($id)
+    {
+        $class = Classroom::find($id);
+
+        return $class->malop;
+    }
     //Hiện thông tin lớp Học sinh
     public function showSingleClassStudent(Request $req)
     {
         $class = Classroom::where('malop', '=', $req->id)->get();
-        return View('Student/ClassStudent', compact('class'));
+        $idclass = Classroom::where('malop', '=', $req->id)->first();
+        $post = Post::orderBy('created_at', 'desc')->where('idclassroom', $idclass->id)->get();
+        return View('Student/ClassStudent', compact('class', 'post'));
     }
     //Cập nhật lớp
     public function updateClass(Request $req)
@@ -141,31 +161,93 @@ class ClassroomController extends Controller
         $lstStudent = Classroom::find($req->id)->dsStudentJoined;
         return View('SCL', compact('lstStudent'));
     }
-    // Danh sách học sinh được cah61p nhận
+    // Danh sách học sinh được chấp nhận
     public function listStudent(Request $req)
     {
         $student = Classroom::where('malop', $req->id)->first();
         $lst = Classroom::find($student->id)->dsStudentJoined;
+        $classname=$student->name;
+        $account = Account::where('username', session('username'))->first();
+        $accountname=$account->hoten;
         // Truy cập thuộc tính bảng trung gian
         $lstStudent = $lst->reject(function ($value, $key) {
             return $value->pivot->waitingqueue == 0;
         });
-        return View('Teacher/ListStudent', compact('lstStudent'));
+        return View('Teacher/ListStudent', compact('lstStudent','classname','accountname'));
     }
     // Danh sách học sinh đang chờ
     public function listStudentWaiting(Request $req)
     {
+
+        $account = Account::where('username', session('username'))->first();
+        $accountname=$account->hoten;
         $student = Classroom::where('malop', $req->id)->first();
+        $classname=$student->name;
         $lst = Classroom::find($student->id)->dsStudentJoined;
         // Truy cập thuộc tính bảng trung gian
         $lstStudent = $lst->reject(function ($value, $key) {
             return $value->pivot->waitingqueue == 1;
         });
-        return View('Teacher/waitingroom', compact('lstStudent'));
+        return View('Teacher/waitingroom', compact('lstStudent','classname','accountname'));
     }
     //Chech thông tin phiên bản php
     public function phpinfo()
     {
         return phpinfo();
+        return View('Teacher/waitingroom  ', compact('lstStudent'));
+    }
+    //Gủi mail
+    public function sendMail(Request $req)
+    {
+        $checkLoopMail = "";
+        $listaccount = StudentList::all();
+        $idclass = Classroom::where('malop', $req->id)->first();
+        $listEmail = explode(",", $req->textinput);
+        foreach ($listEmail as $item) {
+            $allacc = Account::where('email', $item)->first();
+            if ($allacc == null) {
+                Cookie::queue('error', "Email $item không tồn tại", 0.09);
+                return  redirect()->route('lstStudent', ['id' => $req->id]);
+            }
+            foreach ($listaccount as $var) {
+                if ($var->idaccount == $allacc->id && $var->idclassroom == $idclass->id || $var->deleted_at != null) {
+
+                    Cookie::queue('error', "Tài khoản có mail $item đã tồn tại", 0.09);
+                    return  redirect()->route('lstStudent', ['id' => $req->id]);
+                }
+            }
+            if ($item == $checkLoopMail) {
+                Cookie::queue('error', "Vui lòng không nhập trùng email [ $item ]", 0.09);
+                return  redirect()->route('lstStudent', ['id' => $req->id]);
+            } else {
+                $checkLoopMail = $item;
+            }
+        }
+        $idclasss=$idclass->id;
+        $classname=$idclass->name;
+        $username=$req->name;
+        foreach($listEmail as $var){
+            $account=Account::where('email',$var)->first();
+            $id=$account->id;
+            Mail::send('Teacher/MailContent',compact('username','classname','id','idclasss'),function($Email) use ($var)
+            {
+                $Email->to($var);
+            });
+        }
+        session()->flash('success','Gửi yêu cầu thành công');
+        return  redirect()->route('lstStudent', ['id' => $idclass->malop]);
+    }
+    //Chấp nhập vào lớp
+    public function Acp(Request $req)
+    {
+        $class=Classroom::find($req->idclass);
+        $studentlis = new StudentList;
+        $studentlis->stt = 1;
+        $studentlis->idaccount = $req->id;
+        $studentlis->idclassroom = $req->idclass;
+        $studentlis->waitingqueue = 1;
+        $studentlis->save();
+        session()->flash('success', ' Thành công');
+        return redirect()->route('lstStudent', ['id' => $class->malop]);
     }
 }
