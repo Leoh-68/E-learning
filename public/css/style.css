@@ -105,6 +105,7 @@ header ul li a {
     border-radius: 12px;
     background-repeat: no-repeat;
     background-size: cover;
+    object-fit: cover;
 }
 .classname {
     position: relative;
@@ -129,6 +130,7 @@ header ul li a {
 }
 .postown {
     float: left;
+    background-color: white;
     width: 100%;
 }
 .postcontent {
@@ -152,13 +154,16 @@ header ul li a {
     padding: 10px;
     display: inline-block;
     width: 100%;
-    background-color: #ddd;
-    border-color: white;
+    background-color: white;
+    border-style: ridge;
     border-radius: 12px;
+
 }
 .comment input {
-    width: 95%;
+    padding: 6px;
+    width: 90%;
     border-radius: 10px;
+    border-style: none none outset none;
 }
 .posttext {
     padding-bottom: 20px;
@@ -174,6 +179,13 @@ header ul li a {
     width: 100%;
     float: right;
     border-radius: 12px;
+}
+.contentpostview{
+    padding: 10px;
+}
+.headpostview
+{
+   padding: 10px;
 }
 .status {
     padding-top: 20px;

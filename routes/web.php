@@ -8,6 +8,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\StudentListController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 
 // Khánh
@@ -29,7 +30,7 @@ Route::get('/updateClass/{name}', [ClassroomController::class, 'updateClass'])->
 Route::group(['prefix'=>'/', 'middleware' => ['giangvien']],function(){
 
     Route::get('/showClass',[ClassroomController::class,'showClass'])->name('showClass');
-    
+
     Route::get('/AddClass', function () {
         return view('Teacher/AddClass');
     })->name('Addclass');
@@ -56,10 +57,41 @@ Route::get('/AcceptStudent/{class}/{account}', [StudentListController::class, 'a
 Route::get('/ListStudent', [ClassroomController::class, 'listStudent']);
 Route::post('/ListStudent/{id}', [StudentListController::class, 'AddStudent'])->name('dsSinhVienPost');
 Route::get('/ListStudent/Delete/{id}/{code}', [StudentListController::class, 'DeleteStudent'])->name('xoaSinhvien');
+Route::get('/Class/Post/{id}', [PostController::class, 'post'])->name('post');
+Route::post('/Class/Post/{id}', [PostController::class, 'post'])->name('post');
+Route::get('/Class/PostShow/{id}', [PostController::class, 'showPost'])->name('ShowPost');
+Route::get('/Class/Post/Update/{code}/{id}', [PostController::class, 'updatePostShow'])->name('UpdatePost');
+Route::post('/Class/Post/Update/{code}/{id}', [PostController::class, 'updatePost'])->name('UpdatePostP');
+Route::get('/Class/Post/Delete/{code}/{id}', [PostController::class, 'deletePost'])->name('DeletePostP');
+Route::post('/Class/Post/Delete/{code}/{id}', [PostController::class, 'deletePost'])->name('DeletePostP');
+Route::get('/Class/Post/Copy/{id}', [PostController::class,'copyPostShow'])->name('CopyPostG');
+Route::post('/Class/Post/Copy/{id}', [PostController::class,'copyPost'])->name('CopyPostP');
+Route::get('/Class/Post/View/{id}', [PostController::class,'singlePost'])->name('ViewPost');
+Route::get('/Class/Student/Post/{id}', [PostController::class,'singlePostStudent'])->name('ViewPostStudent');
+Route::get('/Class/Post/Comment/{idaccount}/{idpost}', [CommentController::class,'addComment'])->name('AddComment');
+Route::get('/Class/Comment/Update/{idcomment}', [CommentController::class,'updateCommentShow'])->name('UpdateCommentG');
+Route::post('/Class/Comment/Update/{idcomment}', [CommentController::class,'updateComment'])->name('UpdateCommentP');
+Route::post('/Class/Comment/Delete/{idcomment}', [CommentController::class,'deleteComment'])->name('DeleteCommentP');
+Route::get('/Class/Comment/Delete/{idcomment}', [CommentController::class,'deleteComment'])->name('DeleteCommentG');
+Route::post('/SendMail/{name}/{id}', [ClassroomController::class, 'sendMail'])->name("SendMailP");
+Route::get('/Accept/{id}/{idclass}', [ClassroomController::class, 'Acp'])->name("AcceptG");
+Route::post('/Accept/{id}/{idclass}', [ClassroomController::class, 'Acp'])->name("AcceptP");
+//Bạch
+Route::get('/', function () {
+    return view('Login');
+})->name('Login');
+
+Route::get('/HomePage', function () {
+    return view('HomePage');
+})->name('HomePage')->middleware('auth');
+Route::get('/Login', [DangNhapController::class, 'dangNhap'])->name('Login')->middleware('guest');
+Route::post('/Login', [DangNhapController::class, 'xuLyDangNhap'])->name('xl-dang-nhap');
+//Route::get('/mk', [DangNhapController::class,'update'])->name('Login'); mã hóa mật khẩu
+Route::get('/ForgotPassword', [DangNhapController::class, 'forgotPassword'])->name('/ForgotPassword');
+Route::post('/ForgotPassword', [DangNhapController::class, 'xuLyMatKhau'])->name('xl-mat-khau');
 Route::get('/Class/Post/{id}', [PostController::class, 'Post'])->name('post');
 Route::post('/Class/Post/{id}', [PostController::class, 'Post'])->name('post');
 Route::group(['prefix'=>'/', 'middleware' => ['auth','admin']],function(){
-
 Route::get('/Admin/Students', [StudentController::class, 'layDanhSachSV'])->name('StudentsList');
 Route::get('/Admin/Students/Add', [StudentController::class, 'themSV'])->name('loadThemSV');
 Route::post('/Admin/Students/Add', [StudentController::class, 'xlThemSV'])->name('xlThemSV');
@@ -109,9 +141,6 @@ Route::group(['prefix'=>'/', 'middleware' => ['hocsinh']],function(){
 Route::get('/loadAccount',[AccountController::class,'loadAccount'])->name('loadAccount');
 Route::post('/updateAccount',[AccountController::class,'updateAccount'])->name('updateAccount');
 });
-
-
-
 //Bạch
 Route::get('/', function () {
     return view('/Wellcome');
@@ -137,3 +166,9 @@ Route::get('/loadAccount',[AccountController::class,'loadAccount'])->name('loadA
 Route::post('/updateAccount',[AccountController::class,'updateAccount'])->name('updateAccount')->middleware('auth');
 
 Route::get('/Student/Waiting', [StudentController::class, 'listClassWaiting'])->name('classWaiting');
+
+Route::get('/TestRoute', [ClassroomController::class, 'sendMail'])->name("TestRoute");
+
+Route::get('/SendMail', [ClassroomController::class, 'sendMail'])->name("SendMailG");
+
+

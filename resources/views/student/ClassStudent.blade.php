@@ -26,64 +26,66 @@
  @section('body')
  @foreach ($class as $item)
  <div class="classbody">
-    <div class="imgclass" style="background-image: url('../images/bg.jpg')">
+    <div class="imgclass" style="background-image: url('../images/Classroom/{{$item->hinhanh}}')">
         <h1 class="nameinclass">{{$item->name}}</h1>
     </div>
+    @if(session()->has('success'))
+    <div class="alert alert-success" style="width: 500px">
+      {{ session()->get('success') }}
+    </div>
+    @endif
+    @if(session()->has('fail'))
+    <div class="alert alert-danger" style="width: 500px">
+      {{ session()->get('fail') }}
+    </div>
+    @endif
     <div class="post">
-        <div class="form-group">     
-            <textarea type="text" class="posttext"></textarea>
-        </div>
-   <div class="posts" >
-       <div class="imgpost">
-        <a href="{{route('loadAccount')}}"><img src="{{ asset('images/3.jpg') }}" alt="Avatar" class="avatarnavbar"></a>
-       </div>
-       <div class="postown">
-        <Span>Trần Phước Khánh</Span><br>
-        <Span style="font-size: 13px; color:grey">11/11/2001</Span><br>
-       </div>
-    <br>
-        <div class="postcontent">
-                    Xin chào cả lớp, sắp tới cô có tổ chức 1 buổi hướng dẫn viết CV, các bạn tham gia để có 1 chiếc CV cho kỳ thực tập sắp tới thật tốt nhé.
-                    Nội dung buổi chia sẻ:
-                    - Nắm được những điểm quan trọng trong 1 CV dành cho các bạn lập trình viên<
-                    - Cách xây dựng hình ảnh của mình khi đi ứng tuyển.
-                    - Được BTC góp ý và chỉnh sửa CV
-                    - Kết nối doanh nghiệp phù hợp để apply sau khi hoàn tất CV
-                    Thời gian: 19h30, ngày 31/12/2021
-                    Hình thức: Online qua Zoom
-                    Số lượng: 100 slot
-                    Link đăng ký: https://forms.gle/c1hpn6NPu6kp5g869
-                    Hạn chót đăng ký: 28/12/2021.
-                    Thông tin Zoom sẽ được gửi qua email của các bạn, do vậy hãy gõ thật chính xác email của mình nhé.
-                    Hẹn gặp lại các bạn vào buổi webinar nhé
-         </div>
-         <div class="comment">
-              <a href="{{route('loadAccount')}}"><img src="{{ asset('images/3.jpg') }}" alt="Avatar" class="avatarnavbar"></a>
-              <input>
-         </div>
-   </div>
+        @foreach ($post as $var)
+            <div class="posts">
+                <div class="postown">
+                    <div class="imgpost">
+                        <a href=""><img src="{{ asset('images/3.jpg') }}"
+                                alt="Avatar" class="avatarnavbar"></a>
+                    </div>
+                    <Span>
+                        {{ App\Http\Controllers\ClassroomController::TheoAccount($var->idclassroom) }}</Span><br>
+                    <Span style="font-size: 13px; color:grey">{{ $var->created_at->format('d/m/Y') }}</Span>
+                </div>
+                <br>
+                <div class="postcontent">
+                    <a href="{{route('ViewPostStudent',['id'=>$var->id])}}"><label style="color: black">{{ $var->mota }}</label><br></a>
+                    @php
+                        if (App\Http\Controllers\PostController::attachmentfromID($var->id) == null) {
+                        } else {
+                            $image = App\Http\Controllers\PostController::attachmentfromID($var->id);
+                    @endphp
+                    <a href="{{route('ViewPostStudent',['id'=>$var->id])}}"><img style="height:100px " src="{{ asset('/images/PostFile/' . $image) }}"></a>
+                    @php
+                        }
+                    @endphp
+                </div>
+            </div>
+        @endforeach
     </div>
 
-    </div>
-   
     <div class="idclass">
         <span class="idcls">Mã lớp</span>
         <div class="dropdown">
             <button onclick="myFunction()" class="dropbtn"><i class="fa fa-ellipsis-v"></i></button>
             <div id="myDropdown" class="dropdown-content">
-                          
+
             </div>
           </div>
          <br> <h5 style="padding: 10px">{{$item->malop}}<h5>
     </div>
  @endforeach
 
-    
+
     </div>
     </div>
 </div>
 
  @endsection
- 
+
 
 

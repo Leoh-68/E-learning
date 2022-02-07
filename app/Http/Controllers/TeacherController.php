@@ -14,7 +14,7 @@ class TeacherController extends Controller
     {
         $dsGV = Account::where([['accounttype','=','2'],['deleted_at','=',null]])->get();
 
-        return view('admin/TeachersList',compact('dsGV'));   
+        return view('admin/TeachersList',compact('dsGV'));
     }
     public function themGV()
     {
@@ -24,7 +24,7 @@ class TeacherController extends Controller
     {
         $gv = new Account;
         $gv->username = $rq->username;
-        $sv->password = Hash::make($rq->password);
+        $gv->password = Hash::make($rq->password);
         $gv->hoten = $rq->hoten;
         $gv->ngaysinh = $rq->ngaysinh;
         $gv->diachi = $rq->diachi;
@@ -92,4 +92,5 @@ class TeacherController extends Controller
         $dsGV->save();
         return redirect()->route('TeachersList');
     }
+    
 }

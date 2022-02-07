@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 @yield('html')
-<head>  
+<head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,13 +40,16 @@
 	    }
 	    @endphp
             @yield('AddButton')
-           
-            {{Auth::user()->hoten;}} 
+
+            {{Auth::user()->hoten;}}
+            @php
+                $account=Auth::user()->hinhanh;
+            @endphp
             <li>
-                <a href="{{route('loadAccount')}}"><img src="{{ asset('images/3.jpg') }}" alt="Avatar" class="avatarnavbar"></a>
+                <a href="{{route('loadAccount')}}"><img src="{{ asset('images/'.$account) }}" alt="Avatar" class="avatarnavbar"></a>
             </li>
-             <a href="{{route('dangXuat')}}"><img src="{{ asset('images/logout.png') }}" alt="Avatar" class="avatarnavbar"></a>    
-             <li> 
+             <a href="{{route('dangXuat')}}"><img src="{{ asset('images/logout.png') }}" alt="Avatar" class="avatarnavbar"></a>
+             <li>
 
             </li>
         </ul>
@@ -57,4 +60,3 @@
 </body>
 
 </html>
- 

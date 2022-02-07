@@ -17,9 +17,10 @@ class AccountController extends Controller
     }
     public function dsLopJoined ()
     {
+
     }
     public function updateAccount(Request $request)
-    { 
+    {
         $request->validate([
             'hoten'=>'required',
             'diachi'=>'required|',
@@ -42,11 +43,23 @@ class AccountController extends Controller
     $account->diachi=$request->diachi;
     $account->sdt=$request->sdt;
     $account->email=$request->email;
-    $account->save();
-    return redirect()->route('loadAccount');    
 
+    if ($request->image!=null) {
+        $size = $request->image->getSize();
+        $extention = $request->image->extension();
+        if ($size > 2000000) {
+            session()->flash('fail', 'Kích thướt ảnh phải dưới 2M');
+            return View('Teacher/Post', compact('idclass'));
+        }
+        $image = $request->image;
+        $image_name = $image->getClientoriginalName();
+        $image->move(public_path('images'), $image_name);
+        $account->hinhanh = $image_name;
     }
-
+    $account->save();
+    session()->flash('success', 'Sửa thành công');
+    return redirect()->route('loadAccount');
+    }
     public static function AccountLogin(){
         $account=Account::where('username',session('username'))->first();
         return $account;
