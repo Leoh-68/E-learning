@@ -25,6 +25,9 @@
  @endsection
  @section('body')
  @foreach ($class as $item)
+ @php
+ $hinhanh=App\Http\Controllers\ClassroomController::LayHinhTheoMa($item->idaccount);
+ @endphp
  <div class="classbody">
     <div class="imgclass" style="background-image: url('../images/Classroom/{{$item->hinhanh}}')">
         <h1 class="nameinclass">{{$item->name}}</h1>
@@ -44,7 +47,7 @@
             <div class="posts">
                 <div class="postown">
                     <div class="imgpost">
-                        <a href=""><img src="{{ asset('images/3.jpg') }}"
+                        <a href=""><img src="{{ asset('images/'.$hinhanh) }}"
                                 alt="Avatar" class="avatarnavbar"></a>
                     </div>
                     <Span>

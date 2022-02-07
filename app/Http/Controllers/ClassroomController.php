@@ -192,6 +192,7 @@ class ClassroomController extends Controller
     // Danh sách học sinh được chấp nhận
     public function listStudent(Request $req)
     {
+        $malop=$req->id;
         $student = Classroom::where('malop', $req->id)->first();
         $lst = Classroom::find($student->id)->dsStudentJoined;
         $classname=$student->name;
@@ -201,7 +202,7 @@ class ClassroomController extends Controller
         $lstStudent = $lst->reject(function ($value, $key) {
             return $value->pivot->waitingqueue == 0;
         });
-        return View('Teacher/ListStudent', compact('lstStudent','classname','accountname'));
+        return View('Teacher/ListStudent', compact('lstStudent','classname','accountname','malop'));
     }
     // Danh sách học sinh đang chờ
     public function listStudentWaiting(Request $req)

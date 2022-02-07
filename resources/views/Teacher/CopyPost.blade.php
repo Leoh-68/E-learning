@@ -4,7 +4,7 @@
  @extends('IndexHomePage')
  @section('MenuHomePage')
 <a href="{{route('showClass')}}">Lớp học</a>
-<a href="{{route('Logout')}}">Sủi</a>
+
 @endsection
  @section('library')
  <meta charset="utf-8">

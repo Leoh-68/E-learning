@@ -76,6 +76,8 @@ Route::get('/Class/Comment/Delete/{idcomment}', [CommentController::class,'delet
 Route::post('/SendMail/{name}/{id}', [ClassroomController::class, 'sendMail'])->name("SendMailP");
 Route::get('/Accept/{id}/{idclass}', [ClassroomController::class, 'Acp'])->name("AcceptG");
 Route::post('/Accept/{id}/{idclass}', [ClassroomController::class, 'Acp'])->name("AcceptP");
+Route::post('/ListStudent/Find/{id}', [StudentListController::class, 'findStudent'])->name('FindStudentP');
+Route::get('/ListStudent/Find/{id}', [StudentListController::class, 'findStudent'])->name('FindStudentG');
 //Bạch
 Route::get('/', function () {
     return view('Login');

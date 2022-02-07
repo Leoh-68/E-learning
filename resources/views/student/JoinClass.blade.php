@@ -28,7 +28,7 @@
   @csrf
   <div class="formsubmit" style="padding: 30px">
   <div class="form-group">
-      <label for="">Mã lớp</label> 
+      <label for="">Mã lớp</label>
       <input type="text" class="form-control"  value=""  placeholder="Enter class code" name="classcode">
       @error('classcode')
       <span style="color: red">{{$message}}</span>

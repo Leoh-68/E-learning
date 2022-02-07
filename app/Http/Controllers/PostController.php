@@ -16,11 +16,11 @@ class PostController extends Controller
     {
         $type = 0;
         if ($req->type == "Thông báo") {
-            $type = 1;
+            $type = 2;
         }
         else
         {
-            $type = 2;
+            $type = 1;
         }
         if($type==0)
         {

@@ -1,7 +1,6 @@
 @extends('IndexHomePage')
 @section('MenuHomePage')
 <a href="{{route('showClassStudent')}}">Lớp học</a>
-<a href="{{route('Logout')}}">Sủi</a>
 @endsection
 
 @section('body')
@@ -22,7 +21,7 @@
             @csrf
             </form>
             <table class="table">
-            <thead>     
+            <thead>
                 <tr>
                     <th>Giáo viên</th>
                     <th>Tên lớp </th>
@@ -40,12 +39,12 @@
                     <a  onclick="return confirm('Bạn có chắc muốn xóa ?')" href="">Xóa</a>
                     <a  href="" >Chấp nhận</a>
                     </td>
-                    
+
                 </tr>
                 @endforeach
             </tbody>
         </table>
         </div>
       </div>
-   
+
 @endsection
