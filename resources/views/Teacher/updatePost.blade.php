@@ -46,8 +46,28 @@
     <input class="form-control"  type="file" rows="10" name='image'>
     @error('image')
     <span style="color: red">{{$message}}</span>
-@enderror
+    @enderror
 </div>
+<div class="form-group">
+    <label for="exampleFormControlSelect1">Loại bài đăng</label>
+    <select class="form-control" name="type" id="type" type="text">
+        @php
+            if($post->posttype==1)
+            {
+              echo'<option value="Thông báo">Thông báo</option>';
+               echo'<option value="Bài tập" selected="selected">Bài tập</option>';
+            }
+            else {
+              echo'<option value="Thông báo">Thông báo</option>';
+              echo '<option value="Bài tập">Bài tập</option>';
+
+            }
+        @endphp
+    </select>
+    @error('type')
+    <span style="color: red">{{$message}}</span>
+    @enderror
+  </div>
   <button type="submit" class="btn btn-primary" style="margin: 20px 0px 0px">Submit</button>
 </form>
 </div>

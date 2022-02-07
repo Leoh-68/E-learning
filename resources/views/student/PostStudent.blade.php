@@ -46,9 +46,6 @@ $malop=App\Http\Controllers\ClassroomController::Trans($post->idclassroom);
 @php
 $account=App\Http\Controllers\AccountController::AccountLogin();
 @endphp
-@php
-$hinhanh=App\Http\Controllers\ClassroomController::LayHinhTheoMa($account->id);
-@endphp
 <div class="formpost" style="padding-top: 50px">
         <div>
             <div class="headpostview" style=" border-bottom: 2px solid black; ">
@@ -75,7 +72,7 @@ $hinhanh=App\Http\Controllers\ClassroomController::LayHinhTheoMa($account->id);
             </div>
             <form action="{{route('AddComment',['idpost'=>$post->id,'idaccount'=>$account->id])}}">
                 <div class="comment">
-                    <a href="{{ route('loadAccount') }}"><img src="{{ asset('images/'.$hinhanh) }}" alt="Avatar"
+                    <a href="{{ route('loadAccount') }}"><img src="{{ asset('images/3.jpg') }}" alt="Avatar"
                             class="avatarnavbar"></a>
                     <input placeholder="Bình luận" style="padding-left: 10px" name="comment">
                     @error('comment')
@@ -85,12 +82,9 @@ $hinhanh=App\Http\Controllers\ClassroomController::LayHinhTheoMa($account->id);
                 </div>
             </form>
             @foreach ($cmt as $res)
-            @php
-            $hinhanhcmt=App\Http\Controllers\ClassroomController::LayHinhTheoMa($res->idaccount);
-            @endphp
             <div>
                 <div style="float: left">
-                    <img src="{{ asset('images/'.$hinhanhcmt) }}" alt="Avatar" class="avatarnavbar">
+                    <img src="{{ asset('images/3.jpg') }}" alt="Avatar" class="avatarnavbar">
                 </div>
                 <div style="float: left">
                     <span class="">

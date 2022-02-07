@@ -42,8 +42,11 @@
             @yield('AddButton')
 
             {{Auth::user()->hoten;}}
+            @php
+                $account=Auth::user()->hinhanh;
+            @endphp
             <li>
-                <a href="{{route('loadAccount')}}"><img src="{{ asset('images/3.jpg') }}" alt="Avatar" class="avatarnavbar"></a>
+                <a href="{{route('loadAccount')}}"><img src="{{ asset('images/'.$account) }}" alt="Avatar" class="avatarnavbar"></a>
             </li>
              <a href="{{route('dangXuat')}}"><img src="{{ asset('images/logout.png') }}" alt="Avatar" class="avatarnavbar"></a>
              <li>

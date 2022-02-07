@@ -30,7 +30,7 @@ use app\Http\Controllers\ClassroomController;
 @foreach ($classlst as $var)
 @if ($var->deleted_at==null)
 <div class="column">
-  <div class="card" style="background-image: url('../images/bg.jpg')">
+  <div class="card" style="background-image: url('../images/Classroom/{{$var->hinhanh}}')">
     @php
      $id=$var->malop;
     @endphp

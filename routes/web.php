@@ -64,7 +64,10 @@ Route::get('/Class/Post/Update/{code}/{id}', [PostController::class, 'updatePost
 Route::post('/Class/Post/Update/{code}/{id}', [PostController::class, 'updatePost'])->name('UpdatePostP');
 Route::get('/Class/Post/Delete/{code}/{id}', [PostController::class, 'deletePost'])->name('DeletePostP');
 Route::post('/Class/Post/Delete/{code}/{id}', [PostController::class, 'deletePost'])->name('DeletePostP');
+Route::get('/Class/Post/Copy/{id}', [PostController::class,'copyPostShow'])->name('CopyPostG');
+Route::post('/Class/Post/Copy/{id}', [PostController::class,'copyPost'])->name('CopyPostP');
 Route::get('/Class/Post/View/{id}', [PostController::class,'singlePost'])->name('ViewPost');
+Route::get('/Class/Student/Post/{id}', [PostController::class,'singlePostStudent'])->name('ViewPostStudent');
 Route::get('/Class/Post/Comment/{idaccount}/{idpost}', [CommentController::class,'addComment'])->name('AddComment');
 Route::get('/Class/Comment/Update/{idcomment}', [CommentController::class,'updateCommentShow'])->name('UpdateCommentG');
 Route::post('/Class/Comment/Update/{idcomment}', [CommentController::class,'updateComment'])->name('UpdateCommentP');

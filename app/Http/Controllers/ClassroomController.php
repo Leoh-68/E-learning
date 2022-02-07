@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Classroom;
 use App\Models\Account;
 use App\Models\Post;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Mail;
@@ -37,6 +38,7 @@ class ClassroomController extends Controller
     // Thêm lớp
     public function addClass(Request $req)
     {
+        $image_name="";
         $req->validate([
             'classname' => 'required',
             'classcode' => 'required|max:6|min:6'
@@ -50,22 +52,22 @@ class ClassroomController extends Controller
         if ($req->has('image')) {
             $image = $req->image;
             $image_name = $image->getClientoriginalName();
-            $image->move(public_path('images/FileUpload'), $image_name);
+            $image->move(public_path('images/Classroom'), $image_name);
         }
-        $listClass = Classroom::where('malop', $req->classcode)->first();
-        // if($listClass!=null )
-        // {
-        //   Cookie::queue('error',"Lớp này đã tồn tại hoặc bị xóa",0.09);
-        // }
-        // if($listClass!=null && $listClass->deleted_at=!null)
-        // {
-        //   return 0;
-        // }
-        // *******
-        // if($listClass!=null&&  $listClass->deleted_at==null )
-        // {
-        //   return 0;
-        // }
+        else
+        {
+            $image_name="bg.jpg";
+        };
+        $listClass = Classroom::all();
+        foreach($listClass as $item)
+        {
+            if($item->malop==$req->classcode)
+            {
+                session()->flash('fail', 'MÃ lớp đã tồn tại');
+                return redirect()->route('Addclass');
+            }
+
+        }
         $account = Account::where('username', session('username'))->first();
         $class = new Classroom;
         $class->idaccount = $account->id;
@@ -116,6 +118,16 @@ class ClassroomController extends Controller
             'username' => 'required',
             'classname.required' => 'Vui lòng nhập đầy đủ tên lớp',
         ]);
+
+        if ($req->has('image')) {
+            $image = $req->image;
+            $image_name = $image->getClientoriginalName();
+            $image->move(public_path('images/Classroom'), $image_name);
+            $class = Classroom::where('malop', '=', $req->id)->first();
+            $class->name = $req->classname;
+            $class->hinhanh=$image_name;
+            $class->save();
+        }
         $class = Classroom::where('malop', '=', $req->id)->first();
         $class->name = $req->classname;
         $class->save();
@@ -126,6 +138,16 @@ class ClassroomController extends Controller
     public function deleteClass(Request $req)
     {
         $class = Classroom::where([['malop', '=', $req->id], ['deleted_at', null]])->first();
+        $post=Post::where('idclassroom',$class->id)->get();
+        foreach($post as $var)
+        {
+            $cmt=Comment::where('idpost',$var->id)->get();
+            foreach($cmt as $item)
+            {
+                $item->delete();
+            }
+            $var->delete();
+        }
         $class->delete();
         session()->flash('success', 'Xóa thành công');
         return redirect()->route('showClass');
@@ -154,6 +176,12 @@ class ClassroomController extends Controller
     {
         $account = Account::where('id', $id)->first();
         return $account->hoten;
+    }
+    //Lấy hình ảnh theo mã tài khoản
+    public static function LayHinhTheoMa($id)
+    {
+        $account = Account::where('id', $id)->first();
+        return $account->hinhanh;
     }
 
     public function layDSSVTL(Request $req)
@@ -248,6 +276,6 @@ class ClassroomController extends Controller
         $studentlis->waitingqueue = 1;
         $studentlis->save();
         session()->flash('success', ' Thành công');
-        return redirect()->route('lstStudent', ['id' => $class->malop]);
+        return redirect()->route('Logout');
     }
 }

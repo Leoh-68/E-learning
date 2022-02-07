@@ -6,7 +6,7 @@ use App\Models\Post;
 use App\Models\Classroom;
 use App\Models\Attachment;
 use App\Models\Comment;
-
+use App\Models\Account;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -65,6 +65,18 @@ class PostController extends Controller
     }
     public function updatePost(Request $req)
     {
+        $type = 0;
+        if ($req->type =="Thông báo") {
+            $type = 2;
+        }
+        else
+        {
+            $type = 1;
+        }
+        if($type==0)
+        {
+            session()->flash('fail', 'Sai phần loại bài đăng');
+        }
         $idclass = Classroom::where('id', $req->code)->first();
         $req->validate([
             'mota' => 'required',
@@ -76,6 +88,7 @@ class PostController extends Controller
         $post = Post::where('id', $req->id)->first();
         $post->ten = $req->name;
         $post->mota = $req->mota;
+        $post->posttype=$type;
         $post->save();
         if ($req->has('image')) {
             $size = $req->image->getSize();
@@ -128,5 +141,41 @@ class PostController extends Controller
         $post = Post::find($req->id);
         $cmt = Comment::orderBy('created_at', 'desc')->where('idpost', $post->id)->get();
         return view('Teacher/PostView', compact('post', 'cmt'));
+    }
+    public function singlePostStudent(Request $req)
+    {
+        $post = Post::find($req->id);
+        $cmt = Comment::orderBy('created_at', 'desc')->where('idpost', $post->id)->get();
+        return view('student/PostStudent', compact('post', 'cmt'));
+    }
+    //Sao chép bài đăng
+    public function copyPostShow(Request $req)
+    {
+        $account = Account::where('username', session('username'))->first();
+        $post=Post::find($req->id);
+        $class=Classroom::where('idaccount',$account->id)->get();
+        return View('Teacher/CopyPost',compact('post','class'));
+    }
+    public function copyPost(Request $req)
+    {
+        $post=Post::find($req->id);
+        $class=Classroom::where('malop',$req->class)->first();
+        $postcopy=new Post();
+        $postcopy->ten =  $post->ten;
+        $postcopy->mota = $post->mota;
+        $postcopy->idclassroom = $class->id;
+        $postcopy->posttype=$post->posttype;
+        $postcopy->save();
+        $attachpost=Attachment::where('idpost',$req->id)->count();
+        if($attachpost!=0)
+        {
+            $att=Attachment::where('idpost',$req->id)->first();
+            $attach= new Attachment();
+            $attach->attachment=$att->attachment;
+            $attach->idpost=$postcopy->id;
+            $attach->save();
+        }
+        session()->flash('success', 'Sao chép thành công');
+        return redirect()->back();
     }
 }

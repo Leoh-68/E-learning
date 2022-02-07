@@ -64,7 +64,6 @@
               <option value="Bài tập">Bài tập</option>
             </select>
           </div>
-
             <label>Hình ảnh</label>
             <input style="margin-bottom: 10px" type="file" class="form-control"  name="image">
             <button  type="submit" class="btn btn-secondary">submit</button>

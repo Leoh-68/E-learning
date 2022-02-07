@@ -1,14 +1,16 @@
 @extends('IndexHomePage')
+@section('MenuHomePage')
+<a href="{{route('showClass')}}">Lớp học</a>
+<a href="{{route('Logout')}}">Sủi</a>
+@endsection
 @section('body')
     @php
-
     @endphp
-    
-    <form method="POST" action="{{route('updateAccount')}}">
+    <form method="POST" action="{{route('updateAccount')}}"  enctype="multipart/form-data">
         @csrf
         <div class="formsubmit" style="padding: 30px">
         <div class="form-group">
-            <label for="">Họ tên </label> 
+            <label for="">Họ tên </label>
             <input type="text" class="form-control"  value="{{$account->hoten}}"  placeholder="Enter class code" name="hoten">
             @error('hoten')
             <span style="color: red">{{$message}}</span>
@@ -42,8 +44,14 @@
             <span style="color: red">{{$message}}</span>
         @enderror
           </div>
-
+          <div class="form-group">
+            <label for="">Ảnh đại diện</label>
+            <input class="form-control"  type="file" rows="10" name='image'>
+            @error('image')
+            <span style="color: red">{{$message}}</span>
+            @enderror
+        </div>
         <button type="submit" class="btn btn-primary" style="margin: 20px 0px 0px">Sửa</button>
-      </form>   
+      </form>
 
 @endsection

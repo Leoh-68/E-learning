@@ -25,6 +25,16 @@
  <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
  @endsection
  @section('body')
+ @if(session()->has('success'))
+<div class="shadow mx-auto d-block alert alert-success" style="width: 500px">
+  {{ session()->get('success') }}
+</div>
+@endif
+@if(session()->has('fail'))
+<div class="shadow mx-auto d-block alert alert-danger" style="width: 500px">
+  {{ session()->get('fail') }}
+</div>
+@endif
  <form method="POST" action="{{route('addClass')}}" enctype="multipart/form-data">
   @csrf
   <div class="formsubmit" style="padding: 30px">

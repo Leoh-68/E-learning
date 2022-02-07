@@ -26,7 +26,7 @@
  @section('body')
  @foreach ($class as $item)
  <div class="classbody">
-    <div class="imgclass" style="background-image: url('../images/bg.jpg')">
+    <div class="imgclass" style="background-image: url('../images/Classroom/{{$item->hinhanh}}')">
         <h1 class="nameinclass">{{$item->name}}</h1>
     </div>
     @if(session()->has('success'))
@@ -47,30 +47,19 @@
                         <a href=""><img src="{{ asset('images/3.jpg') }}"
                                 alt="Avatar" class="avatarnavbar"></a>
                     </div>
-                    {{-- Nút của giáo viên --}}
-                    {{-- <div class="dropdown">
-                        <button class="btn btn-basic dropdown-toggle" type="button" id="dropdownMenuButton"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item"
-                                href="{{ route('UpdatePost', ['id' => $var->id, 'code' => $item->id]) }}">Sửa</a>
-                            <a class="dropdown-item" href="{{ route('DeletePostP', ['id' => $var->id, 'code' => $item->id]) }}">Xóa</a>
-                        </div>
-                    </div> --}}
                     <Span>
                         {{ App\Http\Controllers\ClassroomController::TheoAccount($var->idclassroom) }}</Span><br>
                     <Span style="font-size: 13px; color:grey">{{ $var->created_at->format('d/m/Y') }}</Span>
                 </div>
                 <br>
                 <div class="postcontent">
-                    <a href="{{route('ViewPost',['id'=>$var->id])}}"><label style="color: black">{{ $var->mota }}</label><br></a>
+                    <a href="{{route('ViewPostStudent',['id'=>$var->id])}}"><label style="color: black">{{ $var->mota }}</label><br></a>
                     @php
                         if (App\Http\Controllers\PostController::attachmentfromID($var->id) == null) {
                         } else {
                             $image = App\Http\Controllers\PostController::attachmentfromID($var->id);
                     @endphp
-                    <a href="{{route('ViewPost',['id'=>$var->id])}}"><img style="height:100px " src="{{ asset('/images/PostFile/' . $image) }}"></a>
+                    <a href="{{route('ViewPostStudent',['id'=>$var->id])}}"><img style="height:100px " src="{{ asset('/images/PostFile/' . $image) }}"></a>
                     @php
                         }
                     @endphp

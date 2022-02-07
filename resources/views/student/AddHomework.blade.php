@@ -19,22 +19,13 @@
  @endsection
  @section('body')
  @foreach ($class as $item)
- <form method="POST" action="{{route('updateSingleClassPost',['id' => $item->malop])}}"  enctype="multipart/form-data">
+ <form method="POST" action=""  enctype="multipart/form-data">
   @csrf
   <div class="formsubmit" style="padding: 30px">
-
-      <div class="form-group">
-      <label for="">Tên lớp</label>
-      <input type="text" value="{{$item->name}}" class="form-control"  placeholder="Enter class name" name="classname">
-    </div>
     <div class="form-group">
-      <label for="">Giảng viên</label>
-      <input type="subject" value="{{\App\Http\Controllers\ClassroomController::LayTenTheoMa($item->idaccount)}}"  class="form-control"  placeholder="Enter suject name" name="username" readonly>
-    </div>
-    <div class="form-group">
-        <label for="">Hình ảnh</label>
+        <label for="">Nộp bài</label>
         <input type="file" class="form-control" name="image">
-        @error('classcode')
+        @error('image')
         <span style="color: red">{{$message}}</span>
         @enderror
     </div>

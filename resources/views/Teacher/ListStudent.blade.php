@@ -1,7 +1,7 @@
 @extends('IndexHomePage')
 @section('MenuHomePage')
 <a href="{{route('showClass')}}">Lớp học</a>
-<a href="{{route('Logout')}}">Sủi</a>
+<a href="{{route('showSingleClass',['id'=>request()->id])}}">Quay lại</a>
 @endsection
 @if(session()->has('success'))
 <div class="shadow mx-auto d-block alert alert-success" style="width: 500px">
@@ -16,7 +16,7 @@
 @section('body')
     <div class="classbody">
         <div class="container">
-            <a href="{{route('showSingleClass',['id'=>request()->id])}}">Quay lại</a>
+
             <form method="POST" action="{{route('SendMailP',['id' => request()->id,'name'=>$accountname])}}">
             @csrf
                 <br><input name="textinput">

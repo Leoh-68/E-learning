@@ -23,8 +23,11 @@
         @php
             $idclass = $item->malop;
         @endphp
+        @php
+        $hinhanh=App\Http\Controllers\ClassroomController::LayHinhTheoMa($item->idaccount);
+        @endphp
         <div class="classbody">
-            <div class="imgclass" style="background-image: url('../images/1.jpg')">
+            <div class="imgclass" style="background-image: url('../images/Classroom/{{$item->hinhanh}}')">
                 <h1 class="nameinclass">{{ $item->name }}</h1>
             </div>
             @if (session()->has('success'))
@@ -44,7 +47,7 @@
                 @foreach ($post as $var)
                     <div class="posts">
                         @php
-                            if($var->posttype==2)
+                            if($var->posttype==1)
                             {
                         @endphp
                             <div class="postown">
@@ -58,6 +61,8 @@
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item"
+                                        href="{{route('CopyPostG',['id'=>$var->id])}}">Sao chép</a>
+                                        <a class="dropdown-item"
                                             href="{{ route('UpdatePost', ['id' => $var->id, 'code' => $item->id]) }}">Sửa</a>
                                         <a class="dropdown-item" href="{{ route('DeletePostP', ['id' => $var->id, 'code' => $item->id]) }}">Xóa</a>
                                     </div>
@@ -67,18 +72,17 @@
                                 <Span style="font-size: 13px; color:grey">{{ $var->created_at->format('d/m/Y') }}</Span></a>
 
                             </div>
-
                                 @php
                             };
                                 @endphp
 
 @php
-if($var->posttype!=2)
+if($var->posttype!=1)
 {
                         @endphp
                         <div class="postown">
                             <div class="imgpost">
-                                <a href="{{ route('loadAccount') }}"><img src="{{ asset('images/3.jpg') }}"
+                                <a href="{{ route('loadAccount') }}"><img src="{{ asset('images/'.$hinhanh) }}"
                                         alt="Avatar" class="avatarnavbar"></a>
                             </div>
                             <div class="dropdown">
@@ -87,8 +91,9 @@ if($var->posttype!=2)
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item"
+                                        href="{{route('CopyPostG',['id'=>$var->id])}}">Sao chép</a>
+                                    <a class="dropdown-item"
                                         href="{{ route('UpdatePost', ['id' => $var->id, 'code' => $item->id]) }}">Sửa</a>
-
                                     <a onclick="return confirm('Bạn có chắc muốn xóa ?')" class="dropdown-item" href="{{ route('DeletePostP', ['id' => $var->id, 'code' => $item->id]) }}">Xóa</a>
                                 </div>
                             </div>
