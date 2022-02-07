@@ -1,7 +1,7 @@
 @extends('IndexHomePage')
 @section('MenuHomePage')
 <a href="{{route('showClass')}}">Lớp học</a>
-<a href="{{route('Logout')}}">Sủi</a>
+<a href="{{route('showSingleClass',['id'=>request()->id])}}">Quay lại</a>
 @endsection
 @if(session()->has('success'))
 <div class="shadow mx-auto d-block alert alert-success" style="width: 500px">
@@ -16,15 +16,15 @@
 @section('body')
     <div class="classbody">
         <div class="container">
-            <a href="{{route('showSingleClass',['id'=>request()->id])}}">Quay lại</a>
-            <form method="POST" action="{{route('dsSinhVienPost',['id' => request()->id])}}">
+
+            <form method="POST" action="{{route('SendMailP',['id' => request()->id,'name'=>$accountname])}}">
             @csrf
                 <br><input name="textinput">
                 <button type="submit"> Thêm</button>
                 <span style="color: red">{{Cookie::get('error')}}</span>
             </form>
             <table class="table">
-            <thead>     
+            <thead>
                 <tr>
                     <th>Họ tên</th>
                     <th>Ngày sinh</th>
@@ -50,5 +50,5 @@
         </table>
         </div>
       </div>
-   
+
 @endsection

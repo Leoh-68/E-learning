@@ -1,5 +1,5 @@
 <!-- @php
-use app\Http\Controllers\ClassroomController;   
+use app\Http\Controllers\ClassroomController;
 @endphp -->
 @extends('IndexHomePage')
 @section('AddButton')
@@ -11,7 +11,7 @@ use app\Http\Controllers\ClassroomController;
 @endsection
 
 @section('logo')
-<a href="#" class="logo">E-Learning Project</a>   
+<a href="#" class="logo">E-Learning Project</a>
 @endsection
 @section('body')
 @if(session()->has('success'))
@@ -27,9 +27,9 @@ use app\Http\Controllers\ClassroomController;
 @foreach ($classlst as $var)
 @if ($var->deleted_at==null)
 <div class="column">
-  <div class="card" style="background-image: url('../images/bg.jpg')"> 
+  <div class="card" style="background-image: url('../images/Classroom/{{$var->hinhanh}}')">
     @php
-     $id=$var->malop;   
+     $id=$var->malop;
     @endphp
       <a class="linkname" style="text-decoration: none" href="{{route('showSingleClass',['id'=>$id])}}">
         <h1 class="classname">{{$var->name}}</h1>
@@ -37,15 +37,18 @@ use app\Http\Controllers\ClassroomController;
     <h2 class="nameteacher">
       {{\App\Http\Controllers\ClassroomController::TheoAccount($var->id)}}
     </h2>
+    @php
+        $hinhanh=App\Http\Controllers\ClassroomController::LayHinhTheoMa($var->idaccount);
+    @endphp
     <span class="classcode">
      Mã lớp: {{$var->malop}}
     </span>
-     <img src="{{ asset('images/3.png') }}" class="avatar" align="right">
+     <img src="{{ asset('images/'.$hinhanh) }}" class="avatar" align="right">
     <div class="listfunct">
       <a href="{{route('updateSingleClassPost',['id' => $var->malop])}}">Sửa</a>
       <a  onclick="return confirm('Bạn có chắc muốn xóa ?')" href="{{route('deleteClassPost',['id' => $var->malop])}}">Xóa</a>
     </div>
-   </div> 
+   </div>
 </div>
 @endif
 @endforeach

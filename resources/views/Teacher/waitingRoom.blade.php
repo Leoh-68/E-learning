@@ -1,7 +1,7 @@
 @extends('IndexHomePage')
 @section('MenuHomePage')
 <a href="{{route('showClass')}}">Lớp học</a>
-<a href="{{route('Logout')}}">Sủi</a>
+<a href="{{route('showSingleClass',['id'=>request()->id])}}">Quay lại</a>
 @endsection
 
 @section('body')
@@ -17,7 +17,7 @@
 @endif
     <div class="classbody">
         <div class="container">
-            <a href="{{route('showSingleClass',['id'=>request()->id])}}">Quay lại</a>
+
             <form method="POST" action="{{route('dsSinhVienPost',['id' => request()->id])}}">
             @csrf
                 <br><input name="textinput">
@@ -25,7 +25,7 @@
                 <span style="color: red">{{Cookie::get('error')}}</span>
             </form>
             <table class="table">
-            <thead>     
+            <thead>
                 <tr>
                     <th>Họ tên</th>
                     <th>Ngày sinh</th>
@@ -47,12 +47,12 @@
                     <a  onclick="return confirm('Bạn có chắc muốn xóa ?')" href="{{route('xoaSinhvien',['id'=>$item->id,'code'=>request()->id])}}">Xóa</a>
                     <a  href="{{route('acceptStudent',['account'=>$item->id,'class'=>request()->id])}}" >Chấp nhận</a>
                     </td>
-                    
+
                 </tr>
                 @endforeach
             </tbody>
         </table>
         </div>
       </div>
-   
+
 @endsection
