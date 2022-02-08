@@ -13,7 +13,7 @@ use App\Http\Requests\EmailRequest;
 use Carbon\Carbon;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-// Bạch: Ngộ thêm cả thư mục fonts(~E-learning\public\fonts) 
+// Bạch: Ngộ thêm cả thư mục fonts(~E-learning\public\fonts)
 // và vendor(~E-learning\public\vendor) nhưng ghi chú hết thì trầm cảm lắm
 class DangNhapController extends Controller
 {
@@ -35,7 +35,7 @@ class DangNhapController extends Controller
     public function xuLyDangNhap(DangNhapRequest $request)
     {
         $validated = $request->validated();
-        if (Auth::attempt(['username' =>$request->username, 'password' =>  $request->password])) { 
+        if (Auth::attempt(['username' =>$request->username, 'password' =>  $request->password])) {
             session(['username' => $request->username]);
             session(['password' => $request->username]);
             if(Auth::user()->accounttype==2) {
@@ -44,9 +44,9 @@ class DangNhapController extends Controller
                 return redirect()->route('Admin');
             } else {
                 return  redirect()->route('showClassStudent');
-            }      
-        } 
-        return redirect()->route('login')->with('Text','Username hoặc password không tồn tại');         
+            }
+        }
+        return redirect()->route('login')->with('Text','Username hoặc password không tồn tại');
     }
 
     public function forgotPassword()
@@ -56,17 +56,17 @@ class DangNhapController extends Controller
 
     public function xuLyMatKhau(EmailRequest $request)
     {
-        
-        $validated = $request->validated();   
+
+        $validated = $request->validated();
         $user = Account::where('email',$request->email)->first();
         if(!empty($user)||$user->email == $request->email){
                 Mail::send('SendMail',compact('user'),function($email) use($user){
                     $email->subject('E-learning - Quên mật khẩu');
                     $email->to($user->email,$user->hoten);
-                }); 
-            return redirect()->route('login')->with('title', 'Vui lòng kiểm tra hòm thư của bạn!!!'); 
+                });
+            return redirect()->route('login')->with('title', 'Vui lòng kiểm tra hòm thư của bạn!!!');
         }
-        
+
         return redirect()->route('ForgotPassword')->with('title','Email không tồn tại');
     }
 
@@ -87,12 +87,12 @@ class DangNhapController extends Controller
 
     public function taoMoiMatKhau(Request $request,$id)
     {
-        
+
         $request->validate([
             'password' => 'required|min:5',
             'password2' => 'required|min:5'
         ]
-        );  
+        );
         $user = Account::find($id);
         if($request->password!=$request->password2){
             $title = " Password không khớp";
@@ -100,9 +100,9 @@ class DangNhapController extends Controller
          }else{
             $user->password = Hash::make($request->password);
             $user->save();
-           
+
             return redirect()->route('login')->with('title', 'Cập nhật mật khẩu thành công');
-         }           
+         }
     }
 
     //Cái này là đăng xuất
@@ -116,7 +116,7 @@ class DangNhapController extends Controller
         $session4 = session()->forget('laravel_session');
         $session5 = session()->forget('1P_JAR');
         return redirect()->route('Wellcome')->withSession($session)->withSession($session1)
-        ->withSession($session2)->withSession($session3)->withSession($session4)->withSession($session5);  
+        ->withSession($session2)->withSession($session3)->withSession($session4)->withSession($session5);
     }
 
     public function taoTaiKhoan(Request $request)
@@ -129,12 +129,13 @@ class DangNhapController extends Controller
         $dt = Carbon::now('Asia/Ho_Chi_Minh');
         $user = Account::where('username',$request->username)->first();
         $user2 = Account::where('email',$request->email)->first();
-        if(!empty($user) && !empty($user2)){
+
+        if(empty($user) && empty($user2)){
             if($request->password!=$request->password2){
                 return redirect()->route('Create')->with('message', 'Password không khớp!!!');
             }else if(strlen($request->phone)<10||strlen($request->phone)>10)
             {
-                return redirect()->route('Create')->with('message', 'SDT không hợp lệ!!!'); 
+                return redirect()->route('Create')->with('message', 'SDT không hợp lệ!!!');
             }
             // else if($request->day >= $dt)
             // {
@@ -150,11 +151,12 @@ class DangNhapController extends Controller
              $account->ngaysinh=$request->day;
              $account->diachi=$request->address;
              $account->sdt=$request->phone;
+             $account->hinhanh='3.jpg';
              $account->save();
              return redirect()->route('login')->with('title', 'Tạo tài khoản thành công');
             }
         }
-        return redirect()->route('Create')->with('message', 'Username hoặc email đã tồn tại!!!'); 
-    
+        return redirect()->route('Create')->with('message', 'Username hoặc email đã tồn tại!!!');
+
     }
 }

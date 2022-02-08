@@ -57,6 +57,7 @@ $hinhanh=App\Http\Controllers\ClassroomController::LayHinhTheoMa($account->id);
                 </h1>
                 <h4 style="color: grey">{{$post->created_at->format('d-m-Y')}}</h4>
             </div>
+
             <div class="contentpostview" style=" border-bottom: 2px solid black;">
                 <h4>
                    {{$post->mota}}
@@ -74,6 +75,7 @@ $hinhanh=App\Http\Controllers\ClassroomController::LayHinhTheoMa($account->id);
             @endphp
             </div>
             <form action="{{route('AddComment',['idpost'=>$post->id,'idaccount'=>$account->id])}}">
+                @csrf
                 <div class="comment">
                     <a href="{{ route('loadAccount') }}"><img src="{{ asset('images/'.$hinhanh) }}" alt="Avatar"
                             class="avatarnavbar"></a>
