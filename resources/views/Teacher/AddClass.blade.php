@@ -4,7 +4,6 @@
  @extends('IndexHomePage')
  @section('MenuHomePage')
 <a href="{{route('showClass')}}">Lớp học</a>
-<a href="{{route('Logout')}}">Sủi</a>
 @endsection
 
  @section('library')
@@ -25,15 +24,18 @@
  <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
  @endsection
  @section('body')
- @if(session()->has('success'))
-<div class="shadow mx-auto d-block alert alert-success" style="width: 500px">
-  {{ session()->get('success') }}
-</div>
+ @if (session()->has('success'))
+ <div class="alert alert-success alert-dismissible fade show" role="alert">
+     {{ session()->get('success') }}
+     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+     </button>
+ </div>
 @endif
-@if(session()->has('fail'))
-<div class="shadow mx-auto d-block alert alert-danger" style="width: 500px">
-  {{ session()->get('fail') }}
-</div>
+@if (session()->has('fail'))
+ <div class="alert alert-danger" style="width: 500px">
+     {{ session()->get('fail') }}
+ </div>
 @endif
  <form method="POST" action="{{route('addClass')}}" enctype="multipart/form-data">
   @csrf

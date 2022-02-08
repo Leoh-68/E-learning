@@ -26,6 +26,7 @@
             <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             @yield('MenuHomePage')
+            <a href="{{route('dangXuat')}}">Đăng xuất</a>
          </div>
           <span onclick="openNav()"><i class="fas fa-stream fa-2x"></i></span>
         <a href="#" class="logo">E-Learning Project</a>
@@ -48,7 +49,7 @@
             <li>
                 <a href="{{route('loadAccount')}}"><img src="{{ asset('images/'.$account) }}" alt="Avatar" class="avatarnavbar"></a>
             </li>
-             <a href="{{route('dangXuat')}}"><img src="{{ asset('images/logout.png') }}" alt="Avatar" class="avatarnavbar"></a>
+
              <li>
 
             </li>
