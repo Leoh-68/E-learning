@@ -46,40 +46,31 @@
             <div class="post">
                 @foreach ($post as $var)
                     <div class="posts">
-                        @php
-                            if($var->posttype==1)
-                            {
-                        @endphp
-                            <div class="postown">
-                                <div class="imgpost">
-                                    <a  href="{{route('ViewPost',['id'=>$var->id])}}"><img src="{{ asset('images/baitap.jpg') }}"
-                                            alt="Avatar" class="avatarnavbar"></a>
-                                </div>
-                                <div class="dropdown">
-                                    <button class="btn btn-basic dropdown-toggle" type="button" id="dropdownMenuButton"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item"
-                                        href="{{route('CopyPostG',['id'=>$var->id])}}">Sao chép</a>
-                                        <a class="dropdown-item"
-                                            href="{{ route('UpdatePost', ['id' => $var->id, 'code' => $item->id]) }}">Sửa</a>
-                                        <a class="dropdown-item" href="{{ route('DeletePostP', ['id' => $var->id, 'code' => $item->id]) }}">Xóa</a>
-                                    </div>
-                                </div>
-                                <a href="{{route('ViewPost',['id'=>$var->id])}}" >  <Span>
-                                    {{ App\Http\Controllers\ClassroomController::TheoAccount($var->idclassroom)}} Đã đăng một bài tập mới: {{$var->ten}}</Span><br>
-                                <Span style="font-size: 13px; color:grey">{{ $var->created_at->format('d/m/Y') }}</Span></a>
-
+                        @if ($var->posttype==1)
+                        <div class="postown">
+                            <div class="imgpost">
+                                <a  href="{{route('ViewPost',['id'=>$var->id])}}"><img src="{{ asset('images/baitap.jpg') }}"
+                                        alt="Avatar" class="avatarnavbar"></a>
                             </div>
-                                @php
-                            };
-                                @endphp
+                            <div class="dropdown">
+                                <button class="btn btn-basic dropdown-toggle" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item"
+                                    href="{{route('CopyPostG',['id'=>$var->id])}}">Sao chép</a>
+                                    <a class="dropdown-item"
+                                        href="{{ route('UpdatePost', ['id' => $var->id, 'code' => $item->id]) }}">Sửa</a>
+                                    <a class="dropdown-item" href="{{ route('DeletePostP', ['id' => $var->id, 'code' => $item->id]) }}">Xóa</a>
+                                </div>
+                            </div>
+                            <a href="{{route('ViewPost',['id'=>$var->id])}}" >  <Span>
+                                {{ App\Http\Controllers\ClassroomController::TheoAccount($var->idclassroom)}} Đã đăng một bài tập mới: {{$var->ten}}</Span><br>
+                            <Span style="font-size: 13px; color:grey">{{ $var->created_at->format('d/m/Y') }}</Span></a>
 
-@php
-if($var->posttype!=1)
-{
-                        @endphp
+                        </div>
+                        @endif
+                        @if ($var->posttype!=1)
                         <div class="postown">
                             <div class="imgpost">
                                 <a href="{{ route('loadAccount') }}"><img src="{{ asset('images/'.$hinhanh) }}"
@@ -115,9 +106,7 @@ if($var->posttype!=1)
                                 }
                             @endphp
                         </div>
-    @php
-};
-    @endphp
+                        @endif
 
                     </div>
                 @endforeach

@@ -8,8 +8,8 @@ use app\Http\Controllers\ClassroomController;
 @php
 $malop=App\Http\Controllers\ClassroomController::Trans($post->idclassroom);
 @endphp
-<a href="{{route('showSingleClass',['id'=>$malop])}}"> Trở về</a>
-<a href="{{ route('showClass') }}">Lớp học</a>
+<a href="{{route('showSingleClassStudent',['id'=>$malop])}}"> Trở về</a>
+<a href="{{ route('showClassStudent') }}">Lớp học</a>
 @endsection
 @section('library')
     <meta charset="utf-8">
@@ -46,8 +46,30 @@ $malop=App\Http\Controllers\ClassroomController::Trans($post->idclassroom);
 @php
 $account=App\Http\Controllers\AccountController::AccountLogin();
 @endphp
+@php
+$hinhanh=App\Http\Controllers\ClassroomController::LayHinhTheoMa($account->id);
+@endphp
 <div class="formpost" style="padding-top: 50px">
         <div>
+            @if ($post->posttype==1)
+            <form method="POST" action="{{route('HomeWorkP',['id'=>$post->id])}}" enctype="multipart/form-data">
+                @csrf
+                <div class="form-group" style="float: right">
+                    <label for="">Tệp đính kèm</label>
+                    @if ($att==0)
+                    <label style="margin-left:120px;color:red;"> Chưa nộp</label>
+                    @else
+                    <label style="margin-left:120px;color:green;"> Đã nộp</label>
+                    @endif
+                    <input type="file" class="form-control"  name="image" style="width: 300px">
+                    @error('classcode')
+                    <span style="color: red">{{$message}}</span>
+                    @enderror
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin: 30px 0px 0px;float: right;">Nộp</button>
+            </form>
+            @endif
+
             <div class="headpostview" style=" border-bottom: 2px solid black; ">
                 <h1>
                    {{$post->ten}}
@@ -72,7 +94,7 @@ $account=App\Http\Controllers\AccountController::AccountLogin();
             </div>
             <form action="{{route('AddComment',['idpost'=>$post->id,'idaccount'=>$account->id])}}">
                 <div class="comment">
-                    <a href="{{ route('loadAccount') }}"><img src="{{ asset('images/3.jpg') }}" alt="Avatar"
+                    <a href="{{ route('loadAccount') }}"><img src="{{ asset('images/'.$hinhanh) }}" alt="Avatar"
                             class="avatarnavbar"></a>
                     <input placeholder="Bình luận" style="padding-left: 10px" name="comment">
                     @error('comment')
@@ -82,9 +104,12 @@ $account=App\Http\Controllers\AccountController::AccountLogin();
                 </div>
             </form>
             @foreach ($cmt as $res)
+            @php
+            $hinhanhcmt=App\Http\Controllers\ClassroomController::LayHinhTheoMa($res->idaccount);
+            @endphp
             <div>
                 <div style="float: left">
-                    <img src="{{ asset('images/3.jpg') }}" alt="Avatar" class="avatarnavbar">
+                    <img src="{{ asset('images/'.$hinhanhcmt) }}" alt="Avatar" class="avatarnavbar">
                 </div>
                 <div style="float: left">
                     <span class="">
@@ -105,7 +130,6 @@ $account=App\Http\Controllers\AccountController::AccountLogin();
                     </div>
                 </div>
             </form>
-
             <br>
             <br>
             @endforeach

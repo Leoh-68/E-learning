@@ -14,13 +14,14 @@ class PostController extends Controller
     //Thêm post
     public function post(Request $req)
     {
+        $account = Account::where('username', $req->session()->get('username'))->first();
         $type = 0;
         if ($req->type == "Thông báo") {
-            $type = 1;
+            $type = 2;
         }
         else
         {
-            $type = 2;
+            $type = 1;
         }
         if($type==0)
         {
@@ -52,6 +53,7 @@ class PostController extends Controller
             $image->move(public_path('images/PostFile'), $image_name);
             $attach->attachment = $image_name;
             $attach->idpost = $post->id;
+            $attach->idaccount=$account->id;
             $attach->save();
         }
         session()->flash('success', 'Đăng thành công');
@@ -127,7 +129,7 @@ class PostController extends Controller
         return redirect()->route('showSingleClass', ['id' => $idclass->malop]);
     }
     //Lấy tệp theo id post
-    public function attachmentfromID($id)
+    public static function attachmentfromID($id)
     {
         $att = Post::find($id)->dsTep;
         if ($att == null) {
@@ -144,9 +146,11 @@ class PostController extends Controller
     }
     public function singlePostStudent(Request $req)
     {
+        $account = Account::where('username', session('username'))->first();
         $post = Post::find($req->id);
         $cmt = Comment::orderBy('created_at', 'desc')->where('idpost', $post->id)->get();
-        return view('student/PostStudent', compact('post', 'cmt'));
+        $att=Attachment::where([['idpost',$post->id],['idaccount',$account->id]])->count();
+        return view('student/PostStudent', compact('post', 'cmt','att'));
     }
     //Sao chép bài đăng
     public function copyPostShow(Request $req)
@@ -158,6 +162,7 @@ class PostController extends Controller
     }
     public function copyPost(Request $req)
     {
+        $account = Account::where('username', $req->session()->get('username'))->first();
         $post=Post::find($req->id);
         $class=Classroom::where('malop',$req->class)->first();
         $postcopy=new Post();
@@ -173,9 +178,34 @@ class PostController extends Controller
             $attach= new Attachment();
             $attach->attachment=$att->attachment;
             $attach->idpost=$postcopy->id;
+            $attach->idaccount=$account->id;
             $attach->save();
         }
         session()->flash('success', 'Sao chép thành công');
         return redirect()->back();
+    }
+    //Nộp bài tập
+    public function homeWork (Request $req)
+    {
+        $account = Account::where('username', $req->session()->get('username'))->first();
+        if ($req->has('image')) {
+            $size = $req->image->getSize();
+            $extention = $req->image->extension();
+            $image = $req->image;
+            $image_name = $image->getClientoriginalName();
+            $image->move(public_path('images/PostFile'), $image_name);
+            $attach= new Attachment();
+            $attach->attachment=$image_name;
+            $attach->idpost=$req->id;
+            $attach->idaccount=$account->id;
+            $attach->save();
+            session()->flash('success', 'Nộp bài thành công');
+            return redirect()->back();
+        }
+        else
+        {
+            session()->flash('fail', 'Chưa chọn tệp ');
+            return redirect()->back();
+        }
     }
 }

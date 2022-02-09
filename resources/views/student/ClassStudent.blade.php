@@ -25,6 +25,9 @@
  @endsection
  @section('body')
  @foreach ($class as $item)
+ @php
+ $hinhanh=App\Http\Controllers\ClassroomController::LayHinhTheoMa($item->idaccount);
+ @endphp
  <div class="classbody">
     <div class="imgclass" style="background-image: url('../images/Classroom/{{$item->hinhanh}}')">
         <h1 class="nameinclass">{{$item->name}}</h1>
@@ -41,31 +44,47 @@
     @endif
     <div class="post">
         @foreach ($post as $var)
-            <div class="posts">
-                <div class="postown">
-                    <div class="imgpost">
-                        <a href=""><img src="{{ asset('images/3.jpg') }}"
-                                alt="Avatar" class="avatarnavbar"></a>
-                    </div>
-                    <Span>
-                        {{ App\Http\Controllers\ClassroomController::TheoAccount($var->idclassroom) }}</Span><br>
-                    <Span style="font-size: 13px; color:grey">{{ $var->created_at->format('d/m/Y') }}</Span>
+        <div class="posts">
+            @if ($var->posttype==1)
+            <div class="postown">
+                <div class="imgpost">
+                    <a  href="{{route('ViewPostStudent',['id'=>$var->id])}}"><img src="{{ asset('images/baitap.jpg') }}"
+                            alt="Avatar" class="avatarnavbar"></a>
                 </div>
-                <br>
-                <div class="postcontent">
-                    <a href="{{route('ViewPostStudent',['id'=>$var->id])}}"><label style="color: black">{{ $var->mota }}</label><br></a>
-                    @php
-                        if (App\Http\Controllers\PostController::attachmentfromID($var->id) == null) {
-                        } else {
-                            $image = App\Http\Controllers\PostController::attachmentfromID($var->id);
-                    @endphp
-                    <a href="{{route('ViewPostStudent',['id'=>$var->id])}}"><img style="height:100px " src="{{ asset('/images/PostFile/' . $image) }}"></a>
-                    @php
-                        }
-                    @endphp
-                </div>
+                <a href="{{route('ViewPostStudent',['id'=>$var->id])}}" >  <Span>
+                    {{ App\Http\Controllers\ClassroomController::TheoAccount($var->idclassroom)}} Đã đăng một bài tập mới: {{$var->ten}}</Span><br>
+                <Span style="font-size: 13px; color:grey">{{ $var->created_at->format('d/m/Y') }}</Span></a>
+
             </div>
-        @endforeach
+            @endif
+            @if ($var->posttype!=1)
+            <div class="postown">
+                <div class="imgpost">
+                    <a href="{{ route('loadAccount') }}"><img src="{{ asset('images/'.$hinhanh) }}"
+                            alt="Avatar" class="avatarnavbar"></a>
+                </div>
+                <Span>
+                    {{ App\Http\Controllers\ClassroomController::TheoAccount($var->idclassroom) }}</Span><br>
+                <Span style="font-size: 13px; color:grey">{{ $var->created_at->format('d/m/Y') }}</Span>
+
+            </div>
+            <br>
+            <div class="postcontent">
+                <a href="{{route('ViewPostStudent',['id'=>$var->id])}}"><label style="color: black">{{ $var->mota }}</label><br></a>
+                @php
+                    if (App\Http\Controllers\PostController::attachmentfromID($var->id) == null) {
+                    } else {
+                        $image = App\Http\Controllers\PostController::attachmentfromID($var->id);
+                @endphp
+                <a href="{{route('ViewPostStudent',['id'=>$var->id])}}"><img style="height:100px " src="{{ asset('/images/PostFile/' . $image) }}"></a>
+                @php
+                    }
+                @endphp
+            </div>
+            @endif
+        </div>
+    @endforeach
+</div>
     </div>
 
     <div class="idclass">
@@ -79,8 +98,6 @@
          <br> <h5 style="padding: 10px">{{$item->malop}}<h5>
     </div>
  @endforeach
-
-
     </div>
     </div>
 </div>

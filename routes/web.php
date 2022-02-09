@@ -67,6 +67,8 @@ Route::post('/Class/Post/Delete/{code}/{id}', [PostController::class, 'deletePos
 Route::get('/Class/Post/Copy/{id}', [PostController::class,'copyPostShow'])->name('CopyPostG');
 Route::post('/Class/Post/Copy/{id}', [PostController::class,'copyPost'])->name('CopyPostP');
 Route::get('/Class/Post/View/{id}', [PostController::class,'singlePost'])->name('ViewPost');
+Route::post('/Class/Post/HomeWork/{id}', [PostController::class,'homeWork'])->name('HomeWorkP');
+Route::get('/Class/Post/HomeWork/{id}', [PostController::class,'homeWork'])->name('HomeWorkG');
 Route::get('/Class/Student/Post/{id}', [PostController::class,'singlePostStudent'])->name('ViewPostStudent');
 Route::get('/Class/Post/Comment/{idaccount}/{idpost}', [CommentController::class,'addComment'])->name('AddComment');
 Route::get('/Class/Comment/Update/{idcomment}', [CommentController::class,'updateCommentShow'])->name('UpdateCommentG');
@@ -76,6 +78,8 @@ Route::get('/Class/Comment/Delete/{idcomment}', [CommentController::class,'delet
 Route::post('/SendMail/{name}/{id}', [ClassroomController::class, 'sendMail'])->name("SendMailP");
 Route::get('/Accept/{id}/{idclass}', [ClassroomController::class, 'Acp'])->name("AcceptG");
 Route::post('/Accept/{id}/{idclass}', [ClassroomController::class, 'Acp'])->name("AcceptP");
+Route::post('/ListStudent/Find/{id}', [StudentListController::class, 'findStudent'])->name('FindStudentP');
+Route::get('/ListStudent/Find/{id}', [StudentListController::class, 'findStudent'])->name('FindStudentG');
 //Bạch
 Route::get('/', function () {
     return view('Login');

@@ -81,7 +81,7 @@ class StudentController extends Controller
         $sv->save();
         return redirect()->route('StudentsList');
     }
-    public function xoaSV($id)
+    public  function xoaSV($id)
     {
         $dsSV = Account::find($id);
         if($dsSV == null||$dsSV->deleted_at != NULL)

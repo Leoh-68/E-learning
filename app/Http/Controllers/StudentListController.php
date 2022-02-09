@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Cookie;
 
 class StudentListController extends Controller
 {
+    //Thêm học sinh
     public function AddStudent(Request $req)
     {
         $listaccount = StudentList::all();
@@ -50,7 +51,7 @@ class StudentListController extends Controller
         session()->flash('success', ' Thành công');
         return redirect()->route('lstStudentWating', ['id' => $req->id]);
     }
-
+    //Xóa học sinh
     public function DeleteStudent(Request $req)
     {
         $idclass = Classroom::where('malop', $req->code)->first();
@@ -59,18 +60,16 @@ class StudentListController extends Controller
         return redirect()->route('lstStudent', ['id' => $req->code]);
     }
 
-
     public function AddStudentAdmin(Request $req)
     {
-        $studentlis= new StudentList;
-        $allacc=Account::where([['email' , '=' , $req->textinput],['deleted_at','=',null]])->first();
-        if($allacc==null)
-        {
+        $studentlis = new StudentList;
+        $allacc = Account::where([['email', '=', $req->textinput], ['deleted_at', '=', null]])->first();
+        if ($allacc == null) {
             return view('admin/UnknowAccount');
-        } 
-        $studentlis->stt=1;
-        $studentlis->idaccount=$allacc->id;
-        $studentlis->idclassroom=$req->id;
+        }
+        $studentlis->stt = 1;
+        $studentlis->idaccount = $allacc->id;
+        $studentlis->idclassroom = $req->id;
         $studentlis->save();
         return redirect()->route('loadDSSV', ['id' => $req->id]);
     }
@@ -79,7 +78,7 @@ class StudentListController extends Controller
         $a = StudentList::where('idaccount', $req->id)->delete();
         return redirect()->route('loadDSSV', ['id' => $req->code]);
     }
-
+    //Chấp thuận yêu cầu vào lớp
     public function acceptStudent(Request $req)
     {
         $class = Classroom::where('malop', $req->class)->first();
@@ -87,5 +86,22 @@ class StudentListController extends Controller
         $a->waitingqueue = 1;
         $a->save();
         return  redirect()->route('lstStudent', ['id' => $req->class]);
+    }
+    //Tìm kiếm học sinh
+    public function findStudent(Request $req)
+    {
+            $malop=$req->id;
+            $student = Classroom::where('malop', $req->id)->first();
+            $lsta = Classroom::find($student->id)->dsStudentJoined;
+            $lst=$lsta->where('email','like','%' . 'a' . '%')->get();
+            dd($lst);
+            $classname=$student->name;
+            $account = Account::where('username', session('username'))->first();
+            $accountname=$account->hoten;
+            // Truy cập thuộc tính bảng trung gian
+            $lstStudent = $lst->reject(function ($value, $key) {
+                return $value->pivot->waitingqueue == 0;
+            });
+            return View('Teacher/ListStudent', compact('lstStudent','classname','accountname'));
     }
 }

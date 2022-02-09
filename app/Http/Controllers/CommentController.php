@@ -22,7 +22,7 @@ class CommentController extends Controller
            return redirect()->route('ViewPost',['id'=>$idpost]);
        }
        //Lấy tên tài khoản theo id
-       public function layTenAccTheoID($id)
+       public static function layTenAccTheoID($id)
        {
           $name=Account::find($id);
           return $name->hoten;
