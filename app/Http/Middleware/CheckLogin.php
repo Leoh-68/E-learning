@@ -17,7 +17,7 @@ class CheckLogin
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::check()==false) {
-            return redirect()->route('wellcome');
+            return redirect()->route('Wellcome');
         }
         return $next($request);
     }

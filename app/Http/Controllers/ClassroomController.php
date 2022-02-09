@@ -31,8 +31,18 @@ class ClassroomController extends Controller
     /*Lớp của admin*/
     public function layDSLopHoc()
     {
-        $lst = Classroom::all();
+        $lst = Classroom::where('deleted_at','=',null)->get();
         return View('admin/ClassroomsList', compact('lst'));
+    }
+    public static function TheoIdAccount($idaccount,$idclass)
+    {
+        $account = StudentList::where([['idaccount','=',$idaccount],['idclassroom','=',$idclass]])->first();
+        if($account->waitingqueue==false){
+            return "Chưa xác nhận";
+        }
+        else{
+            return "Đã xác nhận";
+        }
     }
     /*Lớp của sinh viên*/
     // Thêm lớp
@@ -187,7 +197,7 @@ class ClassroomController extends Controller
     public function layDSSVTL(Request $req)
     {
         $lstStudent = Classroom::find($req->id)->dsStudentJoined;
-        return View('SCL', compact('lstStudent'));
+        return View('admin/SCL', compact('lstStudent'));
     }
     // Danh sách học sinh được chấp nhận
     public function listStudent(Request $req)
