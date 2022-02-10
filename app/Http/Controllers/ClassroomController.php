@@ -106,7 +106,7 @@ class ClassroomController extends Controller
         return View('Teacher/Class', compact('class', 'post'));
     }
 
-    public function Trans($id)
+    public static function Trans($id)
     {
         $class = Classroom::find($id);
 
@@ -198,6 +198,16 @@ class ClassroomController extends Controller
     {
         $lstStudent = Classroom::find($req->id)->dsStudentJoined;
         return View('admin/SCL', compact('lstStudent'));
+    }
+    public function layDSBG(Request $req)
+    {
+        $lstBaiGiang = Post::where([['idclassroom','=',$req->id],['posttype','=',2]])->get();
+        return View('admin/BaiGiang', compact('lstBaiGiang'));
+    }
+    public function layDSBT(Request $req)
+    {
+        $lstBaiTap = Post::where([['idclassroom','=',$req->id],['posttype','=',1]])->get();
+        return View('admin/BaiTap', compact('lstBaiTap'));
     }
     // Danh sách học sinh được chấp nhận
     public function listStudent(Request $req)

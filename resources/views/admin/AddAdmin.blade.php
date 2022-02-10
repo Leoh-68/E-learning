@@ -100,6 +100,11 @@
                 <br>
                 <div>
                     <button class="btn btn-primary" type = "submit">Thêm <i class="fa fa-check"></i></button>
+                    @if (session()->has('unique'))
+                    <div style="color:red">
+                        {{ session()->get('unique') }}
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>

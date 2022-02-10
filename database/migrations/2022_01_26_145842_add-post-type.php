@@ -19,6 +19,8 @@ class AddPostType extends Migration
         Schema::create('posttype', function (Blueprint $table) {
             $table->id();
             $table->string('type');
+            $table->timestamps();
+            $table->SoftDeletes();
         });
         Schema::table('post', function (Blueprint $table) {
             

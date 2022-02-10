@@ -22,6 +22,23 @@ class TeacherController extends Controller
     }
     public function xlThemGV(SubmitRequest $rq)
     {
+        $accList = Account::where([['accounttype','=','2'],['deleted_at','=',null]])->get();
+        foreach($accList as $var)
+           {
+               if($var->username == $rq->username)
+               {
+                session()->flash('unique',"Tài khoản $rq->username đã tồn tại");
+                return redirect()->route('loadThemAd');
+               }
+               else if($var->email == $rq->email){
+                session()->flash('unique',"Email $rq->email đã tồn tại");
+                return redirect()->route('loadThemAd');
+               }
+               else if($var->sdt == $rq->sdt){
+                session()->flash('unique',"Số điện thoại $rq->email đã tồn tại");
+                return redirect()->route('loadThemAd');
+               }
+           }
         $gv = new Account;
         $gv->username = $rq->username;
         $gv->password = Hash::make($rq->password);
