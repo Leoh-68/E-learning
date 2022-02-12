@@ -45,7 +45,7 @@ use \App\Http\Controllers\PostController;
                     <td>{{ $item->mota }}</td>
                     <td>{{ PostController::attachmentfromID($item->id) }}</td>
                     <td>
-                    <a class="btn btn-success" href="{{route('xlXoaSVTL',['id'=>$item->id,'code'=>request()->id])}}">Xem chi tiết</a></td>
+                    <a class="btn btn-success" href="{{route('XCTBG',['id1'=>request()->id,'id2'=>$item->id])}}">Xem chi tiết</a></td>
                 </tr>
                 @endforeach
             </tbody>
