@@ -116,6 +116,8 @@ Route::post('/Admin/Classrooms/StudentsList/Add/{id}', [StudentListController::c
 Route::get('/Admin/Classrooms/StudentsList/Delete/{id}/{code}', [StudentListController::class, 'DeleteStudentAdmin'])->name('xlXoaSVTL');
 Route::get('/Admin/Classrooms/BaiGiang/{id}', [ClassroomController::class, 'layDSBG'])->name('loadBaiGiang');
 Route::get('/Admin/Classrooms/BaiTap/{id}', [ClassroomController::class, 'layDSBT'])->name('loadBaiTap');
+Route::get('/Admin/XCTBG/{id1}/{id2}', [ClassroomController::class, 'XCTBG'])->name('XCTBG');
+Route::get('/Admin/XCTBT/{id1}/{id2}', [ClassroomController::class, 'XCTBT'])->name('XCTBT');
 
 Route::get('/Admin/Admins', [AdminController::class, 'layDanhSachAd'])->name('AdminsList');
 Route::get('/Admin/Admins/Add', [AdminController::class, 'themAd'])->name('loadThemAd');

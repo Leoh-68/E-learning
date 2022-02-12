@@ -249,11 +249,11 @@ class ClassroomController extends Controller
     public function sendMail(Request $req)
     {
         $checkLoopMail = "";
-        $listaccount = StudentList::where('accounttype',3);
+        $listaccount = StudentList::all();
         $idclass = Classroom::where('malop', $req->id)->first();
         $listEmail = explode(",", $req->textinput);
         foreach ($listEmail as $item) {
-            $allacc = Account::where('email', $item)->first();
+            $allacc = Account::where([['email', $item],['accounttype',3]])->first();
             if ($allacc == null) {
                 Cookie::queue('error', "Email $item không tồn tại", 0.09);
                 return  redirect()->route('lstStudent', ['id' => $req->id]);
@@ -298,5 +298,20 @@ class ClassroomController extends Controller
         $studentlis->save();
         session()->flash('success', ' Thành công');
         return redirect()->route('Logout');
+    }
+    //Xem chi tiết bài đăng
+    public function XCTBG($id1,$id2)
+    {
+        {
+            $post = Post::find($id2);
+            return view('admin/XCTBG',compact('post'));
+        }
+    }
+    public function XCTBT($id1,$id2)
+    {
+        {
+            $post = Post::find($id2);
+            return view('admin/XCTBT',compact('post'));
+        }
     }
 }

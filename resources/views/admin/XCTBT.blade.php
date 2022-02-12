@@ -27,29 +27,26 @@ use \App\Http\Controllers\PostController;
  
  <div class="">
         <div class="container">
-            <a class="btn btn-primary" href="{{route('ClassroomsList')}}"><i class="fa fa-arrow-alt-circle-left"></i> Quay lại</a>
+            <a class="btn btn-primary" href="{{route('loadBaiTap',['id'=>request()->id1])}}"><i class="fa fa-arrow-alt-circle-left"></i> Quay lại</a>
             <br>
-            <table class="table">
-            <thead>
-                <tr>
-                    <th>Tên</th>
-                    <th>Mô tả</th>
-                    <th>Tệp đính kèm</th>
-                    <th>Chức năng</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($lstBaiTap as $item)
-                <tr>
-                    <td>{{ $item->ten }}</td>
-                    <td>{{ $item->mota }}</td>
-                    <td>{{ PostController::attachmentfromID($item->id) }}</td>
-                    <td>
-                    <a class="btn btn-success" href="{{route('XCTBT',['id1'=>request()->id,'id2'=>$item->id])}}">Xem chi tiết</a></td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+            <div>
+                <h1>{{$post->ten}}</h1>
+                ------------------------------------------
+                <div style="height:250px">
+                    <h3 style="white-space:pre-line">
+                        {{$post->mota}}
+                    </h3>
+                </div>
+                ------------------------------------------
+                <br>@php
+                if (PostController::attachmentfromID($post->id)==null) {
+                    $image = "";
+                } else {
+                    $image = asset('images/PostFile/'.PostController::attachmentfromID($post->id));
+                }
+                @endphp
+                <img style="height:150px" src="{{$image}}">
+            </div>
         </div>
       </div>
  @endsection

@@ -17,13 +17,6 @@
 @endif
     <div class="classbody">
         <div class="container">
-
-            <form method="POST" action="{{route('dsSinhVienPost',['id' => request()->id])}}">
-            @csrf
-                <br><input name="textinput">
-                <button type="submit"> Thêm</button>
-                <span style="color: red">{{Cookie::get('error')}}</span>
-            </form>
             <table class="table">
             <thead>
                 <tr>

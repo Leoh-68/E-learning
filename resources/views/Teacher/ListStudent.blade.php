@@ -20,19 +20,19 @@
                 <form method="POST" action="{{ route('SendMailP', ['id' => request()->id, 'name' => $accountname]) }}">
                     @csrf
                     <br><input name="textinput">
-                    <button type="submit"> Thêm</button>
+                    <button type="submit" class="btn btn-primary"> Thêm</button>
                     <span style="color: red">{{ Cookie::get('error') }}</span>
                 </form>
             </div>
 
-            <div style="float: right">
+            <!-- <div style="float: right">
                 <form method="GET" action="{{ route('FindStudentG', ['id' => $malop]) }}">
                     @csrf
                     <br><input name="name">
-                    <button type="submit"> Tìm kiếm</button>
+                    <button type="submit" class="btn btn-success"> Tìm kiếm</button>
                     <span style="color: red">{{ Cookie::get('error') }}</span>
                 </form>
-            </div>
+            </div> -->
 
             <table class="table">
                 <thead>
