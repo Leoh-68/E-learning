@@ -81,7 +81,7 @@ class AdminController extends Controller
             $ad->email = $rq->email;
             $ad->accounttype = 1;
             $ad->updated_at = date("Y-m-d");
-            $ad->hinhanh = $image_name;
+            $ad->hinhanh = $explain;
             $ad->save();
         }
         $ad = Account::find($id);

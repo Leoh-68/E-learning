@@ -112,7 +112,7 @@
 					        @enderror
                            
                                 <div class="form-group">
-                                    <label class="form-control-label">Username</label>
+                                    <label class="form-control-label">Tên đăng nhập</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i data-feather="user"></i></span>
@@ -124,10 +124,7 @@
                                 <div class="form-group mb-0">
                                     <div class="d-flex align-items-center justify-content-between">
                                         <div>
-                                            <label class="form-control-label">Password</label>
-                                            <a  href ="{{ route('xl-mat-khau') }}">
-                                                Forgot?
-                                            </a> 
+                                            <label class="form-control-label">Mật khẩu</label>
                                         </div>
                                     </div>
                                     <div class="input-group">
@@ -136,14 +133,22 @@
                                         </div>
                                         <input class="input100 @error('password') is-invalid @enderror " type="password" name="password" value="{{ old('password') }}" required>
                                     </div>
-                                   
+                                    <div class="mt-2">
+                                            <a  href ="{{ route('xl-mat-khau') }}">
+                                                Quên mật khẩu?
+                                            </a>
+                                    </div>
                                 </div>
-                                <div class="mt-4">
+                                <div class="mt-2">
                                     <button type="submit" class="btn btn-block btn-primary">Đăng nhập</button></div>
                             </form>
                         </div>
-                        <div class="card-footer px-md-5"><small>Not registered?</small>
-                            <a href="{{ route('xl-tao-tai-khoan') }}" class="small font-weight-bold">Create account</a></div>
+                        <div class="card-footer px-md-5">
+                            <h5>
+                                <small>Chưa có tài khoản?</small>
+                                <a href="{{ route('xl-tao-tai-khoan') }}" class="small font-weight-bold">Đăng ký ngay</a>
+                            </h5>
+                        </div>
                     </div>
                 </div>
             </div>

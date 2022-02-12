@@ -249,7 +249,7 @@ class ClassroomController extends Controller
     public function sendMail(Request $req)
     {
         $checkLoopMail = "";
-        $listaccount = StudentList::all();
+        $listaccount = StudentList::where('accounttype',3);
         $idclass = Classroom::where('malop', $req->id)->first();
         $listEmail = explode(",", $req->textinput);
         foreach ($listEmail as $item) {

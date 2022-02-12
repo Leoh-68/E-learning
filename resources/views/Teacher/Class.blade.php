@@ -95,7 +95,7 @@
                         </div>
                         <br>
                         <div class="postcontent">
-                            <a href="{{route('ViewPost',['id'=>$var->id])}}"><label style="color: black">{{ $var->mota }}</label><br></a>
+                            <a href="{{route('ViewPost',['id'=>$var->id])}}"><pre><label style="color: black">{{ $var->mota }}</label></pre></a>
                             @php
                                 if (App\Http\Controllers\PostController::attachmentfromID($var->id) == null) {
                                 } else {

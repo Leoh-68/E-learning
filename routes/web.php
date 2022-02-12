@@ -129,7 +129,7 @@ Route::get('/Admin/UnknowAccount/', function () {
 })->name('error');
 
 Route::get('/Admin', function () {
-    return view('admin/Admin');
+    return redirect()->route('TeachersList');
 })->name('Admin');
 
 });
