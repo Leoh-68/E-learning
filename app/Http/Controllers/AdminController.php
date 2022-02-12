@@ -34,6 +34,10 @@ class AdminController extends Controller
                 session()->flash('unique',"Email $rq->email đã tồn tại");
                 return redirect()->route('loadThemAd');
                }
+                else if($var->sdt == $rq->sdt){
+                session()->flash('unique',"Số điện thoại $rq->email đã tồn tại");
+                return redirect()->route('loadThemAd');
+                }
            }
         $ad->username = $rq->username;
         $ad->password = Hash::make($rq->password);
@@ -77,7 +81,7 @@ class AdminController extends Controller
             $ad->email = $rq->email;
             $ad->accounttype = 1;
             $ad->updated_at = date("Y-m-d");
-            $ad->hinhanh = $image_name;
+            $ad->hinhanh = $explain;
             $ad->save();
         }
         $ad = Account::find($id);

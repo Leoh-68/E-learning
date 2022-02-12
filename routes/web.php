@@ -114,6 +114,8 @@ Route::get('/Admin/Classrooms', [ClassroomController::class, 'layDSLopHoc'])->na
 Route::get('/Admin/Classrooms/StudentsList/{id}', [ClassroomController::class, 'layDSSVTL'])->name('loadDSSV');
 Route::post('/Admin/Classrooms/StudentsList/Add/{id}', [StudentListController::class, 'AddStudentAdmin'])->name('xlThemSVTL');
 Route::get('/Admin/Classrooms/StudentsList/Delete/{id}/{code}', [StudentListController::class, 'DeleteStudentAdmin'])->name('xlXoaSVTL');
+Route::get('/Admin/Classrooms/BaiGiang/{id}', [ClassroomController::class, 'layDSBG'])->name('loadBaiGiang');
+Route::get('/Admin/Classrooms/BaiTap/{id}', [ClassroomController::class, 'layDSBT'])->name('loadBaiTap');
 
 Route::get('/Admin/Admins', [AdminController::class, 'layDanhSachAd'])->name('AdminsList');
 Route::get('/Admin/Admins/Add', [AdminController::class, 'themAd'])->name('loadThemAd');
@@ -127,7 +129,7 @@ Route::get('/Admin/UnknowAccount/', function () {
 })->name('error');
 
 Route::get('/Admin', function () {
-    return view('admin/Admin');
+    return redirect()->route('TeachersList');
 })->name('Admin');
 
 });

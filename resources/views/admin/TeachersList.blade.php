@@ -43,7 +43,7 @@
                 <td>{{ $GiangVien->diachi }}</td>
                 <td>{{ $GiangVien->sdt }}</td>
                 <td>{{ $GiangVien->email }}</td>
-                <td><a class="btn btn-primary" href="{{route('loadSuaGV',['id' => $GiangVien->id])}}"><i class="fa fa-pencil-alt"></i> Sửa</a>
+                <td><a class="btn btn-primary" href="{{route('loadSuaGV',['id' => $GiangVien->id])}}"><i class="fa fa-edit"></i> Sửa</a>
                 <a class="btn btn-danger" onclick="return confirm('Bạn có chắc không?')" href="{{route('xoaGV',['id' => $GiangVien->id])}}"><i class="fa fa-trash"></i> Xóa</a></td>
             </tr>
             @endforeach

@@ -40,7 +40,9 @@ use \App\Http\Controllers\ClassroomController;
                 <td>{{ $Lop->name }}</td>
                 <td>{{ ClassroomController::TheoAccount($Lop->id) }}</td>
                 <td>{{ $Lop->malop }}</td>
-                <td><a class="btn btn-primary" href="{{route('loadDSSV',['id'=>$Lop->id])}}"><i class="fa fa-pencil-alt"></i> Xem danh sách sinh viên</a></td>
+                <td style="width: 596px;"><a class="btn btn-primary" href="{{route('loadDSSV',['id'=>$Lop->id])}}"><i class="fa fa-pencil-alt"></i> Danh sách sinh viên</a>
+                <a class="btn btn-primary" href="{{route('loadBaiGiang',['id'=>$Lop->id])}}"><i class="fa fa-book-open"></i >Danh sách bài giảng</a>
+                <a class="btn btn-primary" href="{{route('loadBaiTap',['id'=>$Lop->id])}}"><i class="fa fa-file"></i> Danh sách bài tập</a></td>
             </tr>
             @endforeach
         </tbody>

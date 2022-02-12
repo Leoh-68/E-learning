@@ -59,9 +59,7 @@ $hinhanh=App\Http\Controllers\ClassroomController::LayHinhTheoMa($account->id);
             </div>
 
             <div class="contentpostview" style=" border-bottom: 2px solid black;">
-                <h4>
-                   {{$post->mota}}
-                </h4>
+                <pre><h4>{{$post->mota}}</h4></pre>
                 @php
                 if (App\Http\Controllers\PostController::attachmentfromID($post->id) == null) {
                 } else {

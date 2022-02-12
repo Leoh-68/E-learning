@@ -31,8 +31,18 @@ class ClassroomController extends Controller
     /*Lớp của admin*/
     public function layDSLopHoc()
     {
-        $lst = Classroom::all();
+        $lst = Classroom::where('deleted_at','=',null)->get();
         return View('admin/ClassroomsList', compact('lst'));
+    }
+    public static function TheoIdAccount($idaccount,$idclass)
+    {
+        $account = StudentList::where([['idaccount','=',$idaccount],['idclassroom','=',$idclass]])->first();
+        if($account->waitingqueue==false){
+            return "Chưa xác nhận";
+        }
+        else{
+            return "Đã xác nhận";
+        }
     }
     /*Lớp của sinh viên*/
     // Thêm lớp
@@ -96,7 +106,7 @@ class ClassroomController extends Controller
         return View('Teacher/Class', compact('class', 'post'));
     }
 
-    public function Trans($id)
+    public static function Trans($id)
     {
         $class = Classroom::find($id);
 
@@ -187,7 +197,17 @@ class ClassroomController extends Controller
     public function layDSSVTL(Request $req)
     {
         $lstStudent = Classroom::find($req->id)->dsStudentJoined;
-        return View('SCL', compact('lstStudent'));
+        return View('admin/SCL', compact('lstStudent'));
+    }
+    public function layDSBG(Request $req)
+    {
+        $lstBaiGiang = Post::where([['idclassroom','=',$req->id],['posttype','=',2]])->get();
+        return View('admin/BaiGiang', compact('lstBaiGiang'));
+    }
+    public function layDSBT(Request $req)
+    {
+        $lstBaiTap = Post::where([['idclassroom','=',$req->id],['posttype','=',1]])->get();
+        return View('admin/BaiTap', compact('lstBaiTap'));
     }
     // Danh sách học sinh được chấp nhận
     public function listStudent(Request $req)
@@ -229,7 +249,7 @@ class ClassroomController extends Controller
     public function sendMail(Request $req)
     {
         $checkLoopMail = "";
-        $listaccount = StudentList::all();
+        $listaccount = StudentList::where('accounttype',3);
         $idclass = Classroom::where('malop', $req->id)->first();
         $listEmail = explode(",", $req->textinput);
         foreach ($listEmail as $item) {

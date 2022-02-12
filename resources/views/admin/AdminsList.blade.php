@@ -44,7 +44,7 @@
                 <td>{{ $Admin->diachi }}</td>
                 <td>{{ $Admin->sdt }}</td>
                 <td>{{ $Admin->email }}</td>
-                <td><a class="btn btn-primary" href="{{route('loadSuaAd',['id' => $Admin->id])}}"><i class="fa fa-pencil-alt"></i> Sửa</a>
+                <td><a class="btn btn-primary" href="{{route('loadSuaAd',['id' => $Admin->id])}}"><i class="fa fa-edit"></i> Sửa</a>
                 <a class="btn btn-danger" onclick="return confirm('Bạn có chắc không?')" href="{{route('xoaAd',['id' => $Admin->id])}}"><i class="fa fa-trash"></i> Xóa</a></td>
             </tr>
             @endforeach
