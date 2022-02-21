@@ -3,6 +3,7 @@
 use app\Http\Controllers\ClassroomController;
 @endphp -->
 @section('AddButton')
+<li><a href="{{route('ListHWP',['idclass'=>$post->idclassroom,'idpost'=>$post->id])}}"> <i class="fa fa-plus fa-2x" ></i> </a></li>
 @endsection
 @section('MenuHomePage')
 @php
@@ -99,18 +100,22 @@ $hinhanh=App\Http\Controllers\ClassroomController::LayHinhTheoMa($account->id);
                     <span>{{$res->comment}}</span><br>
                 </div>
             </div>
+            @if($res->id==$account->id)
             <form action="#">
                 <div class="dropdown" style="padding-right: 20px">
                     <button class="btn btn-basic dropdown-toggle" type="button" id="dropdownMenuButton"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     </button>
+                   
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item"
                             href="{{route('UpdateCommentG',['idcomment'=>$res->id])}}">Sửa</a>
                         <a class="dropdown-item" href="{{route('DeleteCommentP',['idcomment'=>$res->id])}}">Xóa</a>
                     </div>
+                  
                 </div>
             </form>
+            @endif
 
             <br>
             <br>
@@ -118,5 +123,7 @@ $hinhanh=App\Http\Controllers\ClassroomController::LayHinhTheoMa($account->id);
             </div>
 
 </div>
+
+
 @endsection
 

@@ -34,7 +34,7 @@ Route::group(['prefix'=>'/', 'middleware' => ['giangvien']],function(){
     Route::get('/AddClass', function () {
         return view('Teacher/AddClass');
     })->name('Addclass');
-});
+
 //<-                Classroom                 ->
 //-----------------------------//
 Route::get('/Class', [ClassroomController::class, 'showClass'])->name('showClass');
@@ -80,6 +80,9 @@ Route::get('/Accept/{id}/{idclass}', [ClassroomController::class, 'Acp'])->name(
 Route::post('/Accept/{id}/{idclass}', [ClassroomController::class, 'Acp'])->name("AcceptP");
 Route::post('/ListStudent/Find/{id}', [StudentListController::class, 'findStudent'])->name('FindStudentP');
 Route::get('/ListStudent/Find/{id}', [StudentListController::class, 'findStudent'])->name('FindStudentG');
+Route::post('/Post/ListHW/{idclass}/{idpost}', [ClassroomController::class, 'ListHomeWork'])->name('ListHWP');
+Route::get('/Post/ListHW/{idclass}/{idpost}', [ClassroomController::class, 'ListHomeWork'])->name('ListHWG');
+});
 //Bạch
 Route::get('/', function () {
     return view('Login');
@@ -180,3 +183,5 @@ Route::get('/TestRoute', [ClassroomController::class, 'sendMail'])->name("TestRo
 Route::get('/SendMail', [ClassroomController::class, 'sendMail'])->name("SendMailG");
 
 
+
+Route::get('/test', [ClassroomController::class, 'ListHomeWork'])->name("ListHomeWork");
