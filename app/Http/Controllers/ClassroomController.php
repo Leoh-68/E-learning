@@ -6,6 +6,7 @@ use App\Models\Classroom;
 use App\Models\Account;
 use App\Models\Post;
 use App\Models\Comment;
+use App\Models\Attachment;  
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Mail;
@@ -313,5 +314,43 @@ class ClassroomController extends Controller
             $post = Post::find($id2);
             return view('admin/XCTBT',compact('post'));
         }
+    }
+    //Xem danh sách học sinh đã nộp bài tập
+    public function ListHomeWork(Request $req)
+    {
+        // $ds= collect();
+        // $homework=Post::where([['posttype','1'],['id',$req->id]])->first();
+        // $studentid=StudentList::where('idclassroom',$req->idclass)->get();
+        // foreach($studentid as $var)
+        // {
+        //     $a=Account::find($var->idaccount);
+        //     $ds->push($a);
+            
+        // }
+        // return $studentid;
+        $malop=$req->idclass;
+        $student = Classroom::where('id', $req->idclass)->first();   
+        $lsta = Classroom::find($student->id)->dsStudentJoined;
+        $lst=$lsta->where('deleted_at',null);    
+        $classname=$student->name;
+        $account = Account::where('username', session('username'))->first();
+        $accountname=$account->hoten;
+        // Truy cập thuộc tính bảng trung gian
+        $lstStudent = $lst->reject(function ($value, $key) {
+            return $value->pivot->waitingqueue == 0;
+        });
+        $ds= collect();
+        $attach=Attachment::where('idpost',$req->idpost)->get();
+        foreach($attach as $var)
+        {
+            if($var->idaccoun!=0)
+            {
+                $acc=Account::where(['idaccount',$var->idaccount])->first();
+                $ds->push($acc);
+            }
+        }
+        dd($ds);
+        return view('Teacher/ListHW',compact('lstStudent','ds'));
+        ;
     }
 }

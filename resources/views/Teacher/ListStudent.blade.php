@@ -21,6 +21,7 @@
                     @csrf
                     <br><input name="textinput">
                     <button type="submit" class="btn btn-primary"> Thêm</button>
+                    <br>
                     <span style="color: red">{{ Cookie::get('error') }}</span>
                 </form>
             </div>

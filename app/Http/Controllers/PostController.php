@@ -42,7 +42,7 @@ class PostController extends Controller
         $post->save();
         if ($req->has('image')) {
             $size = $req->image->getSize();
-            $extention = $req->image->extension();
+            $extention       = $req->image->extension();
             if ($size > 2000000) {
                 session()->flash('fail', 'Kích thướt ảnh phải dưới 2M');
                 return View('Teacher/Post', compact('idclass'));
@@ -132,6 +132,7 @@ class PostController extends Controller
     public static function attachmentfromID($id)
     {
         $att = Post::find($id)->dsTep;
+        
         if ($att == null) {
             return $att;
         }
